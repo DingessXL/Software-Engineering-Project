@@ -12,29 +12,18 @@
 		<link rel="shortcut icon" href="${assetPath(src: 'favicon.ico')}" type="image/x-icon">
 		<link rel="apple-touch-icon" href="${assetPath(src: 'apple-touch-icon.png')}">
 		<link rel="apple-touch-icon" sizes="114x114" href="${assetPath(src: 'apple-touch-icon-retina.png')}">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'main.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap.min.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-fixtaglib.css')}" type="text/css">
-		<link rel="stylesheet" href="${resource(dir: 'css', file: 'bootstrap-theme.min.css')}" type="text/css">
   		<asset:stylesheet src="application.css"/>
-
 		<asset:javascript src="application.js"/>
 		<g:layoutHead/>
 	</head>
 	<body>
-<!--		<div id="grailsLogo" role="banner"><a href="http://grails.org"><asset:image src="GC_logo_white.png" alt="Grails"/></a></div>   -->
-	<div class="row">
-		<div class="col-sm-12">
-		
-			<g:layoutBody/>
-
-		<div class="footer" role="contentinfo"></div>
-		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
+		<div id="gcLogo" role="banner"><a href="http://grails.org"><asset:image src="gc_logo.svg"  alt="GC Work Order System"
+																				style="width:auto;height:100px;"/></a>
+			<a href="/CassifiedApp/home">Home</a>
 		</div>
 
-	</div>
+		<g:layoutBody/>
+		<div class="footer" role="contentinfo"></div>
+		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>
 	</body>
 </html>
-
-
-

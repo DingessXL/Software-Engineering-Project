@@ -19,7 +19,7 @@
 	<body>
 		<div id="gcLogo" role="banner"><a href="http://grails.org"><asset:image src="gc_logo.svg"  alt="GC Work Order System"
 																				style="width:auto;height:100px;"/></a>
-			<a href="/CassifiedApp/home">Home</a>
+			<a href="/ITWorkorders/index/">Home</a>
 		</div>
 
 		<g:layoutBody/>

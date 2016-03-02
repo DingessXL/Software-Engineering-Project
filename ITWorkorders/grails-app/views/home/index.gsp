@@ -13,6 +13,9 @@
     <title>GC - Work Order</title>
 </head>
 <body>
-Updated GC Branding and Navigation
+<p></p>
+<h3>You must be logged in to Unify to view this page.</h3>
+<p><a href="/ITWorkorders/index/">Click here to Login</a></p>
+<p></p>
 </body>
 </html>

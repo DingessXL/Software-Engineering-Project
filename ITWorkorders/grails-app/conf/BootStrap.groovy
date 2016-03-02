@@ -3,8 +3,10 @@ import com.auth.*
 
 class BootStrap {
 
+
+
     def init = { servletContext ->
-    	/*
+
         def myAppRole = new SecRole(authority:"ROLE_USER").save(flush:true)
 
       def will = new SecUser(
@@ -31,11 +33,21 @@ class BootStrap {
                 accountLocked:false,
                 passwordExpired:false
             ).save(flush:true)
+
+        def matt = new SecUser(
+                username:"matt.gaines@gcsu.edu",
+                password:"password",
+                enabled:true,
+                accountExpired:false,
+                accountLocked:false,
+                passwordExpired:false
+            ).save(flush:true)
+
         SecUserSecRole.create will, myAppRole
         SecUserSecRole.create david, myAppRole
         SecUserSecRole.create nick, myAppRole
+        SecUserSecRole.create matt, myAppRole
 
-       */
        
         
     }

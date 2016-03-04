@@ -56,7 +56,7 @@ class BootStrap {
         SecUserSecRole.create david, myAppRole
         SecUserSecRole.create nick, myAppRole
         SecUserSecRole.create matt, myAppRole
-        SecUserSecRole.create daniel, myAppRole
+        SecUserSecRole.create daniel myAppRole
 
        
         

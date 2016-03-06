@@ -3,8 +3,14 @@ class Note {
 
     Date        date
     String      user
-    String      reply
+    String      note
 
     static constraints = {
+    
+    }
+
+    String toString()
+    {
+        "$date,$user,$note"
     }
 }

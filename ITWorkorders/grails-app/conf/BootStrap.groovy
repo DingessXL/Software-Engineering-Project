@@ -44,7 +44,16 @@ class BootStrap {
             ).save(flush:true)
 
         def daniel = new SecUser(
-                username:"daniel.dingess@gcsu.edu",
+                username:"daniel.dingess@bobcats.gcsu.edu",
+                password:"password",
+                enabled:true,
+                accountExpired:false,
+                accountLocked:false,
+                passwordExpired:false
+        ).save(flush:true)
+
+        def alex = new SecUser(
+                username:"alexander.heavner@bobcats.gcsu.edu",
                 password:"password",
                 enabled:true,
                 accountExpired:false,
@@ -57,6 +66,7 @@ class BootStrap {
         SecUserSecRole.create nick, myAppRole
         SecUserSecRole.create matt, myAppRole
         SecUserSecRole.create daniel, myAppRole
+        SecUserSecRole.create alex, myAppRole
 
        
         

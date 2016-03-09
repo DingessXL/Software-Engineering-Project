@@ -1,8 +1,11 @@
 package itworkorders
+
+import com.auth.SecUser
+
 class Note {
 
     Date        date
-    String      user
+    SecUser     user
     String      note
 
     static constraints = {
@@ -11,6 +14,6 @@ class Note {
 
     String toString()
     {
-        "$date,$user,$note"
+        "$date," + user.username + ",$note"
     }
 }

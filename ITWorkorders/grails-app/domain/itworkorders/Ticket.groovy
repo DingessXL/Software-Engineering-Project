@@ -15,6 +15,7 @@ class Ticket {
     String building
     String subject
     String technician  //possible object from src/groovy/com.auth/GcPerson
+    //Alex: Maybe SecUser or do we want to make a child class that is GcPerson?
 
     static constraints = {
         email email:true

@@ -48,7 +48,16 @@ body {
 }
 
 #grailsLogo {
-	background-color: #abbf78;
+	background-color: #abbf78;  /* Original: abbf78 */
+
+}
+/*
+
+	Added for main.gsp gcLogo for Work Order System -MG
+
+*/
+#gcLogo{
+	background-color: #003366;
 }
 
 /* replace with .no-boxshadow body if you have modernizr available */
@@ -92,6 +101,14 @@ img {
 #grailsLogo a {
 	display: inline-block;
 	margin: 1em;
+
+}
+
+#gcLogo a{
+	display: inline-block;
+	margin: 1em;
+	color: #ffffff
+
 }
 
 .content {
@@ -108,7 +125,7 @@ img {
 }
 
 .footer {
-	background: #abbf78;
+	background: #003366;
 	color: #000;
 	clear: both;
 	font-size: 0.8em;

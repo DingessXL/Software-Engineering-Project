@@ -37,7 +37,7 @@ class Ticket {
     }
 
     String toString(){
-        "$firstName,$lastName"
+        "$firstName,$lastName,$email,$priority,$categegory,$phoneNumber,$mobileNumber,$department,$roomNumber,$building,$subject,$technician,$dateCreated,$dateClosed"
     }
 
 }

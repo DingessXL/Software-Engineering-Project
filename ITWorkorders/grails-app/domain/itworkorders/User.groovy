@@ -5,13 +5,13 @@ class User {
 	String 	   username
 	String 	   fname
 	String 	   lname
-	int	       queueID
 
     static constraints = {
     }
 
+    static hasMany = [queue:Queue]
     String toString()
     {
-    	"$username,$fname,$lname,$queueID"
+    	"$username,$fname,$lname"
     }
 }

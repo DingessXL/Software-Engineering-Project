@@ -2,10 +2,10 @@ package itworkorders
 
 class User {
 
-	String 	username
-	String 	fname
-	String 	lname
-	Number	queueID
+	String 	   username
+	String 	   fname
+	String 	   lname
+	int	       queueID
 
     static constraints = {
     }

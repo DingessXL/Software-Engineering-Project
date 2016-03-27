@@ -16,6 +16,7 @@ class Ticket {
     String  subject
     String  technician  
     
+    static hasMany = [notes:Note]
 
     static constraints = {
 

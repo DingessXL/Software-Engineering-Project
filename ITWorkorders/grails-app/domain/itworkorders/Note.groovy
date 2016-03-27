@@ -5,10 +5,12 @@ class Note {
     String     	user
     String      note
 
-    static belongsTo = [ticket:Ticket]
 
     static constraints = {
     }
+
+   	static belongsTo = [ticket:Ticket]
+
 
     String toString()
     {

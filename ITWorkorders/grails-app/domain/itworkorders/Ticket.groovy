@@ -2,21 +2,27 @@ package itworkorders
 
 class Ticket {
 
-    String  firstName
-    String  lastName
-    String  email
-    String  priority
-    Integer queueID
-    String  categegory
-    String  phoneNumber
-    String  mobileNumber
-    String  department
-    String  roomNumber
-    String  building
-    String  subject
-    String  technician  
+    String      firstName
+    String      lastName
+    String      email
+    String      priority
+    Integer     queueID
+    String      categegory
+    String      phoneNumber
+    String      mobileNumber
+    String      department
+    String      roomNumber
+    String      building
+    String      subject
+    String      technician
+    Date        dateCreated
+    Date        dateClosed
     
-    static hasMany = [notes:Note]
+    static hasMany = [
+        notes:Note,
+        histories:History,
+        replies:Reply
+    ]
 
     static constraints = {
 

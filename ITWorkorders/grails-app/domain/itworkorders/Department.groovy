@@ -1,15 +1,18 @@
 package itworkorders
 
-class Queue {
+class Department {
+	
+	String name
 
     static constraints = {
     }
 
-    static belongsTo = [
-    	workgroup:WorkGroup
+    static hasMany = [
+    	tickets:Ticket
     ]
+    
     String toString()
     {
-    	
+    	"$name"
     }
 }

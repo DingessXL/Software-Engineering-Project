@@ -5,14 +5,9 @@ class Ticket {
     String      firstName
     String      lastName
     String      email
-    String      priority
-    Integer     queueID
-    String      categegory
     String      phoneNumber
     String      mobileNumber
-    String      department
     String      roomNumber
-    String      building
     String      subject
     String      technician
     Date        dateCreated
@@ -24,20 +19,25 @@ class Ticket {
         replies:Reply
     ]
 
+    static belongsTo = [
+        priority:Priority,
+        department:Department,
+        building:Building,
+        status:Status,
+        category:Category,
+        workgroup:WorkGroup
+    ]
     static constraints = {
 
         email           email:true
         phoneNumber     blank:true, nullable:true
         mobileNumber    blank:true, nullable:true
-        department      blank:true, nullable:true
         roomNumber      blank:true, nullable:true
-        building        blank:true, nullable:true
-        queueID         min:0
 
     }
 
     String toString(){
-        "$firstName,$lastName,$email,$priority,$categegory,$phoneNumber,$mobileNumber,$department,$roomNumber,$building,$subject,$technician,$dateCreated,$dateClosed"
+        "$firstName,$lastName,$email,$phoneNumber,$mobileNumber,$roomNumber,$subject,$technician,$dateCreated,$dateClosed"
     }
 
 }

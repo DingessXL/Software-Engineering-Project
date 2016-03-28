@@ -9,7 +9,9 @@ class User {
     static constraints = {
     }
 
-    static hasMany = [queue:Queue]
+    static belongsTo = [
+        workgroup:WorkGroup
+    ]
     String toString()
     {
     	"$username,$fname,$lname"

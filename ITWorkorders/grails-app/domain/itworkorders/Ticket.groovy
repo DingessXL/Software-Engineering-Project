@@ -25,7 +25,7 @@ class Ticket {
         building:Building,
         status:Status,
         category:Category,
-        workgroup:WorkGroup
+        workgroup:WorkGroup,
         technician:User
     ]
     static constraints = {

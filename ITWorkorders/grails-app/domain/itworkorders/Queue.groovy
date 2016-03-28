@@ -8,6 +8,10 @@ class Queue {
     static belongsTo = [
     	workgroup:WorkGroup
     ]
+
+    static hasMany = [
+    	tickets:Ticket
+    ]
     String toString()
     {
     	

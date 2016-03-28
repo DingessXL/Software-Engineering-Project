@@ -26,6 +26,7 @@ class Ticket {
         status:Status,
         category:Category,
         workgroup:WorkGroup
+        technician:User
     ]
     static constraints = {
 
@@ -37,7 +38,7 @@ class Ticket {
     }
 
     String toString(){
-        "$firstName,$lastName,$email,$phoneNumber,$mobileNumber,$roomNumber,$subject,$technician,$dateCreated,$dateClosed"
+        "$firstName,$lastName,$email,$phoneNumber,$mobileNumber,$roomNumber,$subject,$dateCreated,$dateClosed"
     }
 
 }

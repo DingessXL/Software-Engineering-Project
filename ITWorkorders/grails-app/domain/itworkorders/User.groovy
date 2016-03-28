@@ -12,6 +12,10 @@ class User {
     static belongsTo = [
         workgroup:WorkGroup
     ]
+
+    static hasMany = [
+        tickets:Ticket
+    ]
     String toString()
     {
     	"$username,$fname,$lname"

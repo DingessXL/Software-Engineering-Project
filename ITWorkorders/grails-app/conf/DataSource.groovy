@@ -5,7 +5,6 @@ dataSource {
     username = "sa"
     password = ""
 }
-
 hibernate {
     cache.use_second_level_cache = true
     cache.use_query_cache = false
@@ -23,7 +22,6 @@ environments {
             url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
         }
     }
-
     test {
         dataSource {
             dbCreate = "update"
@@ -33,14 +31,8 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            dialect = "org.hibernate.dialect.MySQL5InnoDBDialect"
-            driverClassName = "com.mysql.jdbc.Driver"
-            username = ""
-            password = ""
-          
-              url = "jdbc:mysql://flow.gcsu.edu:3306/db-name"
+            url = "jdbc:h2:prodDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
             properties {
-              
                // See http://grails.org/doc/latest/guide/conf.html#dataSource for documentation
                jmxEnabled = true
                initialSize = 5

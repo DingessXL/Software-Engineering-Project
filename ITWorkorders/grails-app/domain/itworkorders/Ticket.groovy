@@ -1,28 +1,44 @@
 package itworkorders
-import com.auth.GcPerson
+
 class Ticket {
 
-    String firstName
-    String lastName
-    String email
-    Number priority
-    Number queueID
-    String categegory
-    Number phoneNumber
-    Number mobileNumber
-    String department
-    String roomNumber
-    String building
-    String subject
-    String technician  //possible object from src/groovy/com.auth/GcPerson
-    //Alex: Maybe SecUser or do we want to make a child class that is GcPerson?
+    String      firstName
+    String      lastName
+    String      email
+    String      phoneNumber
+    String      mobileNumber
+    String      roomNumber
+    String      subject
+    String      technician
+    Date        dateCreated
+    Date        dateClosed
+    
+    static hasMany = [
+        notes:Note,
+        histories:History,
+        replies:Reply
+    ]
 
+    static belongsTo = [
+        priority:Priority,
+        department:Department,
+        building:Building,
+        status:Status,
+        category:Category,
+        workgroup:WorkGroup,
+        technician:User
+    ]
     static constraints = {
-        email email:true
+
+        email           email:true
+        phoneNumber     blank:true, nullable:true
+        mobileNumber    blank:true, nullable:true
+        roomNumber      blank:true, nullable:true
+
     }
 
     String toString(){
-        "$fname,$lname"
+        "$firstName,$lastName,$email,$phoneNumber,$mobileNumber,$roomNumber,$subject,$dateCreated,$dateClosed"
     }
 
 }

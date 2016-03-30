@@ -2,23 +2,15 @@
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
 
-grails.config.locations = []
+// grails.config.locations = [ "classpath:${appName}-config.properties",
+//                             "classpath:${appName}-config.groovy",
+//                             "file:${userHome}/.grails/${appName}-config.properties",
+//                             "file:${userHome}/.grails/${appName}-config.groovy"]
 
- if (System.properties["j2j.config.location"]) {
-   
-    println "found J2J Configuration"
-    grails.config.locations << "file:" + System.properties["j2j.config.location"]
-    
-    }
- if(System.properties["current.cas.config.location"]){
-    
-    println "found CAS Configuration"
-    grails.config.locations << "file:"+System.properties["current.cas.config.location"]
- }
- if(System.properties["config.application.url"]){
-    grails.config.locations << "file:"+System.properties["config.application.url"]
- }
-import grails.plugin.springsecurity.SecurityConfigType
+// if (System.properties["${appName}.config.location"]) {
+//    grails.config.locations << "file:" + System.properties["${appName}.config.location"]
+// }
+
 grails.project.groupId = appName // change this to alter the default package name and Maven publishing destination
 
 // The ACCEPT header will not be used for content negotiation for user agents containing the following strings (defaults to the 4 major rendering engines)
@@ -99,27 +91,6 @@ environments {
     }
     production {
         grails.logging.jul.usebridge = false
-        grails.plugin.springsecurity.secureChannel.useHeaderCheckChannelSecurity = true
-        grails.plugin.springsecurity.secureChannel.secureHeaderName = 'X-FORWARDED-PROTO'
-        grails.plugin.springsecurity.secureChannel.secureHeaderValue = 'http'
-        grails.plugin.springsecurity.secureChannel.insecureHeaderName = 'X-FORWARDED-PROTO'
-        grails.plugin.springsecurity.secureChannel.insecureHeaderValue = 'https'
-        //grails.plugin.springsecurity.portMapper.httpPort =  4653
-        //grails.plugin.springsecurity.portMapper.httpsPort = 4854
-//
-        grails.plugin.springsecurity.secureChannel.definition = [
-                                    
-                                    '/some-url/index':          'REQUIRES_SECURE_CHANNEL',
-                                    '/some-url/create':         'REQUIRES_SECURE_CHANNEL',
-                                    '/some-url/save':           'REQUIRES_SECURE_CHANNEL',
-                                    '/some-url/show':           'REQUIRES_SECURE_CHANNEL',
-                                    '/assets/**':                     'ANY_CHANNEL' ,                 
-                                    '/**/js/**':                      'ANY_CHANNEL' ,           
-                                    '/**/css/**':                     'ANY_CHANNEL',            
-                                    '/**/images/**':                  'ANY_CHANNEL',             
-                                    '/**/favicon.ico':                'ANY_CHANNEL'
-                                    ]
-        grails.plugin.springsecurity.auth.forceHttps = true                                 
         // TODO: grails.serverURL = "http://www.changeme.com"
     }
 }
@@ -132,116 +103,15 @@ log4j.main = {
     //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
     //}
 
-   warn     'org.codehaus.groovy.grails.web.servlet',        // controllers  
-            'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
-            'org.codehaus.groovy.grails.web.mapping',       // URL mapping
-            'org.codehaus.groovy.grails.web.pages',          // GSP
-            'org.codehaus.groovy.grails.web.sitemesh',      // layouts
-            'org.codehaus.groovy.grails.commons',            // core / classloading
-            'org.codehaus.groovy.grails.plugins',            // plugins
-            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-            'org.springframework',
-            'org.hibernate',
-            'net.sf.ehcache.hibernate',
-            'grails.plugin.springsecurity',
-            'org.codehaus.groovy.grails.plugin.springsecurity',
-            'org.springframework.security',
-            'org.jasig.cas.client'
-          
+    error  'org.codehaus.groovy.grails.web.servlet',        // controllers
+           'org.codehaus.groovy.grails.web.pages',          // GSP
+           'org.codehaus.groovy.grails.web.sitemesh',       // layouts
+           'org.codehaus.groovy.grails.web.mapping.filter', // URL mapping
+           'org.codehaus.groovy.grails.web.mapping',        // URL mapping
+           'org.codehaus.groovy.grails.commons',            // core / classloading
+           'org.codehaus.groovy.grails.plugins',            // plugins
+           'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
+           'org.springframework',
+           'org.hibernate',
+           'net.sf.ehcache.hibernate'
 }
-        grails.plugin.springsecurity.cas.active = true
-        grails.plugin.springsecurity.cas.sendRenew = false
-
-        grails.plugin.springsecurity.cas.serverUrlEncoding = 'UTF-8'
-        grails.plugin.springsecurity.cas.key = 'grails-spring-security-cas'
-        grails.plugin.springsecurity.cas.artifactParameter = 'ticket'
-        grails.plugin.springsecurity.cas.serviceParameter = 'service'
-        grails.plugin.springsecurity.cas.filterProcessesUrl = '/j_spring_cas_security_check'
-
-
-        grails.plugin.springsecurity.cas.useSingleSignout = true
-
-
-
-        grails.plugin.springsecurity.cas.loginUri = '/login'
-grails.plugin.springsecurity.cas.serviceUrl = 'http://localhost:8080/'+grails.project.groupId+'/j_spring_cas_security_check'
-grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://unify.gcsu.edu/cas'
-grails.plugin.springsecurity.cas.proxyCallbackUrl = 'http://localhost:8080/'+grails.project.groupId+'/secure/receptor'
-grails.plugin.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
-grails.plugin.springsecurity.logout.afterLogoutUrl = 'https://unify.gcsu.edu/cas/logout?url=http://localhost:8080/'+grails.project.groupId+'/'
-
-        
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
-
-        //Begin PRODUCTION  CAS configuration
-
-
-        
-    //    grails.plugin.springsecurity.cas.loginUri = '/login'
-    //    grails.plugin.springsecurity.cas.serviceUrl = 'https://vband.gcsu.edu:4854/gcForms/j_spring_cas_security_check'
-    //    grails.plugin.springsecurity.cas.serverUrlPrefix = 'https://unify.gcsu.edu/cas'
-    //    grails.plugin.springsecurity.cas.proxyCallbackUrl = 'https://vband.gcsu.edu:4854/gcForms/secure/receptor'
-    //    grails.plugin.springsecurity.cas.proxyReceptorUrl = '/secure/receptor'
-     //   grails.plugin.springsecurity.logout.afterLogoutUrl = 'https://unify.gcsu.edu/cas/logout?url=https://vband.gcsu.edu:4854/gcForms/'
-
-
-        //End PRODUCTION Configuration for CAS
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-        grails.plugin.springsecurity.userLookup.userDomainClassName = 'com.auth.SecUser'
-        grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'com.auth.SecUserSecRole'
-        grails.plugin.springsecurity.authority.className = 'com.auth.SecRole'
-
-
-        grails.plugin.springsecurity.securityConfigType = "InterceptUrlMap"//SecurityConfigType.InterceptUrlMap  // remember to import this object
-        grails.plugin.springsecurity.rejectIfNoRule = true
-        grails.plugin.springsecurity.fii.rejectPublicInvocations = false
-        //grails.plugin.springsecurity.controllerAnnotations.staticRules needs to be changed to the rule below
-        grails.plugin.springsecurity.interceptUrlMap = [
-	
-                    '/':                            ['permitAll'],
-                    '/home/':                       ['permitAll'],
-                    '/home':                        ['permitAll'],
-                    '/home/index':                  ['permitAll'],
-                    '/some-url':                    ['ROLE_USER'],
-                    '/some-url/':                   ['ROLE_USER'],
-                    '/propertyOffCampus':           ['ROLE_USER'],
-                    '/propertyOffCampus/':          ['ROLE_USER'],
-                    '/some-url/index':              ['ROLE_USER'],  //, 'isFullyAuthenticated()']
-                    '/some-url/create':             ['ROLE_USER'],
-                    '/some-url/save':               ['ROLE_USER'],
-                    '/some-url/show':               ['ROLE_USER'],
-                    '/some-url/edit':               ['ROLE_USER'],
-                    '/some-url/update':             ['ROLE_USER'],
-                    '/some-url/delete':             ['ROLE_USER'],
-                    '/some-url/workflowError':      ['ROLE_USER'],
-                    '/communicationError/workflowError':['ROLE_USER'],
-                    '/communicationError/youCantSeeThis':['ROLE_USER'],
-                    '/some-url/j2jError/**':        ['ROLE_USER'],
-                                        
-                    '/index':                        ['permitAll'],
-                    '/index.gsp':                    ['permitAll'],
-                    '/assets/**':                    ['permitAll'],
-                    '/**/js/**':                     ['permitAll'],
-                    '/**/css/**':                    ['permitAll'],
-                    '/**/images/**':                 ['permitAll'],
-                    '/**/favicon.ico':               ['permitAll'],
-                    '/login/**':                     ['permitAll'],
-                    '/logout/**':                    ['permitAll'],
-                    '/secure/**':                    ['ROLE_USER']
-]
-

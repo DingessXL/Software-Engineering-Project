@@ -1,0 +1,48 @@
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "BUILDING" not found; SQL statement:
+alter table building drop constraint FK_9x24vnkdk09q7uvv7vprf6q66 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "HISTORY" not found; SQL statement:
+alter table history drop constraint FK_ifs70s27csgp63uq0ybxpmtnq if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "NOTE" not found; SQL statement:
+alter table note drop constraint FK_7nxg8qvcqtjjvfw2mn15ks58o if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUEUE" not found; SQL statement:
+alter table queue drop constraint FK_j40hb93ib7wq6gq1ee57v5esv if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUEUE_TICKET" not found; SQL statement:
+alter table queue_ticket drop constraint FK_gn8p6elrlk3uwe2epilgl4mjm if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "QUEUE_TICKET" not found; SQL statement:
+alter table queue_ticket drop constraint FK_neeq5cfksufibfgorxp7w3aj8 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "REPLY" not found; SQL statement:
+alter table reply drop constraint FK_m07m4wsyeryniehiip2p0dpdq if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_c59lkbdj7emvnimomo5nfutc6 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_jn435fyx1exnktk45h9uv1tt2 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_95pw196xd8iy111lhdx7cqfo5 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_mjuv5xlcrqtv32aa9mclwk689 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_mkl9cxyonrfp08prgl1h6x7y7 if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "TICKET" not found; SQL statement:
+alter table ticket drop constraint FK_muuvsjectaapdy9hd7em1t95d if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER" not found; SQL statement:
+alter table user drop constraint FK_stbvycqjsdoku5vlwftnno6ho if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_TICKET" not found; SQL statement:
+alter table user_ticket drop constraint FK_c9ondkkrormuf149d2a5hctli if exists [42102-176]
+04-04 11:44:56 jdbc[12]: exception
+org.h2.jdbc.JdbcSQLException: Table "USER_TICKET" not found; SQL statement:
+alter table user_ticket drop constraint FK_23e8bgubf66wl2rsxvk34eagy if exists [42102-176]

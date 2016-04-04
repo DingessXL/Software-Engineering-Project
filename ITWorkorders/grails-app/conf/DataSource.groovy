@@ -19,7 +19,10 @@ environments {
     development {
         dataSource {
             dbCreate = "create-drop" // one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"
+
+            //Removed 'mem' in between h2 and devDB so that we will not have to bootstrap locations and categories
+            //every time.  -Matt
+            url = "jdbc:h2:devDb;MVCC=TRUE;LOCK_TIMEOUT=10000;DB_CLOSE_ON_EXIT=FALSE"  
         }
     }
     test {

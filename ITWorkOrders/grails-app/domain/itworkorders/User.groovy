@@ -10,6 +10,8 @@ class User {
 
     static belongsTo = [workgroup: Workgroup]
 
+    static hasMany = [tickets: Ticket]
+
     static constraints = {
         email blank:false,nullable: false
         /*
@@ -26,6 +28,7 @@ class User {
         */
         isTechnician blank:true,nullable:true
         isAdmin blank:true,nullable: true
+        tickets blank:true,nullable: true
 
     }
     String toString () {"$firstName $lastName"}

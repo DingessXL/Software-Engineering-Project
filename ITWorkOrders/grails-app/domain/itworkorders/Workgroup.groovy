@@ -9,7 +9,7 @@ class Workgroup {
     static constraints = {
         workgroupName blank:false
         user blank:true
-        ticket blank:true
+        ticket blank:true, nullable:true
     }
 
     String toString(){"$workgroupName"}

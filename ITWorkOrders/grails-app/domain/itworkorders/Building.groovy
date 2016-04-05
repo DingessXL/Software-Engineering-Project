@@ -4,7 +4,7 @@ class Building {
     String buildingName
     String buildingAddress
 
-    static belongsTo = [ticket: Ticket]
+    //static belongsTo = [ticket: Ticket]
     static hasMany = [ticket: Ticket]
     static constraints = {
         buildingName blank:false

@@ -4,7 +4,7 @@ class Department {
     String departmentName
     String departmentAddress
 
-    static belongsTo =[ticket: Ticket]
+    //static belongsTo =[ticket: Ticket]
     static hasMany = [ticket:Ticket]
     static constraints = {
         departmentName blank:false

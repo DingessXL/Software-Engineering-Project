@@ -7,17 +7,19 @@ class Ticket {
     String phoneNumber
     String roomNumber
     final Date creationDate = new Date()  //must not be changed after creation
-    Status ticketStatus
+    //Status ticketStatus
     String subject
     String description
 
     //we need to find some way of limiting the list of users to only technicians for this field
-    User technician
-    Department departmentName
-    Building buildingName
-    Workgroup workgroup
+    //User technician
+    //Department departmentName
+    //Building buildingName
+    //Workgroup workgroup
 
-    static belongsTo = [workgroup:Workgroup]
+
+    //This may have cascading delete 
+    static belongsTo = [workgroup:Workgroup, technician:User, workgroup:Workgroup, buildingName:Building, departmentName:Department, ticketStatus:Status]
 
     static hasMany = [reply:Reply, note:Note]
 

@@ -43,6 +43,8 @@
 				</li>
 				</g:if>-->
 			
+
+				<!-- Start Workgroup Queue display-->
 				<g:if test="${workgroupInstance?.ticket}">
 				<li class="fieldcontain">
 					<!--<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>-->
@@ -52,6 +54,7 @@
 								<th>Name</th>
 								<th>Subject</th>
 								<th>Status</th>
+								<th>Assigned</th>
 							</tr>
 							<g:each in="${workgroupInstance.ticket}" var="t">
 								<tr>
@@ -76,6 +79,10 @@
 									<td>
 										${t.ticketStatus}
 									</td>
+
+									<td>
+										${t.technician}
+									</td>
 								</tr>
 								
 							</g:each>
@@ -83,6 +90,7 @@
 					
 				</li>
 				</g:if>
+				<!-- End Workgroup Queue display-->
 			
 			</ol>
 			<g:form url="[resource:workgroupInstance, action:'delete']" method="DELETE">

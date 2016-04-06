@@ -55,6 +55,6 @@ class Ticket {
     }
 
     String toString(){
-        return "${id}|${subject}|${email}|${ticketStatus}"
+        return "${firstName} ${lastName} ${subject} ${technician} ${ticketStatus}"
     }
 }

@@ -23,7 +23,7 @@
 			</g:if>
 			<ol class="property-list workgroup">
 			
-				<g:if test="${workgroupInstance?.workgroupName}">
+				<!--<g:if test="${workgroupInstance?.workgroupName}">
 				<li class="fieldcontain">
 					<span id="workgroupName-label" class="property-label"><g:message code="workgroup.workgroupName.label" default="Workgroup Name" /></span>
 					
@@ -41,14 +41,16 @@
 						</g:each>
 					
 				</li>
-				</g:if>
+				</g:if>-->
 			
 				<g:if test="${workgroupInstance?.ticket}">
 				<li class="fieldcontain">
-					<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>
+					<!--<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>-->
 					
 						<g:each in="${workgroupInstance.ticket}" var="t">
-						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
+							${t}
+						</g:link></span>
 						</g:each>
 					
 				</li>

@@ -2,8 +2,12 @@ package itworkorders
 
 class Ticket {
     String email
-    String firstName
-    String lastName
+
+    //Default names to empty for easier logic in view
+    String firstName = ""
+    String lastName = ""
+
+    
     String phoneNumber
     String roomNumber
     final Date creationDate = new Date()  //must not be changed after creation

@@ -64,11 +64,19 @@
 										</g:link>
 										</span>
 									</td>
-								
-									<td>	
-										${t.firstName} ${t.lastName}
-									</td>
 									
+									<td>
+										<g:if test="${(t.firstName != '') &&  ($t?.lastName != '')}">
+											
+											${t.firstName} ${t.lastName}
+										
+										</g:if>
+										<g:else>
+									
+											<i>(No Name Provided)</i>
+
+										</g:else>
+									</td>
 									<td>
 										<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
 											${t.subject}
@@ -80,9 +88,18 @@
 										${t.ticketStatus}
 									</td>
 
-									<td>
-										${t.technician}
-									</td>
+
+									<g:if test="${t?.technician}">
+										<td>
+											${t.technician}
+										</td>
+									</g:if>
+
+									<g:else>
+										<td>
+											Unassigned
+										</td>
+									</g:else>
 								</tr>
 								
 							</g:each>

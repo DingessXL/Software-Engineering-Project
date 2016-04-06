@@ -46,12 +46,40 @@
 				<g:if test="${workgroupInstance?.ticket}">
 				<li class="fieldcontain">
 					<!--<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>-->
-					
-						<g:each in="${workgroupInstance.ticket}" var="t">
-						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
-							${t}
-						</g:link></span>
-						</g:each>
+						<table id="queue-table">
+							<tr id="queue-table-header">
+								<th>ID</th>
+								<th>Name</th>
+								<th>Subject</th>
+								<th>Status</th>
+							</tr>
+							<g:each in="${workgroupInstance.ticket}" var="t">
+								<tr>
+									<td>
+										<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
+											${t.id}
+										</g:link>
+										</span>
+									</td>
+								
+									<td>	
+										${t.firstName} ${t.lastName}
+									</td>
+									
+									<td>
+										<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
+											${t.subject}
+										</g:link>
+										</span>
+									</td>
+								
+									<td>
+										${t.ticketStatus}
+									</td>
+								</tr>
+								
+							</g:each>
+						</table>
 					
 				</li>
 				</g:if>

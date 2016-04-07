@@ -23,7 +23,7 @@
 			</g:if>
 			<ol class="property-list workgroup">
 			
-				<g:if test="${workgroupInstance?.workgroupName}">
+				<!--<g:if test="${workgroupInstance?.workgroupName}">
 				<li class="fieldcontain">
 					<span id="workgroupName-label" class="property-label"><g:message code="workgroup.workgroupName.label" default="Workgroup Name" /></span>
 					
@@ -41,18 +41,73 @@
 						</g:each>
 					
 				</li>
-				</g:if>
+				</g:if>-->
 			
+
+				<!-- Start Workgroup Queue display-->
 				<g:if test="${workgroupInstance?.ticket}">
 				<li class="fieldcontain">
-					<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>
-					
-						<g:each in="${workgroupInstance.ticket}" var="t">
-						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
+					<!--<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>-->
+						<table id="queue-table">
+							<tr id="queue-table-header">
+								<th>ID</th>
+								<th>Name</th>
+								<th>Subject</th>
+								<th>Status</th>
+								<th>Assigned</th>
+							</tr>
+							<g:each in="${workgroupInstance.ticket}" var="t">
+								<tr>
+									<td>
+										<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
+											${t.id}
+										</g:link>
+										</span>
+									</td>
+									
+									<td>
+										<g:if test="${(t.firstName != '') &&  ($t?.lastName != '')}">
+											
+											${t.firstName} ${t.lastName}
+										
+										</g:if>
+										<g:else>
+									
+											<i>(No Name Provided)</i>
+
+										</g:else>
+									</td>
+									<td>
+										<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">
+											${t.subject}
+										</g:link>
+										</span>
+									</td>
+								
+									<td>
+										${t.ticketStatus}
+									</td>
+
+
+									<g:if test="${t?.technician}">
+										<td>
+											${t.technician}
+										</td>
+									</g:if>
+
+									<g:else>
+										<td>
+											Unassigned
+										</td>
+									</g:else>
+								</tr>
+								
+							</g:each>
+						</table>
 					
 				</li>
 				</g:if>
+				<!-- End Workgroup Queue display-->
 			
 			</ol>
 			<g:form url="[resource:workgroupInstance, action:'delete']" method="DELETE">

@@ -12,8 +12,11 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+
+				<!-- Removing the reply list and reply create button since it should not be used like this>
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				-->
 			</ul>
 		</div>
 		<div id="show-reply" class="content scaffold-show" role="main">
@@ -32,11 +35,38 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${replyInstance?.author}">
+				<li class="fieldcontain">
+					<span id="author-label" class="property-label"><g:message code="reply.author.label" default="Author" /></span>
+					
+						<span class="property-value" aria-labelledby="author-label"><g:link controller="user" action="show" id="${replyInstance?.author?.id}">${replyInstance?.author?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${replyInstance?.ticket}">
 				<li class="fieldcontain">
 					<span id="ticket-label" class="property-label"><g:message code="reply.ticket.label" default="Ticket" /></span>
 					
 						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${replyInstance?.ticket?.id}">${replyInstance?.ticket?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${replyInstance?.dateCreated}">
+				<li class="fieldcontain">
+					<span id="dateCreated-label" class="property-label"><g:message code="reply.dateCreated.label" default="Date Created" /></span>
+					
+						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${replyInstance?.dateCreated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${replyInstance?.lastUpdated}">
+				<li class="fieldcontain">
+					<span id="lastUpdated-label" class="property-label"><g:message code="reply.lastUpdated.label" default="Last Updated" /></span>
+					
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${replyInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

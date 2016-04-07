@@ -32,28 +32,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${workgroupInstance?.user}">
-				<li class="fieldcontain">
-					<span id="user-label" class="property-label"><g:message code="workgroup.user.label" default="User" /></span>
-					
-						<g:each in="${workgroupInstance.user}" var="u">
-						<span class="property-value" aria-labelledby="user-label"><g:link controller="user" action="show" id="${u.id}">${u?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
-				<g:if test="${workgroupInstance?.ticket}">
-				<li class="fieldcontain">
-					<span id="ticket-label" class="property-label"><g:message code="workgroup.ticket.label" default="Ticket" /></span>
-					
-						<g:each in="${workgroupInstance.ticket}" var="t">
-						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${t.id}">${t?.encodeAsHTML()}</g:link></span>
-						</g:each>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form url="[resource:workgroupInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

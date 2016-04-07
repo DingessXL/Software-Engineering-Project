@@ -41,15 +41,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${buildingInstance?.ticket}">
-				<li class="fieldcontain">
-					<span id="ticket-label" class="property-label"><g:message code="building.ticket.label" default="Ticket" /></span>
-					
-						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${buildingInstance?.ticket?.id}">${buildingInstance?.ticket?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form url="[resource:buildingInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

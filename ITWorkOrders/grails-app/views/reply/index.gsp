@@ -26,7 +26,13 @@
 					
 						<g:sortableColumn property="reply" title="${message(code: 'reply.reply.label', default: 'Reply')}" />
 					
+						<th><g:message code="reply.author.label" default="Author" /></th>
+					
 						<th><g:message code="reply.ticket.label" default="Ticket" /></th>
+					
+						<g:sortableColumn property="dateCreated" title="${message(code: 'reply.dateCreated.label', default: 'Date Created')}" />
+					
+						<g:sortableColumn property="lastUpdated" title="${message(code: 'reply.lastUpdated.label', default: 'Last Updated')}" />
 					
 					</tr>
 				</thead>
@@ -36,7 +42,13 @@
 					
 						<td><g:link action="show" id="${replyInstance.id}">${fieldValue(bean: replyInstance, field: "reply")}</g:link></td>
 					
+						<td>${fieldValue(bean: replyInstance, field: "author")}</td>
+					
 						<td>${fieldValue(bean: replyInstance, field: "ticket")}</td>
+					
+						<td><g:formatDate date="${replyInstance.dateCreated}" /></td>
+					
+						<td><g:formatDate date="${replyInstance.lastUpdated}" /></td>
 					
 					</tr>
 				</g:each>

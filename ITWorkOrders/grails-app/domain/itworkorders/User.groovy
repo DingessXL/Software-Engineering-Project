@@ -28,7 +28,7 @@ class User {
         */
         isTechnician blank:true,nullable:true
         isAdmin blank:true,nullable: true
-        tickets blank:true,nullable: true
+        tickets blank:true,nullable: true, display:false
 
     }
     String toString () {"$firstName $lastName"}

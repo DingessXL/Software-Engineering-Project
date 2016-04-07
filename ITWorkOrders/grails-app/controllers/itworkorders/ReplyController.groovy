@@ -86,7 +86,7 @@ class ReplyController {
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'Reply.label', default: 'Reply'), replyInstance.id])
-                redirect action:"index", method:"GET"
+                redirect(controller:"Ticket", action:"show")
             }
             '*'{ render status: NO_CONTENT }
         }

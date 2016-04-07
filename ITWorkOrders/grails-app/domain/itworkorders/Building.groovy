@@ -9,7 +9,7 @@ class Building {
     static constraints = {
         buildingName blank:false
         buildingAddress blank:true, nullable: true
-        ticket nullable:true
+        ticket nullable:true, display:false
     }
     String toString(){"$buildingName"}
 }

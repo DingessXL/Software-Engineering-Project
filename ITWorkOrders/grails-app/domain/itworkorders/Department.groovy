@@ -9,7 +9,7 @@ class Department {
     static constraints = {
         departmentName blank:false
         departmentAddress blank:true, nullable:true
-        ticket  nullable:true
+        ticket  nullable:true, display:false
     }
     String toString (){"$departmentName"}
 }

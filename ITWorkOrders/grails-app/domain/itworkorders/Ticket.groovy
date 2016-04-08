@@ -2,15 +2,20 @@ package itworkorders
 
 class Ticket {
     String email
+<<<<<<< HEAD
 
     //Default names to empty for easier logic in view
     String firstName = ""
     String lastName = ""
 
     
+=======
+    String firstName = ""
+    String lastName = ""
+>>>>>>> matt
     String phoneNumber
     String roomNumber
-    final Date creationDate = new Date()  //must not be changed after creation
+    Date creationDate = new Date()  //must not be changed after creation
     //Status ticketStatus
     String subject
     String description
@@ -51,14 +56,29 @@ class Ticket {
         roomNumber blank:true, nullable:true
         subject blank:false
         description blank:false, maxSize:2500
+
+        //We need technician to check to see if isTechnician is true in the user table.  Display only technicians from user table.
         technician blank:true, nullable:true
+
+        //workgroup needs to be set to Serve Help Desk by default and hidden from view if the current logged in user is not a technician.
         workgroup blank:false, nullable:false
+
+        //ticketStatus needs to be set to Open by default and hidden from view if the current logged in user is not a technician.
         ticketStatus blank:false;
+
+        //Reply needs to be hidden from view on the create page only.
         reply blank:true, nullable:true
+
+        //Notes should be hidden from view to create or view notes if the user is not a technician.
         note blank:true, nullable:true
     }
 
+    static mapping = {
+        reply sort: 'dateCreated', order: 'asc'
+        note sort: 'dateCreated', order: 'asc'
+    }
+
     String toString(){
-        return "${firstName} ${lastName} ${subject} ${technician} ${ticketStatus}"
+        return "Ticket WO-${id}: ${subject}"
     }
 }

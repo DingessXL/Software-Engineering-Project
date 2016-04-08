@@ -12,8 +12,12 @@
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
+
+				<!-- Removing note list and note create button from view.  Should not be used like this.
 				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
+				-->
+
 			</ul>
 		</div>
 		<div id="show-note" class="content scaffold-show" role="main">
@@ -32,11 +36,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${noteInstance?.name}">
+				<g:if test="${noteInstance?.author}">
 				<li class="fieldcontain">
-					<span id="name-label" class="property-label"><g:message code="note.name.label" default="Name" /></span>
+					<span id="author-label" class="property-label"><g:message code="note.author.label" default="Author" /></span>
 					
-						<span class="property-value" aria-labelledby="name-label"><g:fieldValue bean="${noteInstance}" field="name"/></span>
+						<span class="property-value" aria-labelledby="author-label"><g:link controller="user" action="show" id="${noteInstance?.author?.id}">${noteInstance?.author?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>
@@ -46,6 +50,24 @@
 					<span id="ticket-label" class="property-label"><g:message code="note.ticket.label" default="Ticket" /></span>
 					
 						<span class="property-value" aria-labelledby="ticket-label"><g:link controller="ticket" action="show" id="${noteInstance?.ticket?.id}">${noteInstance?.ticket?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${noteInstance?.dateCreated}">
+				<li class="fieldcontain">
+					<span id="dateCreated-label" class="property-label"><g:message code="note.dateCreated.label" default="Date Created" /></span>
+					
+						<span class="property-value" aria-labelledby="dateCreated-label"><g:formatDate date="${noteInstance?.dateCreated}" /></span>
+					
+				</li>
+				</g:if>
+			
+				<g:if test="${noteInstance?.lastUpdated}">
+				<li class="fieldcontain">
+					<span id="lastUpdated-label" class="property-label"><g:message code="note.lastUpdated.label" default="Last Updated" /></span>
+					
+						<span class="property-value" aria-labelledby="lastUpdated-label"><g:formatDate date="${noteInstance?.lastUpdated}" /></span>
 					
 				</li>
 				</g:if>

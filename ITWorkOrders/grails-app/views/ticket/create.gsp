@@ -14,7 +14,7 @@
 			</ul>
 		</div>
 		<div id="create-ticket" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="[entityName]" /></h1>
+			<h1><g:message code="default.create.label" args="Open New Ticket" /></h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -27,7 +27,7 @@
 			</g:hasErrors>
 			<g:form url="[resource:ticketInstance, action:'save']" >
 				<fieldset class="form">
-					<g:render template="form"/>
+					<g:render template="createForm"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

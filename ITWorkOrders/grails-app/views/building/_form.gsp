@@ -20,12 +20,3 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: buildingInstance, field: 'ticket', 'error')} ">
-	<label for="ticket">
-		<g:message code="building.ticket.label" default="Ticket" />
-		
-	</label>
-	<g:select id="ticket" name="ticket.id" from="${itworkorders.Ticket.list()}" optionKey="id" value="${buildingInstance?.ticket?.id}" class="many-to-one" noSelection="['null': '']"/>
-
-</div>
-

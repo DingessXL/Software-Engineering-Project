@@ -7,7 +7,7 @@ class Status {
 
     static constraints = {
         status blank:false
-        ticket blank:true, nullable: true
+        ticket blank:true, nullable: true, display:false
 
     }
     String toString () {"$status"}

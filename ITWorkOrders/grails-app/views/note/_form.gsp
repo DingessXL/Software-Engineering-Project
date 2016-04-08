@@ -11,21 +11,23 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: noteInstance, field: 'name', 'error')} ">
-	<label for="name">
-		<g:message code="note.name.label" default="Name" />
+<div class="fieldcontain ${hasErrors(bean: noteInstance, field: 'author', 'error')} ">
+	<label for="author">
+		<g:message code="note.author.label" default="Author" />
 		
 	</label>
-	<g:textField name="name" value="${noteInstance?.name}"/>
+	<g:select id="author" name="author.id" from="${itworkorders.User.list()}" optionKey="id" value="${noteInstance?.author?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: noteInstance, field: 'ticket', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: noteInstance, field: 'ticket', 'error')} ">
+	<!-- Removing ticket Label since it is hiddenField
 	<label for="ticket">
 		<g:message code="note.ticket.label" default="Ticket" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="ticket" name="ticket.id" from="${itworkorders.Ticket.list()}" optionKey="id" required="" value="${noteInstance?.ticket?.id}" class="many-to-one"/>
+		
+	</label> -->
+	<!-- Changed to hiddenField since this should be autopopulated using current ticket -->
+	<g:hiddenField id="ticket" name="ticket.id" from="${itworkorders.Ticket.list()}" optionKey="id" value="${noteInstance?.ticket?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 

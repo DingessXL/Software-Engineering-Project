@@ -5034,3 +5034,4 @@ n:2152:org/apache/tools/ant/taskdefs/optional/native2ascii/DefaultNative2Ascii
 n:6755:sun/tools/native2ascii/Main
 n:697:sun/tools/native2ascii/resources/MsgNative2ascii
 n:1239:sun/tools/native2ascii/N2AFilter
+n:2273:org/codehaus/groovy/grails/commons/GrailsApplication$isArtefactOfType

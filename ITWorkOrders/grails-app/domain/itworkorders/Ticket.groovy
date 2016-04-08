@@ -2,23 +2,20 @@ package itworkorders
 
 class Ticket {
     String email
-<<<<<<< HEAD
 
     //Default names to empty for easier logic in view
     String firstName = ""
     String lastName = ""
 
-    
-=======
-    String firstName = ""
-    String lastName = ""
->>>>>>> matt
     String phoneNumber
     String roomNumber
-    Date creationDate = new Date()  //must not be changed after creation
+    //Date creationDate = new Date()  //must not be changed after creation
     //Status ticketStatus
     String subject
     String description
+
+    Date dateCreated
+    Date lastUpdated
 
     //we need to find some way of limiting the list of users to only technicians for this field
     //User technician

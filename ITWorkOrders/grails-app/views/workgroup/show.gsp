@@ -23,7 +23,9 @@
 			</g:if>
 			<ol class="property-list workgroup">
 			
-				<!--<g:if test="${workgroupInstance?.workgroupName}">
+				<!--Comented out original code
+
+				<g:if test="${workgroupInstance?.workgroupName}">
 				<li class="fieldcontain">
 					<span id="workgroupName-label" class="property-label"><g:message code="workgroup.workgroupName.label" default="Workgroup Name" /></span>
 					
@@ -32,7 +34,7 @@
 				</li>
 				</g:if>
 			
-<<<<<<< HEAD
+
 				<g:if test="${workgroupInstance?.user}">
 				<li class="fieldcontain">
 					<span id="user-label" class="property-label"><g:message code="workgroup.user.label" default="User" /></span>
@@ -109,9 +111,7 @@
 				</li>
 				</g:if>
 				<!-- End Workgroup Queue display-->
-			
-=======
->>>>>>> matt
+
 			</ol>
 			<g:form url="[resource:workgroupInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

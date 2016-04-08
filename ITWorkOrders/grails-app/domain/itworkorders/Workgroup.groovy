@@ -12,5 +12,9 @@ class Workgroup {
         ticket blank:true, nullable:true, display:false
     }
 
+    static mapping = {
+        ticket sort: 'dateCreated', order: 'asc'
+   	}
+
     String toString(){"$workgroupName"}
 }

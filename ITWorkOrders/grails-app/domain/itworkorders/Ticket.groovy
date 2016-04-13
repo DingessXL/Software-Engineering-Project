@@ -9,19 +9,13 @@ class Ticket {
 
     String phoneNumber
     String roomNumber
-    //Date creationDate = new Date()  //must not be changed after creation
-    //Status ticketStatus
+    String priority = "low"
     String subject
     String description
+    String [] history
 
     Date dateCreated
     Date lastUpdated
-
-    //we need to find some way of limiting the list of users to only technicians for this field
-    //User technician
-    //Department departmentName
-    //Building buildingName
-    //Workgroup workgroup
 
 
     //This may have cascading delete 
@@ -53,8 +47,8 @@ class Ticket {
         roomNumber blank:true, nullable:true
         subject blank:false
         description blank:false, maxSize:2500
-
-        //We need technician to check to see if isTechnician is true in the user table.  Display only technicians from user table.
+        priority inList:["low","medium","high"], nullable:false
+        //We need technician to check to see s isTechnician is true in the user table.  Display only technicians from user table.
         technician blank:true, nullable:true
 
         //workgroup needs to be set to Serve Help Desk by default and hidden from view if the current logged in user is not a technician.
@@ -68,14 +62,24 @@ class Ticket {
 
         //Notes should be hidden from view to create or view notes if the user is not a technician.
         note blank:true, nullable:true
+
+        history nullable:true, display:false
+
     }
 
     static mapping = {
+
+        /*
+        This is so that these items are stored in the database in ascending order according
+        to the date created.  This keeps us from having to manually edit the views when using
+        the g:each tags.
+        */
         reply sort: 'dateCreated', order: 'asc'
         note sort: 'dateCreated', order: 'asc'
+        history sort: 'dateCreated', order: 'asc'
     }
 
     String toString(){
-        return "Ticket WO-${id}: ${subject}"
+        return "Ticket ID: ${id}  Subject: ${subject}"
     }
 }

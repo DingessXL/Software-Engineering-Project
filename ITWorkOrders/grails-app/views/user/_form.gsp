@@ -2,12 +2,21 @@
 
 
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'email', 'error')} required">
-	<label for="email">
-		<g:message code="user.email.label" default="Email" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'userName', 'error')} required">
+	<label for="userName">
+		<g:message code="user.userName.label" default="User Name" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="email" required="" value="${userInstance?.email}"/>
+	<g:textField name="userName" required="" value="${userInstance?.userName}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'password', 'error')} required">
+	<label for="password">
+		<g:message code="user.password.label" default="Password" />
+		<span class="required-indicator">*</span>
+	</label>
+	<g:textField name="password" required="" value="${userInstance?.password}"/>
 
 </div>
 
@@ -29,21 +38,12 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isTechnician', 'error')} ">
-	<label for="isTechnician">
-		<g:message code="user.isTechnician.label" default="Is Technician" />
-		
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
+	<label for="role">
+		<g:message code="user.role.label" default="Role" />
+		<span class="required-indicator">*</span>
 	</label>
-	<g:checkBox name="isTechnician" value="${userInstance?.isTechnician}" />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'isAdmin', 'error')} ">
-	<label for="isAdmin">
-		<g:message code="user.isAdmin.label" default="Is Admin" />
-		
-	</label>
-	<g:checkBox name="isAdmin" value="${userInstance?.isAdmin}" />
+	<g:select name="role" from="${userInstance.constraints.role.inList}" required="" value="${userInstance?.role}" valueMessagePrefix="user.role"/>
 
 </div>
 

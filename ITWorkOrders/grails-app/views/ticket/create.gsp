@@ -19,7 +19,8 @@
 		</div>-->
 
 		<div id="create-ticket" class="content scaffold-create" role="main">
-			<h1><g:message code="default.create.label" args="Open New Ticket" /></h1>
+			%{--Use simple h1 tag oppesed to g:message which was causeing issues--}%
+			<h1>Open New Ticket</h1>
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>

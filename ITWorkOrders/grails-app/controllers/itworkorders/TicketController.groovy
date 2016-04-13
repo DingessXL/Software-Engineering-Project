@@ -10,6 +10,16 @@ class TicketController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+
+    //Email function to sen email notifications to users on ticket changes
+    def email() {
+        sendMail {
+            to "alexander.heavner@bobcats.gcsu.edu"
+            subject "This is a cool kid test"
+            body 'Kush did 4/20'
+        }
+    }
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Ticket.list(params), model:[ticketInstanceCount: Ticket.count()]

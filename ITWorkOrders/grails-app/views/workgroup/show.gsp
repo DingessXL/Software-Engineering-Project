@@ -9,7 +9,11 @@
 	</head>
 	<body>
 		<a href="#show-workgroup" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+
+		%{-- Render Nav Template --}%
 		<g:render template="/grails-app/views/nav/nav" />
+
+		
 		<div id="show-workgroup" class="content scaffold-show" role="main">
 			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">

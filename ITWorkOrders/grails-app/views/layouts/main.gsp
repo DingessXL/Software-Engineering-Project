@@ -17,7 +17,9 @@
 		<g:layoutHead/>
 	</head>
 	<body>
-		<div id="grailsLogo" role="banner"><a href="http://localhost:8080/ITWorkOrders/"><asset:image src="gc_logo.png" alt="Georgia College IT Work Order System"/></a></div>
+		<div id="grailsLogo" role="banner"><a href="http://localhost:8080/ITWorkOrders/"><asset:image src="gc_logo.png" alt="Georgia College IT Work Order System"/></a>
+		</div>
+	<g:loginToggle/>
 		<g:layoutBody/>
 		<div class="footer" role="contentinfo"></div>
 		<div id="spinner" class="spinner" style="display:none;"><g:message code="spinner.alt" default="Loading&hellip;"/></div>

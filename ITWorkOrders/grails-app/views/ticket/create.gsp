@@ -19,8 +19,10 @@
 		</div>-->
 
 		<div id="create-ticket" class="content scaffold-create" role="main">
+
 			%{--Use simple h1 tag oppesed to g:message which was causeing issues--}%
 			<h1>Open New Ticket</h1>
+			
 			<g:if test="${flash.message}">
 			<div class="message" role="status">${flash.message}</div>
 			</g:if>
@@ -33,7 +35,7 @@
 			</g:hasErrors>
 			<g:form url="[resource:ticketInstance, action:'save']" >
 				<fieldset class="form">
-					<g:render template="createForm"/>
+					<g:render template="form"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />

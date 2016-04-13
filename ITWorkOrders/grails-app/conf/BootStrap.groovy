@@ -8,8 +8,9 @@ class BootStrap {
     	wg.save(flush:true)
 
 
-    	new User(email: "default@gcsu.edu", firstName: "Default", lastName: "Test", isTechnician: true, isAdmin: true, workgroup: wg).save(flush:true)
-
+    	new User(userName: "admin@gcsu.edu",password:"abcd1234",firstName:"Admin",lastName:"Test", role:"admin", workgroup: wg).save(flush:true)
+		new User(userName: "tech@gcsu.edu", password:"abcd1234",firstName:"Tech",lastName:"Test", role:"technician", workgroup: wg).save(flush:true)
+		new User(userName: "user@gcsu.edu", password:"abcd1234",firstName:"User",lastName:"Test", role:"user", workgroup:wg).save(flush:true)
     	def s = new Status(status:"Open")
     	s.save(flush:true)
     	new Status(status:"Closed").save(flush:true)

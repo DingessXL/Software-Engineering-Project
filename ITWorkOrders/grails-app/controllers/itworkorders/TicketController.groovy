@@ -11,15 +11,6 @@ class TicketController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
 
-    //Email function to sen email notifications to users on ticket changes
-    def email() {
-        sendMail {
-            to "alexander.heavner@bobcats.gcsu.edu"
-            subject "This is a cool kid test"
-            body 'Kush did 4/20'
-        }
-    }
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Ticket.list(params), model:[ticketInstanceCount: Ticket.count()]
@@ -47,6 +38,24 @@ class TicketController {
 
         ticketInstance.save flush:true
 
+        //Email notification for new ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "A New Ticket Has Been Created"
+            html g.render(template:"/grails-app/views/email/ticketcreate", model:[ticketInstance:ticketInstance])
+        }
+
+        //Email technician if one is assigned
+        if(ticketInstance.technician)
+        {
+            sendMail {
+                to ticketInstance.technician.userName
+                subject "A Ticket Has Been Updated"
+                html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
+            }
+        }
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -73,6 +82,24 @@ class TicketController {
         }
 
         ticketInstance.save flush:true
+
+        //Email notification for new ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "A Ticket Has Been Updated"
+            html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
+        }
+
+        //Email technician if one is assigned
+        if(ticketInstance.technician)
+        {
+            sendMail {
+                to ticketInstance.technician.userName
+                subject "A Ticket Has Been Updated"
+                html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
+            }
+        }
 
         request.withFormat {
             form multipartForm {

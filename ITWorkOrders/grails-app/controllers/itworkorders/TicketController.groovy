@@ -56,6 +56,10 @@ class TicketController {
             }
         }
 
+
+        //Add to history of ticket
+        ticketInstance.history.add "Ticket created by " + session.user.firstName + " " + session.user.lastName + " on " + new Date()
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -100,6 +104,9 @@ class TicketController {
                 html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
             }
         }
+
+        //Add to history of ticket
+        ticketInstance.history.add "Ticket updated by " + session.user.firstName + " " + session.user.lastName + " on " + new Date()
 
         request.withFormat {
             form multipartForm {

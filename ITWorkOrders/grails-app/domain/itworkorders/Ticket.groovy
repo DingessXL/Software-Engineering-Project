@@ -12,7 +12,6 @@ class Ticket {
     String priority = "low"
     String subject
     String description
-    String [] history
 
     Date dateCreated
     Date lastUpdated
@@ -21,7 +20,7 @@ class Ticket {
     //This may have cascading delete 
     static belongsTo = [workgroup:Workgroup, technician:User, workgroup:Workgroup, buildingName:Building, departmentName:Department, ticketStatus:Status]
 
-    static hasMany = [reply:Reply, note:Note]
+    static hasMany = [reply:Reply, note:Note, history:String]
 
     static constraints = {
         /* Required Fields:

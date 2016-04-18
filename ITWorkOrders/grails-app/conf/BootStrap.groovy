@@ -22,6 +22,10 @@ class BootStrap {
 
     	new Ticket(email:"meow@mewo.com", subject:"Cats", description: "meow", workgroup: wg, ticketStatus: s).save(flush:true)
     	new Ticket(email:"cats@cats.com", subject:"Meow", description: "cats", workgroup: wg, ticketStatus: s).save(flush:true)
+
+        new Workgroup(workgroupName: "Test").save(flush:true)
+
+        new User(userName: "alexander.heavner@bobcats.gcsu.edu",password:"abcd1234",firstName:"Alex",lastName:"Test", role:"admin", workgroup: wg).save(flush:true)
     }
     def destroy = {
     }

@@ -1,37 +1,15 @@
 package itworkorders
 
-
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
+@Secured(['ROLE_ADMIN'])
 class UserController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
-    //Added Login, validate and Logout methods for user control:
-    def login() {
-        if (params.cName)
-            return [cName:params.cName, aName:params.aName]
-    }
-    def validate() {
-        def user = User.findByUserName(params.username)
-        if (user && user.password == params.password){
-            session.user = user
-            if (params.cName)
-                redirect controller:params.cName, action:params.aName
-            else
-                redirect controller:'workgroup', action:'index'
-        } else{
-            flash.message = "Invalid username and password."
-            render view:'login'
-        }
-    }
-    def logout = {
-        session.user = null
-        redirect(uri:'/')
-    }
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)

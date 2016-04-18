@@ -1,11 +1,14 @@
 package itworkorders
 
-
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
+
+@Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
+
 class TicketController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -50,7 +53,7 @@ class TicketController {
         if(ticketInstance.technician)
         {
             sendMail {
-                to ticketInstance.technician.userName
+                to ticketInstance.technician.username
                 subject "A Ticket Has Been Updated"
                 html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
             }
@@ -58,13 +61,14 @@ class TicketController {
 
 
         //Add to history of ticket
+        def user = getAuthenticatedUser()
         if(ticketInstance.history)
         {            
-            ticketInstance.history.add "Ticket created by " + session.user.firstName + " " + session.user.lastName + " on " + new Date()
+            ticketInstance.history.add "Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()
         }
         else
         {
-            ticketInstance.history = ["Ticket created by " + session.user.firstName + " " + session.user.lastName + " on " + new Date()]
+            ticketInstance.history = ["Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()]
         }
 
         
@@ -107,14 +111,15 @@ class TicketController {
         if(ticketInstance.technician)
         {
             sendMail {
-                to ticketInstance.technician.userName
+                to ticketInstance.technician.username
                 subject "A Ticket Has Been Updated"
                 html g.render(template:"/grails-app/views/email/ticketupdate", model:[ticketInstance:ticketInstance])
             }
         }
 
         //Add to history of ticket
-        ticketInstance.history.add "Ticket updated by " + session.user.firstName + " " + session.user.lastName + " on " + new Date()
+        def user = getAuthenticatedUser()
+        ticketInstance.history.add "Ticket updated by " + user.firstName + " " + user.lastName + " on " + new Date()
 
         request.withFormat {
             form multipartForm {
@@ -126,6 +131,7 @@ class TicketController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Ticket ticketInstance) {
 
         if (ticketInstance == null) {

@@ -3,6 +3,7 @@ package itworkorders
 class SecurityFilters {
 
     def filters = {
+        /*
         doLogin(controller:'*', action:'*'){
             before={
                 if(!controllerName)
@@ -14,6 +15,6 @@ class SecurityFilters {
                     return false
                 }
             }
-        }
+        } */
     }
 }

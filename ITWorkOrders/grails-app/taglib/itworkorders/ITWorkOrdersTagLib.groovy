@@ -3,7 +3,7 @@ package itworkorders
 class ITWorkOrdersTagLib {
     //static defaultEncodeAs = [taglib:'html']
     //static encodeAsForTags = [tagName: [taglib:'html'], otherTagName: [taglib:'none']]
-
+    /*
     def loginToggle = {
         out << "<div style='margin: 15px 0 40px;'>"
         if (request.getSession(false) && session.user){
@@ -17,5 +17,5 @@ class ITWorkOrdersTagLib {
             out << "Login </a></span>"
         }
         out << "</div><br/>"
-    }
+    } */
 }

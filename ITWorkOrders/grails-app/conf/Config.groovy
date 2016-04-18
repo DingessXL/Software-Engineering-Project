@@ -41,6 +41,10 @@ grails.views.default.codec = "html"
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
 
+//This is to allow the GET requests necessary for login logout functionality -MG
+grails.plugin.springsecurity.logout.postOnly=false
+
+
 // GSP settings
 grails {
     views {
@@ -128,3 +132,23 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'itworkorders.auth.SecUser'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'itworkorders.auth.SecUserSecRole'
+grails.plugin.springsecurity.authority.className = 'itworkorders.auth.SecRole'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll'],
+    '/dbconsole/**':      ['ROLE_ADMIN'],
+    'auth/dbconsole/**': ['permitAll'],
+    '/login/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
+    '/logout/**':       ['IS_AUTHENTICATED_FULLY']
+]
+

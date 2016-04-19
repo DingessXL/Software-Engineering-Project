@@ -35,5 +35,5 @@ class Reply  {
         ticket display:true, nullable:false
     }
 
-    String toString() { "$dateCreated: $author said: $reply"}
+    String toString() { "$author said: $reply"}
 }

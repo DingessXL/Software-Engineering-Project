@@ -5582,3 +5582,5 @@ n:6057:org/codehaus/groovy/grails/web/json/JSONWriter
 n:812:org/codehaus/groovy/grails/web/json/JSONException
 n:167:org/codehaus/groovy/grails/web/json/JSONElement
 n:1565:org/slf4j/Logger$trace
+n:3145:BuildConfig$_run_closure1_closure3
+n:3198:BuildConfig$_run_closure1_closure5

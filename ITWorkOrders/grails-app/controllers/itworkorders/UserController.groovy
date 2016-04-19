@@ -1,5 +1,6 @@
 package itworkorders
 
+import itworkorders.auth.*
 import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
@@ -64,6 +65,11 @@ class UserController {
         }
 
         userInstance.save flush:true
+
+
+        //This is not working currently.  It sets the user role but does not allow users to access the secure pages.
+        SecRole newRole = userInstance.role;
+        SecUserSecRole.create(userInstance,newRole,true);
 
         request.withFormat {
             form multipartForm {

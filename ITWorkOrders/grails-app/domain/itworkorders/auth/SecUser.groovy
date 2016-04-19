@@ -5,6 +5,7 @@ import groovy.transform.EqualsAndHashCode
 import groovy.transform.ToString
 import itworkorders.Ticket
 import itworkorders.Workgroup
+import sun.security.util.Password
 
 @EqualsAndHashCode(includes='username')
 @ToString(includes='username', includeNames=true, includePackage=false)
@@ -56,7 +57,7 @@ class SecUser implements Serializable {
 
 	static constraints = {
 		username blank: false, unique: true
-		password blank: false
+		password blank: false, password:true
 		//firstName blank:true
 		//lastName blank:true
 		//tickets blank:true,nullable: true, display:false

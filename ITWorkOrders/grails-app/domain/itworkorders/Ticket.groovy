@@ -55,8 +55,8 @@ class Ticket {
         //workgroup needs to be set to Serve Help Desk by default and hidden from view if the current logged in user is not a technician.
         workgroup blank:false, nullable:false
 
-        //ticketStatus needs to be set to Open by default and hidden from view if the current logged in user is not a technician.
-        ticketStatus blank:false;
+        //ticketStatus needs to be set to Open by default in the create form, and hidden from view from any normal user
+        ticketStatus blank:false, nullable:true;
 
         //Reply needs to be hidden from view on the create page only.
         reply blank:true, nullable:true

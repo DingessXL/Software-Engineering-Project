@@ -35,11 +35,17 @@
 
 			<g:sortableColumn property="lastName" title="${message(code: 'ticket.lastName.label', default: 'Last Name')}" />
 
-			<g:sortableColumn property="phoneNumber" title="${message(code: 'ticket.phoneNumber.label', default: 'Phone Number')}" />
+			<g:sortableColumn property="subject" title="${message(code: 'ticket.subject.label', default: 'Subject')}" />
 
-			<th><g:message code="ticket.departmentName.label" default="Department Name" /></th>
+			<g:sortableColumn property="technician" title="${message(code: 'ticket.technician.label', default: 'Assigned Technician')}" />
 
-			<th><g:message code="ticket.buildingName.label" default="Building Name" /></th>
+			<g:sortableColumn property="dateCreated" title="${message(code: 'ticket.dateCreated.label', default: 'Date Created')}" />
+
+			<g:sortableColumn property="lastUpdated" title="${message(code: 'ticket.lastUpdated.label', default: 'Last Updated')}" />
+
+
+
+
 
 		</tr>
 		</thead>
@@ -53,11 +59,15 @@
 
 				<td>${fieldValue(bean: ticketInstance, field: "lastName")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "phoneNumber")}</td>
+				<td>${fieldValue(bean: ticketInstance, field: "subject")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "departmentName")}</td>
+				<td>${fieldValue(bean: ticketInstance, field: "technician")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "buildingName")}</td>
+				<td>${fieldValue(bean: ticketInstance, field: "dateCreated")}</td>
+
+				<td>${fieldValue(bean: ticketInstance, field: "lastUpdated")}</td>
+
+
 
 			</tr>
 		</g:each>

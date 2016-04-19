@@ -118,7 +118,7 @@
 	<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
-
+<!--
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'reply', 'error')} ">
 	<label for="reply">
 		<g:message code="ticket.reply.label" default="Reply" />
@@ -135,23 +135,60 @@
 </ul>
 
 
-</div>
+</div> -->
+<table>
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'reply', 'error')} ">
+	<tr><th><label for="reply">
+		<g:message code="ticket.reply.label" default="Reply" />
+	</label></th></tr>
 
+	<g:each in="${ticketInstance?.reply?}" var="r">
+		<tr><td><g:link controller="reply" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></td></tr>
+	</g:each>
+	<tr><td>
+		<g:link controller="reply" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reply.label', default: 'Reply')])}</g:link>
+	</td></tr>
+
+</div>
+</table>
+<!-- Notes - Only viewable by admin or techs -->
+
+<sec:ifLoggedIn>
+	<table>
+	<!-- ADMIN RIGHTS -->
+	<sec:ifAllGranted roles="ROLE_ADMIN">
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'note', 'error')} ">
-	<label for="note">
+	<tr><th><label for="note">
 		<g:message code="ticket.note.label" default="Note" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${ticketInstance?.note?}" var="n">
-    <li><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
-</li>
-</ul>
+	</label></th></tr>
 
+	<g:each in="${ticketInstance?.note?}" var="n">
+    	<tr><td><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></td></tr>
+	</g:each>
+	<tr><td>
+<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
+</td></tr>
 
 </div>
+	</sec:ifAllGranted>
+
+	<!-- TECH RIGHTS -->
+
+	<sec:ifAllGranted roles="ROLE_TECH">
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'note', 'error')} ">
+			<tr><th><label for="note">
+				<g:message code="ticket.note.label" default="Note" />
+			</label></th></tr>
+
+			<g:each in="${ticketInstance?.note?}" var="n">
+				<tr><td><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></td></tr>
+			</g:each>
+			<tr><td>
+				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
+			</td></tr>
+
+		</div>
+	</sec:ifAllGranted>
+	</table>
+</sec:ifLoggedIn>
 

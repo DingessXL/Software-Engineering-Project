@@ -89,6 +89,11 @@
     <g:textArea name="description" cols="40" rows="5" maxlength="2500" required="" value="${ticketInstance?.description}"/>
 
 </div>
+
+<!-- NOTES HIDDEN FROM NON ADMIN or TECH -->
+
+<!-- ADMIN RIGHTS -->
+
 <sec:ifLoggedIn>
     <sec:ifAllGranted roles="ROLE_ADMIN">
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
@@ -119,7 +124,40 @@
 </div>
 
     </sec:ifAllGranted>
-    <sec:ifNotGranted roles="ROLE_ADMIN">
+
+<!-- TECH RIGHTS (samem as admin) -->
+    <sec:ifAllGranted roles="ROLE_TECH">
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
+            <label for="technician">
+                <g:message code="ticket.technician.label" default="Technician" />
+
+            </label>
+            <g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+        </div>
+
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+            <label for="workgroup">
+                <g:message code="ticket.workgroup.label" default="Workgroup" />
+                <span class="required-indicator">*</span>
+            </label>
+            <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+        </div>
+
+
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
+            <label for="ticketStatus">
+                <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+                <span class="required-indicator">*</span>
+            </label>
+            <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
+
+        </div>
+
+    </sec:ifAllGranted>
+
+<!-- NORMAL USER RIGHTS -->
+    <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_TECH">
         <!-- This is where we will add a hidden field to default to Serve Help Desk workgroup and Open status -->
 
     </sec:ifNotGranted>

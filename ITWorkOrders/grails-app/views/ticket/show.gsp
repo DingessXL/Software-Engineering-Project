@@ -69,7 +69,7 @@
 			<li class="fieldcontain">
 				<span id="departmentName-label" class="property-label"><g:message code="ticket.departmentName.label" default="Department Name" /></span>
 
-				<span class="property-value" aria-labelledby="departmentName-label"><g:link controller="department" action="show" id="${ticketInstance?.departmentName?.id}">${ticketInstance?.departmentName?.encodeAsHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="departmentName-label"><g:fieldValue bean="${ticketInstance}" field="departmentName"/></span>
 
 			</li>
 		</g:if>
@@ -78,7 +78,7 @@
 			<li class="fieldcontain">
 				<span id="buildingName-label" class="property-label"><g:message code="ticket.buildingName.label" default="Building Name" /></span>
 
-				<span class="property-value" aria-labelledby="buildingName-label"><g:link controller="building" action="show" id="${ticketInstance?.buildingName?.id}">${ticketInstance?.buildingName?.encodeAsHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="buildingName-label"><g:fieldValue bean="${ticketInstance}" field="buildingName"/></span>
 
 			</li>
 		</g:if>
@@ -123,7 +123,7 @@
 			<li class="fieldcontain">
 				<span id="technician-label" class="property-label"><g:message code="ticket.technician.label" default="Technician" /></span>
 
-				<span class="property-value" aria-labelledby="technician-label"><g:link controller="user" action="show" id="${ticketInstance?.technician?.id}">${ticketInstance?.technician?.encodeAsHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="technician-label"><g:fieldValue bean="${ticketInstance}" field="technician"/></span>
 
 			</li>
 		</g:if>
@@ -132,7 +132,7 @@
 			<li class="fieldcontain">
 				<span id="workgroup-label" class="property-label"><g:message code="ticket.workgroup.label" default="Workgroup" /></span>
 
-				<span class="property-value" aria-labelledby="workgroup-label"><g:link controller="workgroup" action="show" id="${ticketInstance?.workgroup?.id}">${ticketInstance?.workgroup?.encodeAsHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="workgroup-label"><g:fieldValue bean="${ticketInstance}" field="workgroup"/></span>
 
 			</li>
 		</g:if>
@@ -141,32 +141,11 @@
 			<li class="fieldcontain">
 				<span id="ticketStatus-label" class="property-label"><g:message code="ticket.ticketStatus.label" default="Ticket Status" /></span>
 
-				<span class="property-value" aria-labelledby="ticketStatus-label"><g:link controller="status" action="show" id="${ticketInstance?.ticketStatus?.id}">${ticketInstance?.ticketStatus?.encodeAsHTML()}</g:link></span>
+				<span class="property-value" aria-labelledby="ticketStatus-label"><g:fieldValue bean="${ticketInstance}" field="ticketStatus"/></span>
 
 			</li>
 		</g:if>
 
-		<g:if test="${ticketInstance?.reply}">
-			<li class="fieldcontain">
-				<span id="reply-label" class="property-label"><g:message code="ticket.reply.label" default="Reply" /></span>
-
-				<g:each in="${ticketInstance.reply}" var="r">
-					<span class="property-value" aria-labelledby="reply-label"><g:link controller="reply" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span>
-				</g:each>
-
-			</li>
-		</g:if>
-
-		<g:if test="${ticketInstance?.note}">
-			<li class="fieldcontain">
-				<span id="note-label" class="property-label"><g:message code="ticket.note.label" default="Note" /></span>
-
-				<g:each in="${ticketInstance.note}" var="n">
-					<span class="property-value" aria-labelledby="note-label"><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></span>
-				</g:each>
-
-			</li>
-		</g:if>
 
 		<g:if test="${ticketInstance?.dateCreated}">
 			<li class="fieldcontain">
@@ -187,6 +166,68 @@
 		</g:if>
 
 	</ol>
+
+	<!-- Will not display replies unless there is one in the ticket -->
+	<!-- REPLIES TABLE -->
+	<table>
+	<g:if test="${ticketInstance?.reply}">
+			<tr><th><span id="reply-label" class="property-label"><g:message code="ticket.reply.label" default="Reply" /></span></th></tr>
+			<g:each in="${ticketInstance.reply}" var="r">
+				<tr><td><span class="property-value" aria-labelledby="reply-label"><g:link controller="reply" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></span></td></tr>
+			</g:each>
+	</g:if>
+	<tr><td>
+		<g:link controller="reply" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reply.label', default: 'Reply')])}</g:link>
+	</td></tr>
+	</table>
+<!-- HIDE Notes from Normal Users -->
+	<sec:ifLoggedIn>
+
+		<!-- NOTES TABLE -->
+		<table>
+		<!-- ADMIN RIGHTS -->
+		<sec:ifAllGranted roles="ROLE_ADMIN">
+			<g:if test="${ticketInstance?.note}">
+			<tr><th>
+					<span id="note-label" class="property-label"><g:message code="ticket.note.label" default="Notes" /></span>
+			</th></tr>
+					<g:each in="${ticketInstance.note}" var="n">
+						<tr><td><span class="property-value" aria-labelledby="note-label"><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></span></td></tr>
+					</g:each>
+
+			</g:if>
+			<!-- Add Note should be allowed on show page when there are no notes already added to the ticket -->
+
+			<tr><td>
+				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
+			</td></tr>
+
+		</sec:ifAllGranted>
+
+		<!-- TECH RIGHTS -->
+		<sec:ifAllGranted roles="ROLE_TECH">
+			<g:if test="${ticketInstance?.note}">
+				<tr><th>
+					<span id="note-label" class="property-label"><g:message code="ticket.note.label" default="Notes" /></span>
+				</th></tr>
+					<g:each in="${ticketInstance.note}" var="n">
+						<tr><td><span class="property-value" aria-labelledby="note-label"><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></span></td></tr>
+					</g:each>
+
+
+			</g:if>
+
+			<!-- Add Note should be allowed on show page when there are no notes already added to the ticket -->
+
+			<tr><td>
+				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
+			</td></tr>
+
+		</sec:ifAllGranted>
+		</table>
+	</sec:ifLoggedIn>
+
+	<!-- BUTTONS -->
 	<g:form url="[resource:ticketInstance, action:'delete']" method="DELETE">
 		<fieldset class="buttons">
 			<g:link class="edit" action="edit" resource="${ticketInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>

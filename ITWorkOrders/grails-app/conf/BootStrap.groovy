@@ -5,7 +5,7 @@ class BootStrap {
 
     def init = { servletContext ->
 
-    	def wg = new Workgroup(workgroupName: "Default")
+    	def wg = new Workgroup(workgroupName: "Serve Help Desk")
     	wg.save(flush:true)
 
 		//def adminRole = SecRole.findOrSaveWhere(authority: 'ROLE_ADMIN')
@@ -16,7 +16,7 @@ class BootStrap {
 
 		def adminUser = User.findOrSaveWhere(username: 'admin@gcsu.edu', password:'abcd1234', firstName: "admin", lastName: "account", workgroup:wg,
 				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true)
-		def techUser = User.findOrSaveWhere(username: 'matt.gaines@gcsu.edu', password:'abcd1234', firstName:"Matt",lastName:"Gaines", workgroup:wg,
+		def techUser = User.findOrSaveWhere(username: 'tech@gcsu.edu', password:'abcd1234', firstName:"Matt",lastName:"Gaines", workgroup:wg,
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true)
 		def user = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"Regular", lastName:"User", workgroup:wg,
 				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
@@ -36,12 +36,6 @@ class BootStrap {
 			SecUserSecRole.create(user,userRole, true)
 		}
 
-
-    	/*new User(userName: "admin@gcsu.edu",password:"abcd1234",firstName:"Admin",lastName:"Test", role:"admin", workgroup: wg).save(flush:true)
-		new User(userName: "tech@gcsu.edu", password:"abcd1234",firstName:"Tech",lastName:"Test", role:"technician", workgroup: wg).save(flush:true)
-		new User(userName: "user@gcsu.edu", password:"abcd1234",firstName:"User",lastName:"Test", role:"user", workgroup:wg).save(flush:true)
-		new User(userName: "alexander.heavner@bobcats.gcsu.edu",password:"abcd1234",firstName:"Alex",lastName:"Test", role:"admin", workgroup: wg).save(flush:true)
-*/
     	def s = new Status(status:"Open")
     	s.save(flush:true)
     	new Status(status:"Closed").save(flush:true)
@@ -51,12 +45,23 @@ class BootStrap {
 
     	new Building(buildingName: "Atkinson", buildingAddress: "123 CS St.").save(flush:true)
 
-    	new Ticket(email:"meow@mewo.com", subject:"Cats", description: "meow", workgroup: wg, ticketStatus: s).save(flush:true)
-    	new Ticket(email:"cats@cats.com", subject:"Meow", description: "cats", workgroup: wg, ticketStatus: s).save(flush:true)
+    	new Ticket(email:"user@gcsu.edu", subject:"Computer Issue", description: "Computer will not boot", workgroup: wg, ticketStatus: s).save(flush:true)
+    	new Ticket(email:"user@gcsu.edu", subject:"Network Issue", description: "Can not get to network drive.", workgroup: wg, ticketStatus: s).save(flush:true)
+		new Ticket(email:"user@gcsu.edu", subject:"Display Issue", description: "Display will not turn on", workgroup: wg, ticketStatus: s).save(flush:true)
+		new Ticket(email:"user@gcsu.edu", subject:"Printer Issue", description: "Printer will not print", workgroup: wg, ticketStatus: s).save(flush:true)
 
-        new Workgroup(workgroupName: "Test").save(flush:true)
 
-    }
+
+
+		new Workgroup(workgroupName: "Technology Support Services").save(flush:true)
+		new Workgroup(workgroupName: "System Administration").save(flush:true)
+		new Workgroup(workgroupName: "Enterprise Applications").save(flush:true)
+		new Workgroup(workgroupName: "Network Services").save(flush:true)
+
+
+
+
+	}
     def destroy = {
     }
 }

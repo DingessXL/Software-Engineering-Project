@@ -63,7 +63,7 @@ class TicketController {
         //Add to history of ticket
         def user = getAuthenticatedUser()
         if(ticketInstance.history)
-        {            
+        {
             ticketInstance.history.add "Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()
         }
         else
@@ -71,7 +71,7 @@ class TicketController {
             ticketInstance.history = ["Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()]
         }
 
-        
+
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ticket.label', default: 'Ticket'), ticketInstance.id])

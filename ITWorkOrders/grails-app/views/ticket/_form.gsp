@@ -110,12 +110,12 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
 	<label for="ticketStatus">
 		<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
-		<span class="required-indicator">*</span>
+		
 	</label>
-	<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
+	<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 

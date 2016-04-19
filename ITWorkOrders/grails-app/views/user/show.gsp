@@ -59,6 +59,15 @@
 				</li>
 				</g:if>
 			
+				<g:if test="${userInstance?.workgroup}">
+				<li class="fieldcontain">
+					<span id="workgroup-label" class="property-label"><g:message code="user.workgroup.label" default="Workgroup" /></span>
+					
+						<span class="property-value" aria-labelledby="workgroup-label"><g:link controller="workgroup" action="show" id="${userInstance?.workgroup?.id}">${userInstance?.workgroup?.encodeAsHTML()}</g:link></span>
+					
+				</li>
+				</g:if>
+			
 				<g:if test="${userInstance?.accountExpired}">
 				<li class="fieldcontain">
 					<span id="accountExpired-label" class="property-label"><g:message code="user.accountExpired.label" default="Account Expired" /></span>
@@ -95,11 +104,11 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.workgroup}">
+				<g:if test="${userInstance?.role}">
 				<li class="fieldcontain">
-					<span id="workgroup-label" class="property-label"><g:message code="user.workgroup.label" default="Workgroup" /></span>
+					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
 					
-						<span class="property-value" aria-labelledby="workgroup-label"><g:link controller="workgroup" action="show" id="${userInstance?.workgroup?.id}">${userInstance?.workgroup?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="role-label"><g:link controller="secRole" action="show" id="${userInstance?.role?.id}">${userInstance?.role?.encodeAsHTML()}</g:link></span>
 					
 				</li>
 				</g:if>

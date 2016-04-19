@@ -9,7 +9,7 @@ class Workgroup {
 
 
     static constraints = {
-        workgroupName blank:false
+        workgroupName blank:false, unique: true
         user blank:true, display:false
         ticket blank:true, nullable:true, display:false
     }

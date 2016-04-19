@@ -16,7 +16,7 @@
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:textField name="password" required="" value="${userInstance?.password}"/>
+	<g:field type="password" name="password" required="" value="${userInstance?.password}"/>
 
 </div>
 
@@ -35,6 +35,15 @@
 		
 	</label>
 	<g:textField name="lastName" value="${userInstance?.lastName}"/>
+
+</div>
+
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'workgroup', 'error')} ">
+	<label for="workgroup">
+		<g:message code="user.workgroup.label" default="Workgroup" />
+		
+	</label>
+	<g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" value="${userInstance?.workgroup?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 
@@ -74,12 +83,12 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'workgroup', 'error')} required">
-	<label for="workgroup">
-		<g:message code="user.workgroup.label" default="Workgroup" />
+<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
+	<label for="role">
+		<g:message code="user.role.label" default="Role" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${userInstance?.workgroup?.id}" class="many-to-one"/>
+	<g:select id="role" name="role.id" from="${itworkorders.auth.SecRole.list()}" optionKey="id" required="" value="${userInstance?.role?.id}" class="many-to-one"/>
 
 </div>
 

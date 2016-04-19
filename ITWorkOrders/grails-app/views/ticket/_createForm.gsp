@@ -89,7 +89,8 @@
     <g:textArea name="description" cols="40" rows="5" maxlength="2500" required="" value="${ticketInstance?.description}"/>
 
 </div>
-
+<sec:ifLoggedIn>
+    <sec:ifAllGranted roles="ROLE_ADMIN">
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
     <label for="technician">
         <g:message code="ticket.technician.label" default="Technician" />
@@ -99,14 +100,14 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
-    <label for="workgroup">
-        <g:message code="ticket.workgroup.label" default="Workgroup" />
-        <span class="required-indicator">*</span>
-    </label>
-    <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+    <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+        <label for="workgroup">
+            <g:message code="ticket.workgroup.label" default="Workgroup" />
+            <span class="required-indicator">*</span>
+        </label>
+        <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+    </div>
 
-</div>
 
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
     <label for="ticketStatus">
@@ -116,3 +117,11 @@
     <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
 
 </div>
+
+    </sec:ifAllGranted>
+    <sec:ifNotGranted roles="ROLE_ADMIN">
+        <!-- This is where we will add a hidden field to default to Serve Help Desk workgroup and Open status -->
+
+    </sec:ifNotGranted>
+
+</sec:ifLoggedIn>

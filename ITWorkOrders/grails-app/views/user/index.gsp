@@ -9,12 +9,15 @@
 	</head>
 	<body>
 		<a href="#list-user" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
+	<g:render template="/grails-app/views/nav/nav" />
+
+	<!--
 		<div class="nav" role="navigation">
 			<ul>
 				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
 				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
 			</ul>
-		</div>
+		</div> -->
 		<div id="list-user" class="content scaffold-list" role="main">
 			<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 			<g:if test="${flash.message}">
@@ -26,15 +29,13 @@
 					
 						<g:sortableColumn property="username" title="${message(code: 'user.username.label', default: 'Username')}" />
 					
-						<g:sortableColumn property="password" title="${message(code: 'user.password.label', default: 'Password')}" />
-					
 						<g:sortableColumn property="firstName" title="${message(code: 'user.firstName.label', default: 'First Name')}" />
 					
 						<g:sortableColumn property="lastName" title="${message(code: 'user.lastName.label', default: 'Last Name')}" />
 					
-						<g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
+						<th><g:message code="user.workgroup.label" default="Workgroup" /></th>
 					
-						<g:sortableColumn property="accountLocked" title="${message(code: 'user.accountLocked.label', default: 'Account Locked')}" />
+						<g:sortableColumn property="accountExpired" title="${message(code: 'user.accountExpired.label', default: 'Account Expired')}" />
 					
 					</tr>
 				</thead>
@@ -44,20 +45,22 @@
 					
 						<td><g:link action="show" id="${userInstance.id}">${fieldValue(bean: userInstance, field: "username")}</g:link></td>
 					
-						<td>${fieldValue(bean: userInstance, field: "password")}</td>
-					
 						<td>${fieldValue(bean: userInstance, field: "firstName")}</td>
 					
 						<td>${fieldValue(bean: userInstance, field: "lastName")}</td>
 					
-						<td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
+						<td>${fieldValue(bean: userInstance, field: "workgroup")}</td>
 					
-						<td><g:formatBoolean boolean="${userInstance.accountLocked}" /></td>
+						<td><g:formatBoolean boolean="${userInstance.accountExpired}" /></td>
 					
 					</tr>
 				</g:each>
 				</tbody>
 			</table>
+		<!-- Add Link to create new object for class -->
+		<div class="nav">
+			<a class="list" href="${createLink(uri: '/user/create')}">Create New User</a>
+		</div>
 			<div class="pagination">
 				<g:paginate total="${userInstanceCount ?: 0}" />
 			</div>

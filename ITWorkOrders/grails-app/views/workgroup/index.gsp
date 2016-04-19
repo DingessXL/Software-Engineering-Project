@@ -42,8 +42,14 @@
 					
 					</tr>
 				</g:each>
+
 				</tbody>
 			</table>
+
+		<!-- Add Link to create new object for class -->
+			<div class="nav">
+				<a class="list" href="${createLink(uri: '/workgroup/create')}">Create New Workgroup</a>
+			</div>
 			<div class="pagination">
 				<g:paginate total="${workgroupInstanceCount ?: 0}" />
 			</div>

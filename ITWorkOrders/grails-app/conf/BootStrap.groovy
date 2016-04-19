@@ -8,9 +8,11 @@ class BootStrap {
     	def wg = new Workgroup(workgroupName: "Default")
     	wg.save(flush:true)
 
-		def adminRole = SecRole.findOrSaveWhere(authority: 'ROLE_ADMIN')
-		def techRole = SecRole.findOrSaveWhere(authority: 'ROLE_TECH')
-		def userRole = SecRole.findOrSaveWhere(authority: 'ROLE_USER')
+		//def adminRole = SecRole.findOrSaveWhere(authority: 'ROLE_ADMIN')
+		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
+		def techRole = SecRole.findByAuthority('ROLE_TECH') ?: new SecRole(authority: 'ROLE_TECH').save(failOnError: true)
+		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
+
 
 		def adminUser = User.findOrSaveWhere(username: 'admin@gcsu.edu', password:'abcd1234', firstName: "admin", lastName: "account", workgroup:wg,
 				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true)
@@ -18,6 +20,8 @@ class BootStrap {
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true)
 		def user = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"Regular", lastName:"User", workgroup:wg,
 				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
+
+
 
 		//Creating an admin account for the user above.
 		if(!adminUser.authorities.contains(adminRole)){

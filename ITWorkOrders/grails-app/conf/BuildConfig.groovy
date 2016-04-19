@@ -45,6 +45,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
         mavenRepo "http://repo.spring.io/milestone/"
+        mavenRepo "http://repo.grails.org/grails/core"
     }
 
     dependencies {
@@ -84,5 +85,7 @@ grails.project.dependency.resolution = {
         //MavenRepo above in repo section is required for spring security rc2 -mg
         //compile ":spring-security-core:2.0-RC2"
         compile "org.grails.plugins:spring-security-core:2.0.0"
+
+
     }
 }

@@ -7,7 +7,7 @@ class Building {
     //static belongsTo = [ticket: Ticket]
     static hasMany = [ticket: Ticket]
     static constraints = {
-        buildingName blank:false
+        buildingName blank:false, unique: false
         buildingAddress blank:true, nullable: true
         ticket nullable:true, display:false
     }

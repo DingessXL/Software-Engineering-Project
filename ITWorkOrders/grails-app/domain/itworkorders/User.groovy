@@ -12,7 +12,7 @@ class User extends SecUser{
     String lastName
     //String role = 'user'
 
-    static belongsTo = [workgroup: Workgroup]
+    static belongsTo = [workgroup: Workgroup, role:SecRole]
 
     static hasMany = [tickets: Ticket]
 
@@ -29,6 +29,7 @@ class User extends SecUser{
         //role     (inList:["user", "technician", "admin"])
         tickets blank:true,nullable: true, display:false
         workgroup blank:true, nullable:true
+        role blank:true, nullable:true
 
     }
     String toString () {"$firstName $lastName"}

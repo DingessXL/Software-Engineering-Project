@@ -118,7 +118,7 @@
 	<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
-<!--
+<!--  REMOVED AUTO GENERATED CODE AND ADDED TABLE VIEW FOR REPLIES AND NOTES BELOW
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'reply', 'error')} ">
 	<label for="reply">
 		<g:message code="ticket.reply.label" default="Reply" />

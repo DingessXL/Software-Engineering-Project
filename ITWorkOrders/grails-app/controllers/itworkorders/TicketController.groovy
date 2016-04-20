@@ -1,22 +1,32 @@
 package itworkorders
-
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 import grails.plugin.springsecurity.annotation.Secured
+import grails.plugin.springsecurity.SpringSecurityService
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
-
 @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
-
 class TicketController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
-
+    //To get current logged in user
+    def springSecurityService
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Ticket.list(params), model:[ticketInstanceCount: Ticket.count()]
+            // Original Code for Index after generate-all script: respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
+
+        //Get current logged in user authentication information
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication()
+        String name = auth.getName() //Get login username
+
+            //Query database for users tickets -- Doing all tickets including closed tickets.
+            //Currently set to only show most recent tickets.
+            respond Ticket.executeQuery("from Ticket where email = '$name'", [offset:0, max:50])
+
     }
 
     def show(Ticket ticketInstance) {

@@ -6,7 +6,7 @@ class BootStrap {
     def init = { servletContext ->
 
 		//Creating Serve Help Desk Workgroup
-    	def wg = new Workgroup(workgroupName: "Serve Help Desk").save(flush:true)
+    	def wg = Workgroup.findByWorkgroupName("Serve Help Desk") ?: new Workgroup(workgroupName: "Serve Help Desk").save(flush:true)
 
 		//Creating admin, tech, and user roles
 		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)

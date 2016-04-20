@@ -158,7 +158,25 @@
 
 <!-- NORMAL USER RIGHTS -->
     <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_TECH">
-        <!-- This is where we will add a hidden field to default to Serve Help Desk workgroup and Open status -->
+
+        <!-- NEED TO BE HIDDEEN FIELDS THAT ARE AUTO CREATED WITH THE DEFAULT VALUES -->
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+            <label for="workgroup">
+                <g:message code="ticket.workgroup.label" default="Workgroup" />
+                <span class="required-indicator">*</span>
+            </label>
+            <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+        </div>
+
+
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
+            <label for="ticketStatus">
+                <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+                <span class="required-indicator">*</span>
+            </label>
+            <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
+
+        </div>
 
     </sec:ifNotGranted>
 

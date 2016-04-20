@@ -7,25 +7,25 @@ import grails.transaction.Transactional
 
 
 @Transactional(readOnly = true)
-@Secured(['ROLE_ADMIN'])
+@Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
+
 class WorkgroupController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
-
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Workgroup.list(params), model:[workgroupInstanceCount: Workgroup.count()]
     }
-
     def show(Workgroup workgroupInstance) {
         respond workgroupInstance
     }
-
+    @Secured(['ROLE_ADMIN'])
     def create() {
         respond new Workgroup(params)
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def save(Workgroup workgroupInstance) {
         if (workgroupInstance == null) {
             notFound()
@@ -47,7 +47,7 @@ class WorkgroupController {
             '*' { respond workgroupInstance, [status: CREATED] }
         }
     }
-
+    @Secured(['ROLE_ADMIN'])
     def edit(Workgroup workgroupInstance) {
         respond workgroupInstance
     }
@@ -76,6 +76,7 @@ class WorkgroupController {
     }
 
     @Transactional
+    @Secured(['ROLE_ADMIN'])
     def delete(Workgroup workgroupInstance) {
 
         if (workgroupInstance == null) {

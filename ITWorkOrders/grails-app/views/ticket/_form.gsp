@@ -83,59 +83,89 @@
 
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'priority', 'error')} required">
-	<label for="priority">
-		<g:message code="ticket.priority.label" default="Priority" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select name="priority" from="${ticketInstance.constraints.priority.inList}" required="" value="${ticketInstance?.priority}" valueMessagePrefix="ticket.priority"/>
+<!-- REGULAR USER LOCKDOWN -->
+<!-- Do not allow users to edit the fields below.  They can only view them. -->
+<sec:ifLoggedIn>
+	<sec:ifAllGranted roles="ROLE_USER">
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'priority', 'error')} required">
+			<!--<label for="priority">
+				<g:message code="ticket.priority.label" default="Priority" />
+				<span class="required-indicator">*</span>
+			</label>-->
+			<g:hiddenField type="text" name="priority" readonly="true" required="" value="${ticketInstance?.priority}" valueMessagePrefix="ticket.priority"/>
+		</div>
 
-</div>
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
+			<!--<label for="technician">
+				<g:message code="ticket.technician.label" default="Technician" />
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
-	<label for="technician">
-		<g:message code="ticket.technician.label" default="Technician" />
-		
-	</label>
-	<g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+			</label>-->
+			<g:hiddenField type="text" readonly="true" id="technician" name="technician.id" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
 
-</div>
+		</div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
-	<label for="workgroup">
-		<g:message code="ticket.workgroup.label" default="Workgroup" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+			<!--<label for="workgroup">
+				<g:message code="ticket.workgroup.label" default="Workgroup" />
+				<span class="required-indicator">*</span>
+			</label>-->
+			<g:hiddenField type="text" readonly="true" id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
 
-</div>
+		</div>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
-	<label for="ticketStatus">
-		<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
-		
-	</label>
-	<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
+			<!--<label for="ticketStatus">
+				<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
 
-</div>
-<!--  REMOVED AUTO GENERATED CODE AND ADDED TABLE VIEW FOR REPLIES AND NOTES BELOW
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'reply', 'error')} ">
-	<label for="reply">
-		<g:message code="ticket.reply.label" default="Reply" />
-		
-	</label>
-	
-<ul class="one-to-many">
-<g:each in="${ticketInstance?.reply?}" var="r">
-    <li><g:link controller="reply" action="show" id="${r.id}">${r?.encodeAsHTML()}</g:link></li>
-</g:each>
-<li class="add">
-<g:link controller="reply" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'reply.label', default: 'Reply')])}</g:link>
-</li>
-</ul>
+			</label>-->
+			<g:hiddenField type="text" readonly="true" id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
 
+		</div>
 
-</div> -->
+	</sec:ifAllGranted>
+<!-- ROLE TECH AND ADMIN ARE ALLOWED TO VIEW AND EDIT THESE FIELDS -->
+	<sec:ifAnyGranted roles="ROLE_TECH, ROLE_ADMIN">
+
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'priority', 'error')} required">
+			<label for="priority">
+				<g:message code="ticket.priority.label" default="Priority" />
+				<span class="required-indicator">*</span>
+			</label>
+			<g:select name="priority" from="${ticketInstance.constraints.priority.inList}" required="" value="${ticketInstance?.priority}" valueMessagePrefix="ticket.priority"/>
+
+		</div>
+
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
+			<label for="technician">
+				<g:message code="ticket.technician.label" default="Technician" />
+
+			</label>
+			<g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+		</div>
+
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+			<label for="workgroup">
+				<g:message code="ticket.workgroup.label" default="Workgroup" />
+				<span class="required-indicator">*</span>
+			</label>
+			<g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+
+		</div>
+
+		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
+			<label for="ticketStatus">
+				<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+
+			</label>
+			<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+		</div>
+	</sec:ifAnyGranted>
+</sec:ifLoggedIn>
+
+<!-- BEGIN REPLIES TABLE -->
+
 <table>
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'reply', 'error')} ">
 	<tr><th><label for="reply">
@@ -151,44 +181,27 @@
 
 </div>
 </table>
-<!-- Notes - Only viewable by admin or techs -->
+
+<!-- BEGIN NOTES TABLE -->
 
 <sec:ifLoggedIn>
 	<table>
 	<!-- ADMIN RIGHTS -->
-	<sec:ifAllGranted roles="ROLE_ADMIN">
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'note', 'error')} ">
-	<tr><th><label for="note">
-		<g:message code="ticket.note.label" default="Note" />
-	</label></th></tr>
-
-	<g:each in="${ticketInstance?.note?}" var="n">
-    	<tr><td><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></td></tr>
-	</g:each>
-	<tr><td>
-<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
-</td></tr>
-
-</div>
-	</sec:ifAllGranted>
-
-	<!-- TECH RIGHTS -->
-
-	<sec:ifAllGranted roles="ROLE_TECH">
+	<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
 		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'note', 'error')} ">
 			<tr><th><label for="note">
-				<g:message code="ticket.note.label" default="Note" />
+			<g:message code="ticket.note.label" default="Note" />
 			</label></th></tr>
 
 			<g:each in="${ticketInstance?.note?}" var="n">
-				<tr><td><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></td></tr>
+    		<tr><td><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></td></tr>
 			</g:each>
 			<tr><td>
-				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
+			<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
 			</td></tr>
 
 		</div>
-	</sec:ifAllGranted>
+	</sec:ifAnyGranted>
 	</table>
 </sec:ifLoggedIn>
 

@@ -159,22 +159,27 @@
 <!-- NORMAL USER RIGHTS -->
     <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_TECH">
 
-        <!-- NEED TO BE HIDDEEN FIELDS THAT ARE AUTO CREATED WITH THE DEFAULT VALUES -->
+        <!-- NEED TO BE HIDEEN FIELDS THAT ARE AUTO CREATED WITH THE DEFAULT VALUES -->
         <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
+           <!-- REMOVING LABEL
             <label for="workgroup">
                 <g:message code="ticket.workgroup.label" default="Workgroup" />
                 <span class="required-indicator">*</span>
-            </label>
-            <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
+            </label> -->
+            <g:hiddenField id="workgroup" name="workgroup.id" optionKey="id" required="" value="1" class="many-to-one"/>
         </div>
 
+        <!-- ${ticketInstance?.workgroup?.id} -->
 
         <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
+            <!-- REMOVE LABEL
             <label for="ticketStatus">
                 <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
                 <span class="required-indicator">*</span>
-            </label>
-            <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
+            </label> -->
+
+            <!-- ticketStatus value="1" should point to 'Open' if it was bootstrapped first.
+            <g:hiddenField id="ticketStatus" name="ticketStatus.id" optionKey="id" required="" value="1" class="many-to-one"/>
 
         </div>
 

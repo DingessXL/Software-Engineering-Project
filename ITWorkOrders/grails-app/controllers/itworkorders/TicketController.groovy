@@ -22,11 +22,20 @@ class TicketController {
         //Get current logged in user authentication information
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         String name = auth.getName() //Get login username
+        String role = auth.getAuthorities()
 
+        //Show User Role: println "User Role ${role}"
+
+        //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
+        if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
+            respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
+        }
+        //else if regular user, just display the tickets for that user by username=ticketInstance.email
+        else {
             //Query database for users tickets -- Doing all tickets including closed tickets.
-            //Currently set to only show most recent tickets.
-            respond Ticket.executeQuery("from Ticket where email = '$name'", [offset:0, max:50])
-
+            //Add offset to change amount: , [offset: 0, max: 50]
+            respond Ticket.executeQuery("from Ticket where email = '$name'")
+        }
     }
 
     def show(Ticket ticketInstance) {

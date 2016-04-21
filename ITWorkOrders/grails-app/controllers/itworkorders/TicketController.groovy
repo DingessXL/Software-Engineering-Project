@@ -140,6 +140,13 @@ class TicketController {
         respond ticketInstance
     }
 
+    //ONLY ADMINS AND TECH SHOULD BE ABLE TO ASSIGN TECHS
+    //the button is hidden from regular users, this prevents users from accessing controller manually.
+    //@Secured(['ROLE_ADMIN, ROLE_TECH'])
+    def editTech(Ticket ticketInstance) {
+        respond ticketInstance
+    }
+
     @Transactional
     def update(Ticket ticketInstance) {
         if (ticketInstance == null) {
@@ -266,6 +273,55 @@ class TicketController {
         def newStatus = Status.get(1)
         ticketInstance.ticketStatus = newStatus
         ticketInstance.save flush:true
+
+
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
+                redirect ticketInstance
+            }
+            '*'{ respond ticketInstance, [status: OK] }
+        }
+
+    }
+
+    //Controller for assigning tech.
+    def assignTech(Ticket ticketInstance){
+        if (ticketInstance == null) {
+            notFound()
+            return
+        }
+
+        if (ticketInstance.hasErrors()) {
+            respond ticketInstance.errors, view:'edit'
+            return
+        }
+
+        //Add to history of ticket
+        def user = getAuthenticatedUser()
+        def size = ticketInstance.history.size()
+        ticketInstance.history.add "" + new Date() + ":  Ticket assigned to " + ticketInstance.technician + " by " + user.firstName + " " + user.lastName+"."
+
+        ticketInstance.save flush:true
+
+        //Email notification for new ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "Your ticket (ID: "+ticketInstance.id+") has been assigned to a technician."
+            html g.render(template:"/grails-app/views/email/ticketAssignedUser", model:[ticketInstance:ticketInstance])
+        }
+
+        //Email technician if one is assigned
+        if(ticketInstance.technician)
+        {
+            sendMail {
+                to ticketInstance.technician.username
+                subject "A ticket has been assigned to you."
+                html g.render(template:"/grails-app/views/email/ticketAssignedTech", model:[ticketInstance:ticketInstance])
+            }
+        }
 
 
 

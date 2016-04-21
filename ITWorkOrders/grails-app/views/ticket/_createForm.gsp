@@ -92,16 +92,16 @@
 
 <!-- NOTES HIDDEN FROM NON ADMIN or TECH -->
 
-<!-- ADMIN RIGHTS -->
+<!-- ADMIN AND TECH RIGHTS -->
 
 <sec:ifLoggedIn>
-    <sec:ifAllGranted roles="ROLE_ADMIN">
+    <sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
-    <label for="technician">
+    <!--<label for="technician">
         <g:message code="ticket.technician.label" default="Technician" />
 
-    </label>
-    <g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+    </label>-->
+    <g:hiddenField id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 
@@ -123,43 +123,12 @@
 
 </div>
 
-    </sec:ifAllGranted>
-
-<!-- TECH RIGHTS (samem as admin) -->
-    <sec:ifAllGranted roles="ROLE_TECH">
-        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
-            <label for="technician">
-                <g:message code="ticket.technician.label" default="Technician" />
-
-            </label>
-            <g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
-
-        </div>
-
-        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
-            <label for="workgroup">
-                <g:message code="ticket.workgroup.label" default="Workgroup" />
-                <span class="required-indicator">*</span>
-            </label>
-            <g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
-        </div>
-
-
-        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
-            <label for="ticketStatus">
-                <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
-                <span class="required-indicator">*</span>
-            </label>
-            <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
-
-        </div>
-
-    </sec:ifAllGranted>
+    </sec:ifAnyGranted>
 
 <!-- NORMAL USER RIGHTS -->
     <sec:ifNotGranted roles="ROLE_ADMIN,ROLE_TECH">
 
-        <!-- NEED TO BE HIDEEN FIELDS THAT ARE AUTO CREATED WITH THE DEFAULT VALUES -->
+        <!-- NEED TO BE HIDEN FIELDS THAT ARE AUTO CREATED WITH THE DEFAULT VALUES -->
         <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'workgroup', 'error')} required">
            <!-- REMOVING LABEL
             <label for="workgroup">

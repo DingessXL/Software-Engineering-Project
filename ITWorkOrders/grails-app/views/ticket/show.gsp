@@ -184,9 +184,10 @@
 	<sec:ifLoggedIn>
 
 		<!-- NOTES TABLE -->
-		<table>
-		<!-- ADMIN RIGHTS -->
-		<sec:ifAllGranted roles="ROLE_ADMIN">
+
+		<!-- ADMIN RIGHTS and TECH RIGHTS -->
+		<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+			<table>
 			<g:if test="${ticketInstance?.note}">
 			<tr><th>
 					<span id="note-label" class="property-label"><g:message code="ticket.note.label" default="Notes" /></span>
@@ -201,30 +202,9 @@
 			<tr><td>
 				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
 			</td></tr>
+			</table>
+		</sec:ifAnyGranted>
 
-		</sec:ifAllGranted>
-
-		<!-- TECH RIGHTS -->
-		<sec:ifAllGranted roles="ROLE_TECH">
-			<g:if test="${ticketInstance?.note}">
-				<tr><th>
-					<span id="note-label" class="property-label"><g:message code="ticket.note.label" default="Notes" /></span>
-				</th></tr>
-					<g:each in="${ticketInstance.note}" var="n">
-						<tr><td><span class="property-value" aria-labelledby="note-label"><g:link controller="note" action="show" id="${n.id}">${n?.encodeAsHTML()}</g:link></span></td></tr>
-					</g:each>
-
-
-			</g:if>
-
-			<!-- Add Note should be allowed on show page when there are no notes already added to the ticket -->
-
-			<tr><td>
-				<g:link controller="note" action="create" params="['ticket.id': ticketInstance?.id]">${message(code: 'default.add.label', args: [message(code: 'note.label', default: 'Note')])}</g:link>
-			</td></tr>
-
-		</sec:ifAllGranted>
-		</table>
 	</sec:ifLoggedIn>
 
 	<!-- Show ticket history -->

@@ -33,6 +33,9 @@
 		</fieldset>
 		<fieldset class="buttons">
 			<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+			<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
+			<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
+
 
 			<!-- OPEN / CLOSE TICKET BUTTONS -->
 

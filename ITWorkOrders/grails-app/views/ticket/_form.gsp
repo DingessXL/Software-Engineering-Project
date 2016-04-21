@@ -138,7 +138,6 @@
 
 			<g:field type="text" readonly="true" name="technician.id" value="${ticketInstance.technician}" />
 			<g:hiddenField id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
-			<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
 
 		</div>
 
@@ -147,8 +146,8 @@
 				<g:message code="ticket.workgroup.label" default="Workgroup" />
 				<span class="required-indicator">*</span>
 			</label>
-			<g:select id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
-
+			<g:field type="text" readonly="true" id="workgroup" name="workgroup.id" optionKey="id" required="" value="${ticketInstance.workgroup}" class="many-to-one"/>
+			<g:hiddenField id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
 		</div>
 
 	</sec:ifAnyGranted>

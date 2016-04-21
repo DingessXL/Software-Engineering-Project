@@ -231,6 +231,8 @@
 				<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
 					<!-- Assign to technician button -->
 						<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
+						<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
+
 					<!-- OPEN / CLOSE TICKET BUTTONS -->
 					<g:if test="${ticketInstance?.ticketStatus.id == 1}">
 						<g:actionSubmit class="save" action="close" value="Close Ticket" />

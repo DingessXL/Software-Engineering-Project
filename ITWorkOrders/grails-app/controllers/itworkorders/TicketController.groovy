@@ -147,6 +147,10 @@ class TicketController {
         respond ticketInstance
     }
 
+    def editWorkgroup(Ticket ticketInstance){
+        respond ticketInstance
+    }
+
     @Transactional
     def update(Ticket ticketInstance) {
         if (ticketInstance == null) {
@@ -322,6 +326,55 @@ class TicketController {
                 html g.render(template:"/grails-app/views/email/ticketAssignedTech", model:[ticketInstance:ticketInstance])
             }
         }
+
+
+
+
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
+                redirect ticketInstance
+            }
+            '*'{ respond ticketInstance, [status: OK] }
+        }
+
+    }
+
+
+    //Controller for assigning tech.
+    def assignWorkgroup(Ticket ticketInstance){
+        if (ticketInstance == null) {
+            notFound()
+            return
+        }
+
+        if (ticketInstance.hasErrors()) {
+            respond ticketInstance.errors, view:'edit'
+            return
+        }
+
+        //Add to history of ticket
+        def user = getAuthenticatedUser()
+        def size = ticketInstance.history.size()
+        ticketInstance.history.add "" + new Date() + ":  Ticket workgroup switched to " + ticketInstance.workgroup + " by " + user.firstName + " " + user.lastName+"."
+
+        //Assign to unassigned technician
+        def unassigned = User.get(1)
+        ticketInstance.technician = unassigned
+
+        ticketInstance.save flush:true
+
+        //Email notification for new ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "Your ticket (ID: "+ticketInstance.id+") has been switched to another workgroup."
+            html g.render(template:"/grails-app/views/email/ticketWorkgroupUser", model:[ticketInstance:ticketInstance])
+        }
+
+
+
 
 
 

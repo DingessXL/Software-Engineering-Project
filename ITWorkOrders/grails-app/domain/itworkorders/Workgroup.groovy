@@ -14,6 +14,9 @@ class Workgroup {
     }
 
     static mapping = {
+
+        //CAUTION: Do not sort workgroups in static mapping.  Default is referenced by workgroup.id
+
         ticket sort: 'dateCreated', order: 'asc'
    	}
 

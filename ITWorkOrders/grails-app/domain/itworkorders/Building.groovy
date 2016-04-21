@@ -11,5 +11,9 @@ class Building {
         buildingAddress blank:true, nullable: true
         ticket nullable:true, display:false
     }
+
+    static mapping = {
+        sort "buildingName"
+    }
     String toString(){"$buildingName"}
 }

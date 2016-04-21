@@ -21,7 +21,7 @@ dateCreated and lastUpdated is automatically handled by Grails.
 class Reply  {
 
     String reply
-    String author
+    User author
     Date dateCreated
     Date lastUpdated
 

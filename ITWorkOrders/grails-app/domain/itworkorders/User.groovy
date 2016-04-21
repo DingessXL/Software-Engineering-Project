@@ -62,4 +62,9 @@ class User implements Serializable {
 	static mapping = {
 		password column: '`password`'
 	}
+
+	//Return first name and last name as string for users
+	String toString() {
+		return "$firstName $lastName"
+	}
 }

@@ -82,6 +82,6 @@ class Ticket {
     }
 
     String toString(){
-        return "Ticket ID: ${id}  ----  Subject: ${subject}"
+        return "Ticket ID: ${id}  \n  Subject: ${subject}"
     }
 }

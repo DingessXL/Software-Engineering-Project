@@ -14,7 +14,7 @@ class BootStrap {
 		def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
 
 		//Unassigned added first so it is the first in the list to assign.  Unassigned is a disabled account: no login allowed.
-		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Unassigned",lastName:"", workgroup:wg,
+		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Unassigned",lastName:" ", workgroup:wg,
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: false)
 		def adminUser = User.findOrSaveWhere(username: 'admin@gcsu.edu', password:'abcd1234', firstName: "Admin", lastName: "Account", workgroup:wg,
 				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true)
@@ -22,7 +22,7 @@ class BootStrap {
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true)
 		def user1 = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"User", lastName:"Account",
 				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
-		def user2 = User.findOrSaveWhere(username:'rachel.noles@gcsu.edu', password:'abcd1234', firstName:"Rachel", lastName:"Noles",
+		def user2 = User.findOrSaveWhere(username:'matt.gaines@gcsu.edu', password:'abcd1234', firstName:"Matt", lastName:"Gaines",
 				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
 
 		//Adding unassigned to techRole
@@ -42,7 +42,7 @@ class BootStrap {
 			UserRole.create(user1,userRole, true)
 		}
 
-		//Createing normal user account for Rachel Noles
+		//Createing normal user account for Matt Gaines
 		if(!user2.authorities.contains(userRole)){
 			UserRole.create(user2,userRole, true)
 		}

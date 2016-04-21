@@ -16,28 +16,59 @@ class TicketController {
     //To get current logged in user
     def springSecurityService
     def index(Integer max) {
-        params.max = Math.min(max ?: 10, 100)
-            // Original Code for Index after generate-all script: respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
 
         //Get current logged in user authentication information
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
         String name = auth.getName() //Get login username
         String role = auth.getAuthorities()
 
-        //Show User Role: println "User Role ${role}"
-
         //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
         if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
-            respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
+            params.max = Math.min(params.max ? params.int('max') :5, 100)
+            def ticketList = Ticket.createCriteria().list(params){
+
+                //Search Email
+                if(params.queryEmail){
+                    respond Ticket.executeQuery("from Ticket where email = '$params.queryEmail'")
+                }
+                //Search by Ticket ID
+                else if(params.queryID) {
+                    respond Ticket.executeQuery("from Ticket where id = '$params.queryID'")
+                }
+                //Search by First Name
+                else if(params.queryFirstName){
+                    respond Ticket.executeQuery("from Ticket where lower(firstName) like lower('%${params.queryFirstName}%')")
+                }
+                //Search by Last Name
+                else if(params.queryLastName){
+                    respond Ticket.executeQuery("from Ticket where lower(firstName) like lower('%${params.queryLastName}%')")
+                }
+                //Search by Subject
+                else if(params.querySubject){
+                    respond Ticket.executeQuery("from Ticket where lower(subject) like lower('%${params.querySubject}%')")
+                }
+                //Display All tickets
+                else{
+                    respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
+                }
+            }
         }
         //else if regular user, just display the tickets for that user by username=ticketInstance.email
         else {
-            //Query database for users tickets -- Doing all tickets including closed tickets.
-            //Add offset to change amount: , [offset: 0, max: 50]
-            respond Ticket.executeQuery("from Ticket where email = '$name'")
+            params.max = Math.min(params.max ? params.int('max') :5, 100)
+            def ticketList = Ticket.createCriteria().list(params){
+                //Search by Ticket ID
+                if(params.queryID) {
+                    respond Ticket.executeQuery("from Ticket where id = '$params.queryID'")
+                }
+                else{
+                    //Query database for users tickets -- Doing all tickets including closed tickets.
+                    //Add offset to change amount: , [offset: 0, max: 50]
+                    respond Ticket.executeQuery("from Ticket where email = '$name'")
+                }
+            }
         }
     }
-
     def show(Ticket ticketInstance) {
         respond ticketInstance
     }

@@ -25,6 +25,7 @@
 	<g:if test="${flash.message}">
 		<div class="message" role="status">${flash.message}</div>
 	</g:if>
+
 	<table>
 		<thead>
 		<tr>
@@ -76,6 +77,74 @@
 	<div class="pagination">
 		<g:paginate total="${ticketInstanceCount ?: 0}" />
 	</div>
+
+	<table>
+		<tr><th colspan="2">Search Ticket</th></tr>
+		<tr>
+			<td>Ticket ID: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="queryID" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
+
+		<!--Only display these search fields if Tech or Admin.  Regular users can only search for tickets they know the ticket ID of.-->
+		<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+		<tr>
+			<td>Email: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="queryEmail" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>First Name: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="queryFirstName" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>Last Name: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="queryLastName" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td>Subject: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="querySubject" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
+		</sec:ifAnyGranted>
+	</table>
 </div>
 </body>
 </html>

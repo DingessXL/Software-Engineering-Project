@@ -1,6 +1,5 @@
 package itworkorders
 
-import itworkorders.auth.SecUser
 
 class Workgroup {
     String workgroupName

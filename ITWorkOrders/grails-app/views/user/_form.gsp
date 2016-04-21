@@ -16,7 +16,7 @@
 		<g:message code="user.password.label" default="Password" />
 		<span class="required-indicator">*</span>
 	</label>
-	<g:field type="password" name="password" required="" value="${userInstance?.password}"/>
+	<g:textField name="password" required="" value="${userInstance?.password}"/>
 
 </div>
 
@@ -80,15 +80,6 @@
 		
 	</label>
 	<g:checkBox name="passwordExpired" value="${userInstance?.passwordExpired}" />
-
-</div>
-
-<div class="fieldcontain ${hasErrors(bean: userInstance, field: 'role', 'error')} required">
-	<label for="role">
-		<g:message code="user.role.label" default="Role" />
-		<span class="required-indicator">*</span>
-	</label>
-	<g:select id="role" name="role.id" from="${itworkorders.auth.SecRole.list()}" optionKey="id" required="" value="${userInstance?.role?.id}" class="many-to-one"/>
 
 </div>
 

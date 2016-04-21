@@ -178,7 +178,7 @@
                 <span class="required-indicator">*</span>
             </label> -->
 
-            <!-- ticketStatus value="1" should point to 'Open' if it was bootstrapped first. -->
+            <!-- ticketStatus value="1" should point to 'Open' if it was bootstrapped first.
             <g:hiddenField id="ticketStatus" name="ticketStatus.id" optionKey="id" required="" value="1" class="many-to-one"/>
 
         </div>

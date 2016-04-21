@@ -104,15 +104,6 @@
 				</li>
 				</g:if>
 			
-				<g:if test="${userInstance?.role}">
-				<li class="fieldcontain">
-					<span id="role-label" class="property-label"><g:message code="user.role.label" default="Role" /></span>
-					
-						<span class="property-value" aria-labelledby="role-label"><g:link controller="secRole" action="show" id="${userInstance?.role?.id}">${userInstance?.role?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">

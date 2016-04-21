@@ -134,7 +134,7 @@ log4j.main = {
 }
 
 // Added by the Spring Security Core plugin:
-grails.plugin.springsecurity.userLookup.userDomainClassName = 'itworkorders.auth.SecUser'
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'itworkorders.auth.User'
 grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'itworkorders.auth.SecUserSecRole'
 grails.plugin.springsecurity.authority.className = 'itworkorders.auth.SecRole'
 grails.plugin.springsecurity.controllerAnnotations.staticRules = [
@@ -150,5 +150,22 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     'auth/dbconsole/**': ['ROLE_ADMIN'],
     '/login/**':        ['IS_AUTHENTICATED_ANONYMOUSLY'],
     '/logout/**':       ['IS_AUTHENTICATED_FULLY']
+]
+
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'itworkorders.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'itworkorders.UserRole'
+grails.plugin.springsecurity.authority.className = 'itworkorders.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll']
 ]
 

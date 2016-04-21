@@ -25,7 +25,7 @@ class TicketController {
 
             //Query database for users tickets -- Doing all tickets including closed tickets.
             //Currently set to only show most recent tickets.
-            respond Ticket.executeQuery("from Ticket where lower(email) = lower('$name')", [offset:0, max:50])
+            respond Ticket.executeQuery("from Ticket where email = '$name'", [offset:0, max:50])
 
     }
 

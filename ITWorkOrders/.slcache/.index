@@ -5726,3 +5726,4 @@ n:3260:org/springframework/security/web/access/expression/DefaultWebSecurityExpr
 n:710:org/springframework/security/web/access/expression/WebSecurityExpressionHandler
 n:4702:org/springframework/security/access/expression/AbstractSecurityExpressionHandler
 n:690:javax/servlet/http/HttpSessionEvent
+n:2078:org/grails/plugins/web/rest/plugin/RestResponderGrailsPlugin$registryResourceControllers

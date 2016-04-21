@@ -31,7 +31,7 @@ class Note {
 
     //Current logged in user who created the note using the toString (firstName lastName)
     //Should be hidden from form so the user cannot select anything.
-    User author
+    String author
 
     static belongsTo = [ticket:Ticket]
 

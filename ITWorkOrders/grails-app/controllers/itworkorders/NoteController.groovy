@@ -19,13 +19,13 @@ class NoteController {
 
     def show(Note noteInstance) {
         //Send current logged in users instance from controller to the GSP page.
-        User user = getAuthenticatedUser()
+        //User user = getAuthenticatedUser()
         respond noteInstance
     }
 
     def create() {
         //Send current logged in users instance from controller to the GSP page.
-        User user = getAuthenticatedUser()
+        //User user = getAuthenticatedUser()
         respond new Note(params)
     }
 
@@ -54,7 +54,7 @@ class NoteController {
 
     def edit(Note noteInstance) {
         //Send current logged in users instance from controller to the GSP page.
-        User user = getAuthenticatedUser()
+        //User user = getAuthenticatedUser()
         respond noteInstance
     }
 

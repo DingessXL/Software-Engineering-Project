@@ -1,36 +1,65 @@
 package itworkorders
 
-import itworkorders.auth.*
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
+@EqualsAndHashCode(includes='username')
+@ToString(includes='username', includeNames=true, includePackage=false)
+class User implements Serializable {
 
-import sun.security.util.Password
+	private static final long serialVersionUID = 1
 
-class User extends SecUser{
-    //String userName
-    //String password
-    String firstName
-    String lastName
-    //String role = 'user'
+	transient springSecurityService
 
-    static belongsTo = [workgroup: Workgroup, role:SecRole]
+	String username
+	String password
+	String firstName
+	String lastName
+	boolean enabled = true
+	boolean accountExpired
+	boolean accountLocked
+	boolean passwordExpired
 
-    static hasMany = [tickets: Ticket]
+	static belongsTo = [workgroup: Workgroup]
+	static hasMany = [tickets: Ticket]
 
-    static constraints = {
-        //username blank:false,nullable: false, unique:true
-        //password nullable:false
-        /*
-        firstName and lastName does not need to be selectable.  We will use a string split
-        to split the email address.
-         */
-        firstName blank:true, nullalbe:true
-        lastName blank:true, nullable:true
+	User(String username, String password) {
+		this()
+		this.username = username
+		this.password = password
+	}
 
-        //role     (inList:["user", "technician", "admin"])
-        tickets blank:true,nullable: true, display:false
-        workgroup blank:true, nullable:true
-        role blank:true, nullable:true
+	Set<Role> getAuthorities() {
+		UserRole.findAllByUser(this)*.role
+	}
 
-    }
-    String toString () {"$firstName $lastName"}
+	def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	}
+
+	static transients = ['springSecurityService']
+
+	static constraints = {
+		username blank: false, unique: true
+		password blank: false
+		firstName blank:true, nullalbe:true
+		lastName blank:true, nullable:true
+
+		tickets blank:true,nullable: true, display:false
+		workgroup blank:true, nullable:true
+	}
+
+	static mapping = {
+		password column: '`password`'
+	}
 }

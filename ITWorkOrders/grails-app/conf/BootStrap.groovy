@@ -1,5 +1,5 @@
 import itworkorders.*
-import itworkorders.auth.*
+
 
 class BootStrap {
 
@@ -9,9 +9,9 @@ class BootStrap {
     	def wg = Workgroup.findByWorkgroupName("Serve Help Desk") ?: new Workgroup(workgroupName: "Serve Help Desk").save(flush:true)
 
 		//Creating admin, tech, and user roles
-		def adminRole = SecRole.findByAuthority('ROLE_ADMIN') ?: new SecRole(authority: 'ROLE_ADMIN').save(failOnError: true)
-		def techRole = SecRole.findByAuthority('ROLE_TECH') ?: new SecRole(authority: 'ROLE_TECH').save(failOnError: true)
-		def userRole = SecRole.findByAuthority('ROLE_USER') ?: new SecRole(authority: 'ROLE_USER').save(failOnError: true)
+		def adminRole = Role.findByAuthority('ROLE_ADMIN') ?: new Role(authority: 'ROLE_ADMIN').save(failOnError: true)
+		def techRole = Role.findByAuthority('ROLE_TECH') ?: new Role(authority: 'ROLE_TECH').save(failOnError: true)
+		def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
 
 		//Unassigned added first so it is the first in the list to assign.  Unassigned is a disabled account: no login allowed.
 		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Unassigned",lastName:"", workgroup:wg,
@@ -27,24 +27,24 @@ class BootStrap {
 
 		//Adding unassigned to techRole
 		if(!unassignedTech.authorities.contains(techRole)){
-			SecUserSecRole.create(unassignedTech,techRole,true)
+			UserRole.create(unassignedTech,techRole,true)
 		}
 		//Creating an admin account for the user above.
 		if(!adminUser.authorities.contains(adminRole)){
-			SecUserSecRole.create(adminUser,adminRole, true)
+			UserRole.create(adminUser,adminRole, true)
 		}
 		//Creating tech account for the user above.
 		if(!techUser.authorities.contains(techRole)){
-			SecUserSecRole.create(techUser,techRole,true)
+			UserRole.create(techUser,techRole,true)
 		}
 		//Creating normal user account for user above.
 		if(!user1.authorities.contains(userRole)){
-			SecUserSecRole.create(user1,userRole, true)
+			UserRole.create(user1,userRole, true)
 		}
 
 		//Createing normal user account for Rachel Noles
 		if(!user2.authorities.contains(userRole)){
-			SecUserSecRole.create(user2,userRole, true)
+			UserRole.create(user2,userRole, true)
 		}
 
     	def s = new Status(status:"Open")

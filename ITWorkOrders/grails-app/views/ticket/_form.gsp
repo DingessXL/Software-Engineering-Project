@@ -83,6 +83,9 @@
 
 </div>
 
+
+
+
 <!-- REGULAR USER LOCKDOWN -->
 <!-- Do not allow users to edit the fields below.  They can only view them. -->
 <sec:ifLoggedIn>
@@ -110,15 +113,6 @@
 				<span class="required-indicator">*</span>
 			</label>-->
 			<g:hiddenField type="text" readonly="true" id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
-
-		</div>
-
-		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
-			<!--<label for="ticketStatus">
-				<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
-
-			</label>-->
-			<g:hiddenField type="text" readonly="true" id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 		</div>
 
@@ -153,16 +147,18 @@
 
 		</div>
 
-		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
-			<label for="ticketStatus">
-				<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
-
-			</label>
-			<g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
-
-		</div>
 	</sec:ifAnyGranted>
 </sec:ifLoggedIn>
+
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
+	<!--<label for="ticketStatus">
+		<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+
+	</label>-->
+
+	<g:hiddenField type="text" readonly="true " id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+</div>
 
 <!-- BEGIN REPLIES TABLE -->
 

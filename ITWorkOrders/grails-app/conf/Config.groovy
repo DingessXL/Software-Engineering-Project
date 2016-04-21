@@ -1,3 +1,20 @@
+/*
+*
+* Email Configuration Variables
+*
+*/
+
+//Used to hold email account username
+final EMAIL_USERNAME  = "pispark3.14@gmail.com"
+
+//Used to hold email account password
+final EMAIL_PASSWORD  = "cats-r-cool"
+
+//used to hold the integer value of the port
+final EMAIL_PORT      = 465
+
+
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -62,18 +79,55 @@ grails {
         // filteringCodecForContentType.'text/html' = 'html'
     }
 
-    //Email plugin config
+    /*****************************************
+     *
+     * Email Plugin Configurations
+     *
+     * Please only un comment one at a time
+     *
+    *****************************************/
+
+    
+    //Uncomment for use with Gmail account
     mail {
      host = "smtp.gmail.com"
-     port = 465
-     username = "pispark3.14@gmail.com"
-     password = "cats-r-cool"
+     port = EMAIL_PORT
+     username = EMAIL_USERNAME
+     password = EMAIL_PASSWORD
      props = ["mail.smtp.auth":"true",                     
-              "mail.smtp.socketFactory.port":"465",
+              "mail.smtp.socketFactory.port":Integer.toString(EMAIL_PORT),
               "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
               "mail.smtp.socketFactory.fallback":"false"]
 
    }
+   
+
+   /*
+   //Uncomment for use with Hotmail/Live account
+    mail {
+         host = "smtp.live.com"
+         port = EMAIL_PORT
+         username = EMAIL_USERNAME
+         password = EMAIL_PASSWORD
+         props = ["mail.smtp.starttls.enable":"true", 
+                      "mail.smtp.port":Integer.toString(EMAIL_PORT)]
+
+       }
+   */
+
+   /*
+   //Uncomment for use with Yahoo account
+    mail {
+          host = "smtp.correo.yahoo.es"
+          port = EMAIL_PORT
+          username = EMAIL_USERNAME
+          password = EMAIL_PASSWORD
+          props = [ "mail.smtp.auth":"true",
+                           "mail.smtp.socketFactory.port":Integer.toString(EMAIL_PORT),
+                           "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                           "mail.smtp.socketFactory.fallback":"false"  ]
+       }
+   */
 }
 
 

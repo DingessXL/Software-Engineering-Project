@@ -11,5 +11,9 @@ class Department {
         departmentAddress blank:true, nullable:true
         ticket  nullable:true, display:false
     }
+
+    static mapping={
+        sort "departmentName"
+    }
     String toString (){"$departmentName"}
 }

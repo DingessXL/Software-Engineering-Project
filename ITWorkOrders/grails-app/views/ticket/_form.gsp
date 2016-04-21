@@ -130,11 +130,15 @@
 		</div>
 
 		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
-			<label for="technician">
-				<g:message code="ticket.technician.label" default="Technician" />
 
+			<label for="workgroup">
+				<g:message code="ticket.technician.label" default="Technician" />
+				<span class="required-indicator">*</span>
 			</label>
-			<g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+
+			<g:field type="text" readonly="true" name="technician.id" value="${ticketInstance.technician}" />
+			<g:hiddenField id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+			<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
 
 		</div>
 

@@ -228,14 +228,17 @@
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</sec:ifAllGranted>
 
-				<!-- OPEN / CLOSE TICKET BUTTONS -->
-				<g:if test="${ticketInstance?.ticketStatus.id == 1}">
-					<g:actionSubmit class="save" action="close" value="Close Ticket" />
-				</g:if>
-				<g:if test="${ticketInstance?.ticketStatus.id == 2}">
-					<g:actionSubmit class="save" action="open" value="Reopen Ticket" />
-				</g:if>
-
+				<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+					<!-- Assign to technician button -->
+						<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
+					<!-- OPEN / CLOSE TICKET BUTTONS -->
+					<g:if test="${ticketInstance?.ticketStatus.id == 1}">
+						<g:actionSubmit class="save" action="close" value="Close Ticket" />
+					</g:if>
+					<g:if test="${ticketInstance?.ticketStatus.id == 2}">
+						<g:actionSubmit class="save" action="open" value="Reopen Ticket" />
+					</g:if>
+				</sec:ifAnyGranted>
 			</sec:ifLoggedIn>
 		</fieldset>
 	</g:form>

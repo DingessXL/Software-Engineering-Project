@@ -23,6 +23,8 @@ class Ticket {
 
     static hasMany = [reply:Reply, note:Note, history:String]
 
+    List history
+
     static constraints = {
         /* Required Fields:
             email

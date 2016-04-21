@@ -39,6 +39,16 @@
 		</fieldset>
 		<fieldset class="buttons">
 			<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
+
+			<!-- OPEN / CLOSE TICKET BUTTONS -->
+
+			<g:if test="${ticketInstance?.ticketStatus.id == 1}">
+				<g:actionSubmit class="save" action="close" value="Close Ticket" />
+			</g:if>
+			<g:if test="${ticketInstance?.ticketStatus.id == 2}">
+				<g:actionSubmit class="save" action="open" value="Reopen Ticket" />
+			</g:if>
+
 		</fieldset>
 	</g:form>
 </div>

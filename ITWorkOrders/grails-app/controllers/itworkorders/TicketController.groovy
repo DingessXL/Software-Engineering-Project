@@ -49,6 +49,20 @@ class TicketController {
             return
         }
 
+        //Add to history of ticket
+
+
+        def user = getAuthenticatedUser()
+        if(ticketInstance.history)
+        {
+            ticketInstance.history.add "Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()
+        }
+        else
+        {
+            ticketInstance.history = ["Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()]
+        }
+
+
         ticketInstance.save flush:true
 
         //Email notification for new ticket
@@ -70,16 +84,7 @@ class TicketController {
         }
 
 
-        //Add to history of ticket
-        def user = getAuthenticatedUser()
-        if(ticketInstance.history)
-        {
-            ticketInstance.history.add "Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()
-        }
-        else
-        {
-            ticketInstance.history = ["Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()]
-        }
+
 
 
         request.withFormat {
@@ -107,6 +112,11 @@ class TicketController {
             return
         }
 
+        //Add to history of ticket
+        def user = getAuthenticatedUser()
+        def size = ticketInstance.history.size()
+        ticketInstance.history.add "" + new Date() + ":  Ticket updated by " + user.firstName + " " + user.lastName+"."
+
         ticketInstance.save flush:true
 
         //Email notification for new ticket
@@ -127,9 +137,7 @@ class TicketController {
             }
         }
 
-        //Add to history of ticket
-        def user = getAuthenticatedUser()
-        ticketInstance.history.add "Ticket updated by " + user.firstName + " " + user.lastName + " on " + new Date()
+
 
         request.withFormat {
             form multipartForm {
@@ -158,6 +166,60 @@ class TicketController {
             }
             '*'{ render status: NO_CONTENT }
         }
+    }
+
+    def close(Ticket ticketInstance){
+        if (ticketInstance == null){
+            notFound()
+            return
+        }
+
+        //Add History
+        def user = getAuthenticatedUser()
+        ticketInstance.history.add "" + new Date() + ":  Ticket closed by " + user.firstName + " " + user.lastName+"."
+
+        //set ticketStatus to id=2 (closed)
+        def newStatus = Status.get(2)
+        ticketInstance.ticketStatus = newStatus
+        ticketInstance.save flush:true
+
+
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
+                redirect ticketInstance
+            }
+            '*'{ respond ticketInstance, [status: OK] }
+        }
+
+    }
+
+    def open(Ticket ticketInstance){
+        if (ticketInstance == null){
+            notFound()
+            return
+        }
+
+        //Update History
+        def user = getAuthenticatedUser()
+        ticketInstance.history.add "" + new Date() + ":  Ticket reopened by " + user.firstName + " " + user.lastName+"."
+
+        //set ticketStatus to id=1 (open)
+        def newStatus = Status.get(1)
+        ticketInstance.ticketStatus = newStatus
+        ticketInstance.save flush:true
+
+
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
+                redirect ticketInstance
+            }
+            '*'{ respond ticketInstance, [status: OK] }
+        }
+
     }
 
     protected void notFound() {

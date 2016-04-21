@@ -183,6 +183,23 @@ class TicketController {
         ticketInstance.ticketStatus = newStatus
         ticketInstance.save flush:true
 
+        //Email notification for new ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "A Ticket Has Been Closed"
+            html g.render(template:"/grails-app/views/email/ticketclose", model:[ticketInstance:ticketInstance])
+        }
+
+        //Email technician if one is assigned
+        if(ticketInstance.technician)
+        {
+            sendMail {
+                to ticketInstance.technician.username
+                subject "A Ticket Has Been Closed"
+                html g.render(template:"/grails-app/views/email/ticketclose", model:[ticketInstance:ticketInstance])
+            }
+        }
 
 
         request.withFormat {

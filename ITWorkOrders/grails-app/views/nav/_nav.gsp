@@ -20,7 +20,6 @@ Should be rendered on all accesable pages.
 				<li><a class="list" href="${createLink(uri: '/workgroup/')}">Workgroups</a></li>
 				<li><a class="list" href="${createLink(uri: '/building/')}">Buildings</a></li>
 				<li><a class="list" href="${createLink(uri: '/department/')}">Departments</a></li>
-				<li><a class="list" href="${createLink(uri: '/status/')}">Status</a></li>
 			</sec:ifAllGranted>
 		</sec:ifLoggedIn>
 

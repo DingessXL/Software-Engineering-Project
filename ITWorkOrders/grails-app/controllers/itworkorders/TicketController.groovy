@@ -47,8 +47,13 @@ class TicketController {
                 else if(params.querySubject){
                     respond Ticket.executeQuery("from Ticket where lower(subject) like lower('%${params.querySubject}%')")
                 }
-                //Display All tickets
+
+
+                //Display All Open tickets
                 else{
+                    //respond Ticket.executeQuery("from Ticket where lower(status) like lower('Open')")
+
+                    //Currently showing all tickets, open and closed, until filter is implemented.
                     respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
                 }
             }
@@ -229,9 +234,9 @@ class TicketController {
         def user = getAuthenticatedUser()
         ticketInstance.history.add "" + new Date() + ":  Ticket closed by " + user.firstName + " " + user.lastName+"."
 
-        //set ticketStatus to id=2 (closed)
-        def newStatus = Status.get(2)
-        ticketInstance.ticketStatus = newStatus
+        //set ticket status to closed
+
+        ticketInstance.status = "Closed"
         ticketInstance.save flush:true
 
         //Email notification for new ticket
@@ -273,9 +278,8 @@ class TicketController {
         def user = getAuthenticatedUser()
         ticketInstance.history.add "" + new Date() + ":  Ticket reopened by " + user.firstName + " " + user.lastName+"."
 
-        //set ticketStatus to id=1 (open)
-        def newStatus = Status.get(1)
-        ticketInstance.ticketStatus = newStatus
+        //set ticket status to Open
+        ticketInstance.status = "Open"
         ticketInstance.save flush:true
 
 

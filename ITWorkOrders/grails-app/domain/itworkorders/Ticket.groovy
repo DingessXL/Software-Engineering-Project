@@ -13,17 +13,19 @@ class Ticket {
     String priority = "low"
     String subject
     String description
+    String status
 
     Date dateCreated
     Date lastUpdated
 
 
     //This may have cascading delete 
-    static belongsTo = [workgroup:Workgroup, technician:User, workgroup:Workgroup, buildingName:Building, departmentName:Department, ticketStatus:Status]
+    static belongsTo = [workgroup:Workgroup, technician:User, workgroup:Workgroup, buildingName:Building, departmentName:Department]
 
     static hasMany = [reply:Reply, note:Note, history:String]
 
     List history
+
 
     static constraints = {
         /* Required Fields:
@@ -57,7 +59,7 @@ class Ticket {
         workgroup blank:false, nullable:false
 
         //ticketStatus needs to be set to Open by default in the create form, and hidden from view from any normal user
-        ticketStatus blank:false, nullable:true;
+        status blank:false, nullable:false, inList: ["Open", "Closed", "On Hold"]
 
         //Reply needs to be hidden from view on the create page only.
         reply blank:true, nullable:true

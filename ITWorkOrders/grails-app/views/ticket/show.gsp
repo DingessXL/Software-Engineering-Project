@@ -137,11 +137,11 @@
 			</li>
 		</g:if>
 
-		<g:if test="${ticketInstance?.ticketStatus}">
+		<g:if test="${ticketInstance?.status}">
 			<li class="fieldcontain">
-				<span id="ticketStatus-label" class="property-label"><g:message code="ticket.ticketStatus.label" default="Ticket Status" /></span>
+				<span id="status-label" class="property-label"><g:message code="ticket.status.label" default="Ticket Status" /></span>
 
-				<span class="property-value" aria-labelledby="ticketStatus-label"><g:fieldValue bean="${ticketInstance}" field="ticketStatus"/></span>
+				<span class="property-value" aria-labelledby="status-label"><g:fieldValue bean="${ticketInstance}" field="status"/></span>
 
 			</li>
 		</g:if>
@@ -234,10 +234,10 @@
 						<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
 
 					<!-- OPEN / CLOSE TICKET BUTTONS -->
-					<g:if test="${ticketInstance?.ticketStatus.id == 1}">
+					<g:if test="${ticketInstance?.status.equals("Open")}">
 						<g:actionSubmit class="save" action="close" value="Close Ticket" />
 					</g:if>
-					<g:if test="${ticketInstance?.ticketStatus.id == 2}">
+					<g:if test="${ticketInstance?.status.equals("Closed")}">
 						<g:actionSubmit class="save" action="open" value="Reopen Ticket" />
 					</g:if>
 				</sec:ifAnyGranted>

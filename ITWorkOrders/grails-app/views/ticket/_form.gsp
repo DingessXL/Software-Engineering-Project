@@ -153,13 +153,13 @@
 	</sec:ifAnyGranted>
 </sec:ifLoggedIn>
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} ">
-	<!--<label for="ticketStatus">
-		<g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'status', 'error')} ">
+	<!--<label for="status">
+		<g:message code="ticket.status.label" default="Ticket Status" />
 
 	</label>-->
 
-	<g:hiddenField type="text" readonly="true " id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one" noSelection="['null': '']"/>
+	<g:hiddenField id="status" name="status" required="" value="Open" />
 
 </div>
 

@@ -13,18 +13,14 @@
 %{-- Render Nav Template --}%
 <g:render template="/grails-app/views/nav/nav" />
 
-<!--<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
-		</div>-->
+
 
 <div id="list-ticket" class="content scaffold-list" role="main">
 	<h1><g:message code="default.list.label" args="[entityName]" /></h1>
 	<g:if test="${flash.message}">
 		<div class="message" role="status">${flash.message}</div>
 	</g:if>
+
 
 	<table>
 		<thead>
@@ -42,11 +38,7 @@
 
 			<g:sortableColumn property="dateCreated" title="${message(code: 'ticket.dateCreated.label', default: 'Date Created')}" />
 
-			<g:sortableColumn property="lastUpdated" title="${message(code: 'ticket.lastUpdated.label', default: 'Last Updated')}" />
-
-
-
-
+			<g:sortableColumn property="status" title="${message(code: 'ticket.status.label', default: 'Status')}" />
 
 		</tr>
 		</thead>
@@ -66,7 +58,7 @@
 
 				<td>${fieldValue(bean: ticketInstance, field: "dateCreated")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "lastUpdated")}</td>
+				<td>${fieldValue(bean: ticketInstance, field: "status")}</td>
 
 
 
@@ -78,8 +70,23 @@
 		<g:paginate total="${ticketInstanceCount ?: 0}" />
 	</div>
 
+
+
+
 	<table>
 		<tr><th colspan="2">Search Ticket</th></tr>
+		<tr>
+			<td>Ticket Status: </td>
+			<td>
+				<fieldset class="form">
+					<g:form action="index" method="GET">
+						<div class="fieldcontain">
+							<g:textField name="queryStatus" value="${params.query}" />
+						</div>
+					</g:form>
+				</fieldset>
+			</td>
+		</tr>
 		<tr>
 			<td>Ticket ID: </td>
 			<td>

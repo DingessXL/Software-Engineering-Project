@@ -114,12 +114,13 @@
     </div>
 
 
-<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
-    <label for="ticketStatus">
-        <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'status', 'error')} required">
+    <label for="status">
+        <g:message code="ticket.status.label" default="Ticket Status" />
         <span class="required-indicator">*</span>
     </label>
-    <g:select id="ticketStatus" name="ticketStatus.id" from="${itworkorders.Status.list()}" optionKey="id" required="" value="${ticketInstance?.ticketStatus?.id}" class="many-to-one"/>
+
+    <g:select id="status" name="status" from="${ticketInstance.constraints.status.inList}" required="" value="${ticketInstance?.status}" valueMessagePrefix="ticket.status" />
 
 </div>
 
@@ -140,15 +141,15 @@
 
         <!-- ${ticketInstance?.workgroup?.id} -->
 
-        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'ticketStatus', 'error')} required">
+        <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'status', 'error')} required">
             <!-- REMOVE LABEL
-            <label for="ticketStatus">
-                <g:message code="ticket.ticketStatus.label" default="Ticket Status" />
+            <label for="status">
+                <g:message code="ticket.status.label" default="Ticket Status" />
                 <span class="required-indicator">*</span>
             </label> -->
 
-            <!-- ticketStatus value="1" should point to 'Open' if it was bootstrapped first. -->
-            <g:hiddenField id="ticketStatus" name="ticketStatus.id" optionKey="id" required="" value="1" class="many-to-one"/>
+            <!-- status value="Open" for users creating ticket -->
+            <g:hiddenField id="status" name="status" required="" value="Open" />
 
         </div>
 

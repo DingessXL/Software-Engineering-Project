@@ -47,19 +47,14 @@ class BootStrap {
 			UserRole.create(user2,userRole, true)
 		}
 
-    	def s = new Status(status:"Open")
-    	s.save(flush:true)
-    	new Status(status:"Closed").save(flush:true)
-    	new Status(status:"On Hold").save(flush:true)
-
     	new Department(departmentName:"Computer Science", departmentAddress: "123 CS St.").save(flush:true)
 
     	new Building(buildingName: "Atkinson", buildingAddress: "123 CS St.").save(flush:true)
 
-    	new Ticket(email:"user@gcsu.edu", subject:"Computer Issue", description: "Computer will not boot", workgroup: wg, ticketStatus: s).save(flush:true)
-    	new Ticket(email:"user@gcsu.edu", subject:"Network Issue", description: "Can not get to network drive.", workgroup: wg, ticketStatus: s).save(flush:true)
-		new Ticket(email:"user@gcsu.edu", subject:"Display Issue", description: "Display will not turn on", workgroup: wg, ticketStatus: s).save(flush:true)
-		new Ticket(email:"user@gcsu.edu", subject:"Printer Issue", description: "Printer will not print", workgroup: wg, ticketStatus: s).save(flush:true)
+    	new Ticket(email:"user@gcsu.edu", subject:"Computer Issue", description: "Computer will not boot", workgroup: wg, status: "Open").save(flush:true)
+    	new Ticket(email:"user@gcsu.edu", subject:"Network Issue", description: "Can not get to network drive.", workgroup: wg, status: "Open").save(flush:true)
+		new Ticket(email:"user@gcsu.edu", subject:"Display Issue", description: "Display will not turn on", workgroup: wg, status: "Open").save(flush:true)
+		new Ticket(email:"user@gcsu.edu", subject:"Printer Issue", description: "Printer will not print", workgroup: wg, status: "Open").save(flush:true)
 
 
 

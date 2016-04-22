@@ -67,6 +67,15 @@
 					
 				</li>
 				</g:if>
+				<!--
+				<g:if test="${userInstance?.tickets}">
+					<li class="fieldcontain">
+						<span id="tickets-label" class="property-label"><g:message code="user.tickets.label" default="Tickets" /></span>
+
+						<span class="property-value" aria-labelledby="tickets-label"><g:link controller="ticket" action="index" id="${userInstance?.tickets?.id}">${userInstance?.tickets?.encodeAsHTML()}</g:link></span>
+
+					</li>
+				</g:if> -->
 			
 				<g:if test="${userInstance?.accountExpired}">
 				<li class="fieldcontain">

@@ -24,8 +24,11 @@ class TicketController {
 
         //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
         if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
+            redirect(controller: "workgroup", action: "showTechWorkgroup")
+            /*
             params.max = Math.min(params.max ? params.int('max') :5, 100)
             def ticketList = Ticket.createCriteria().list(params){
+
 
                 //Search Email
                 if(params.queryEmail){
@@ -56,7 +59,7 @@ class TicketController {
                     //Currently showing all tickets, open and closed, until filter is implemented.
                     respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
                 }
-            }
+            } */
         }
         //else if regular user, just display the tickets for that user by username=ticketInstance.email
         else {

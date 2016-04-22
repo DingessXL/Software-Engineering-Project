@@ -13,6 +13,7 @@ class BootStrap {
 		def techRole = Role.findByAuthority('ROLE_TECH') ?: new Role(authority: 'ROLE_TECH').save(failOnError: true)
 		def userRole = Role.findByAuthority('ROLE_USER') ?: new Role(authority: 'ROLE_USER').save(failOnError: true)
 
+
 		//Unassigned added first so it is the first in the list to assign.  Unassigned is a disabled account: no login allowed.
 		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Unassigned",lastName:" ", workgroup:wg,
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: false)

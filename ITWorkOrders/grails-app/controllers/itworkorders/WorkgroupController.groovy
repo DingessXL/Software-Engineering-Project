@@ -16,6 +16,16 @@ class WorkgroupController {
         params.max = Math.min(max ?: 10, 100)
         respond Workgroup.list(params), model:[workgroupInstanceCount: Workgroup.count()]
     }
+
+    def showTechWorkgroup() {
+        def user = getAuthenticatedUser()
+        def workgroupID = user.workgroup.id
+
+        println "USER WORKGROUP $workgroupID"
+        redirect(action: "show", id:workgroupID)
+
+
+    }
     def show(Workgroup workgroupInstance) {
         respond workgroupInstance
     }

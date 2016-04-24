@@ -2,12 +2,20 @@ package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured
 
+//Required to get user role
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
+
 
 @Transactional(readOnly = true)
 @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
 class ReplyController {
+
+    //Required to get currentUser
+    def springSecurityService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -17,6 +25,41 @@ class ReplyController {
     }
 
     def show(Reply replyInstance) {
+
+        //Set ticket as session variable to reference in the edit action
+        Ticket ticketInstance = session['ticket']
+
+        //Get logged in user and user role
+        def user = springSecurityService.currentUser
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication()
+        String role = auth.getAuthorities()
+
+        //Add history item of reply to ticket
+        ticketInstance.history.add "" + new Date() + ": " + user.firstName + " " + user.lastName+" replied to this ticket."
+
+        //Email notification for new ticket
+
+        // --- EMAIL PATRON --- ///
+        //Check to make sure that current logged in user is technician or admin
+        if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")) {
+            sendMail {
+                to ticketInstance.email
+                subject "Your ticket (ID: " + ticketInstance.id + ") has a new reply from " + user.firstName + " " + user.lastName + "."
+                html g.render(template: "/grails-app/views/email/replyTech", model: [ticketInstance: ticketInstance])
+            }
+        }
+        //  --- EMAIL TECHNICIAN ---  //
+        //First check to make sure that the current logged in user is a Patron ROLE_USER
+        else if(role.equals("[ROLE_USER]")) {
+            //Next check to make sure that the ticket has an assigned technician
+            if (ticketInstance.technician) {
+                sendMail {
+                    to ticketInstance.technician.username
+                    subject "A Patron has replied to a ticket."
+                    html g.render(template: "/grails-app/views/email/replyUser", model: [ticketInstance: ticketInstance])
+                }
+            }
+        }
         respond replyInstance
     }
 
@@ -35,6 +78,7 @@ class ReplyController {
             respond replyInstance.errors, view:'create'
             return
         }
+
 
         replyInstance.save flush:true
 

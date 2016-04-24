@@ -81,6 +81,7 @@ class TicketController {
         }
     }
     def show(Ticket ticketInstance) {
+        session['ticket'] = ticketInstance
         respond ticketInstance
     }
 
@@ -149,7 +150,7 @@ class TicketController {
 
     //ONLY ADMINS AND TECH SHOULD BE ABLE TO ASSIGN TECHS
     //the button is hidden from regular users, this prevents users from accessing controller manually.
-    //@Secured(['ROLE_ADMIN, ROLE_TECH'])
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH'])
     def editTech(Ticket ticketInstance) {
         respond ticketInstance
     }

@@ -42,7 +42,9 @@
 			<!-- OPEN / CLOSE TICKET BUTTONS -->
 
 			<g:if test="${ticketInstance?.status.equals("Open")}">
-				<g:actionSubmit class="save" action="close" value="Close Ticket" />
+				<g:link controller="reply" action="createCloseReply" params="['ticket.id': ticketInstance?.id]">${message(code: 'Close Ticket', args: [message(code: 'reply.label', default: 'Close Ticket')])}</g:link>
+
+				<!--<g:actionSubmit class="save" action="close" value="Close Ticket" /> -->
 			</g:if>
 			<g:if test="${ticketInstance?.status.equals("Closed")}">
 				<g:actionSubmit class="save" action="open" value="Reopen Ticket" />

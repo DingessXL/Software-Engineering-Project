@@ -233,9 +233,13 @@
 						<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
 						<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
 
+				</sec:ifAnyGranted>
+				<sec:ifAnyGranted roles="ROLE_ADMIN,ROLE_TECH,ROLE_USER">
 					<!-- OPEN / CLOSE TICKET BUTTONS -->
 					<g:if test="${ticketInstance?.status.equals("Open")}">
-						<g:actionSubmit class="save" action="close" value="Close Ticket" />
+						<g:link controller="reply" action="createCloseReply" params="['ticket.id': ticketInstance?.id]">${message(code: 'Close Ticket', args: [message(code: 'reply.label', default: 'Close Ticket')])}</g:link>
+
+						<!--<g:actionSubmit class="save" action="close" value="Close Ticket" />-->
 					</g:if>
 					<g:if test="${ticketInstance?.status.equals("Closed")}">
 						<g:actionSubmit class="save" action="open" value="Reopen Ticket" />

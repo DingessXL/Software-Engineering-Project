@@ -255,7 +255,9 @@ class TicketController {
         }
     }
 
-    def close(Ticket ticketInstance){
+    def close(){
+        Ticket ticketInstance = session['ticket']
+
         if (ticketInstance == null){
             notFound()
             return
@@ -288,14 +290,7 @@ class TicketController {
             }
         }
 
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
-                redirect ticketInstance
-            }
-            '*'{ respond ticketInstance, [status: OK] }
-        }
+        redirect(controller: "ticket", action: "index")
 
     }
 

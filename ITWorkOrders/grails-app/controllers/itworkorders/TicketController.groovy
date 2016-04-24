@@ -13,9 +13,12 @@ class TicketController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def viewStatus = "Open"
+
     //To get current logged in user
     def springSecurityService
     def index(Integer max) {
+
 
         //Get current logged in user authentication information
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
@@ -24,15 +27,15 @@ class TicketController {
 
         //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
         if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
-            redirect(controller: "workgroup", action: "showTechWorkgroup")
-            /*
+            def user = getAuthenticatedUser()
+            def workgroupID = user.workgroup.id
+
             params.max = Math.min(params.max ? params.int('max') :5, 100)
             def ticketList = Ticket.createCriteria().list(params){
 
-
                 //Search Email
                 if(params.queryEmail){
-                    respond Ticket.executeQuery("from Ticket where email = '$params.queryEmail'")
+                    respond Ticket.executeQuery("from Ticket where email like '%${params.queryEmail}%'")
                 }
                 //Search by Ticket ID
                 else if(params.queryID) {
@@ -50,16 +53,16 @@ class TicketController {
                 else if(params.querySubject){
                     respond Ticket.executeQuery("from Ticket where lower(subject) like lower('%${params.querySubject}%')")
                 }
-
-
                 //Display All Open tickets
                 else{
-                    //respond Ticket.executeQuery("from Ticket where lower(status) like lower('Open')")
+
+                    //Show all tickets for the users workgroup id and $viewStatus.
+                    respond Ticket.executeQuery("from Ticket where lower(status) like lower('%${viewStatus}%') and workgroup.id = $workgroupID")
 
                     //Currently showing all tickets, open and closed, until filter is implemented.
-                    respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
+                    //respond Ticket.list(params), model: [ticketInstanceCount: Ticket.count()]
                 }
-            } */
+            }
         }
         //else if regular user, just display the tickets for that user by username=ticketInstance.email
         else {
@@ -131,10 +134,6 @@ class TicketController {
             }
         }
 
-
-
-
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -158,6 +157,24 @@ class TicketController {
     def editWorkgroup(Ticket ticketInstance){
         respond ticketInstance
     }
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
+    def openTickets() {
+        viewStatus = "Open"
+        redirect(action: "index")
+
+    }
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
+    def closedTickets(){
+        viewStatus = "Closed"
+        redirect(action: "index")
+    }
+    def showTechTickets(){
+        //Add logic here to show only tech id
+
+        redirect(action: "index")
+
+    }
+
 
     @Transactional
     def update(Ticket ticketInstance) {

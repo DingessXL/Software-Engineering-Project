@@ -21,7 +21,7 @@ class WorkgroupController {
         def user = getAuthenticatedUser()
         def workgroupID = user.workgroup.id
 
-        println "USER WORKGROUP $workgroupID"
+        //println "USER WORKGROUP $workgroupID"
         redirect(action: "show", id:workgroupID)
 
 

@@ -1,7 +1,7 @@
 
 <%@ page import="itworkorders.Ticket" %>
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
@@ -44,6 +44,9 @@
 		<g:each in="${ticketInstanceList}" status="i" var="ticketInstance">
 			<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
+				<!--Set Variable for Workgroup Name -->
+				<g:set var="workgroupID" value="${ticketInstance.workgroup.id}" />
+
 				<td><g:link action="show" id="${ticketInstance.id}">${fieldValue(bean: ticketInstance, field: "email")}</g:link></td>
 
 				<td>${fieldValue(bean: ticketInstance, field: "firstName")}</td>
@@ -66,56 +69,20 @@
 		<g:paginate total="${ticketInstanceCount ?: 0}" />
 	</div>
 	<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH, ROLE_USER">
-	<table>
-		<tr><th colspan="3">Ticket Browser</th></tr>
-		<tr>
-			<!-- Ticket Status Table -->
-			<td>
-				<table>
-					<tr><th>Ticket Status</th></tr>
-					<tr><td>
-						<fieldset class="buttons">
-							<li><a class="list" href="${createLink(uri: '/ticket/openTickets')}">Opened Tickets</a></li>
-						</fieldset>
-					</td></tr>
-					<tr><td>
-						<fieldset class="buttons">
-							<li><a class="list" href="${createLink(uri: '/ticket/closedTickets')}">Closed Tickets</a></li>
-						</fieldset>
-					</td></tr>
-				</table>
-			</td>
-			<!-- Workgroup Select Section -->
-			<td>
-				<table>
-					<tr><th>Workgroup Selection</th></tr>
-					<tr><td>
-						<fieldset class="buttons">
-						</fieldset>
-					</td></tr>
-					<tr><td>
-						<fieldset class="buttons">
-						</fieldset>
-					</td></tr>
-				</table>
-			</td>
-			<!-- Technician Select Section -->
-			<td>
-				<table>
-					<tr><th>Technician Selection</th></tr>
-					<tr><td>
-						<fieldset class="buttons">
-						</fieldset>
-					</td></tr>
-					<tr><td>
-						<fieldset class="buttons">
-						</fieldset>
-					</td></tr>
-				</table>
-			</td>
-		</tr>
 
-	</table>
+			<!-- Ticket Status Table -->
+
+			<fieldset class="buttons">
+				<a class="list" href="${createLink(uri: '/ticket/openTickets')}">Opened Tickets</a>
+				<a class="list" href="${createLink(uri: '/ticket/closedTickets')}">Closed Tickets</a>
+				<a class="list" href="${createLink(uri: '/ticket/showAssignedTickets')}">Assigned Tickets</a>
+				<a class="list" href="${createLink(uri: '/ticket/showAllTickets')}">All Tickets</a>
+		<g:form name="selectWorkgroup" controller="ticket" action="showWorkgroupTickets">
+				<g:select id="workgroup" name="workgroup" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${workgroupID}" class="many-to-one"/>
+				<g:actionSubmit class="save" action="showWorkgroupTickets" value="${message(code: 'Select Workgroup', default: 'Select')}" />
+		</g:form>
+			</fieldset>
+
 	</sec:ifAnyGranted>
 	<table>
 		<tr><th colspan="3">Search Ticket</th></tr>

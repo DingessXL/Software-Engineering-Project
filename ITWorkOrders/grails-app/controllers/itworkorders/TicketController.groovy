@@ -114,8 +114,18 @@ class TicketController {
             ticketInstance.history = ["Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()]
         }
 
-
         ticketInstance.save flush:true
+
+        //NEEDED FOR DOCUMENT UPLOAD TO SERVER
+        /* Cannot find a good solution for this
+        if(ticketInstance.save(flush:true)){
+            def documentUpload = request.getFile('document')
+            if(!documentUpload.isEmpty()){
+               if(ticketInstance.document){
+                   ticketInstance.document.add FileUploadService.uploadFile(documentUpload, "${ticketInstance.id}.png", "uploadedDocuments")
+               }
+            }
+        } */
 
         //Email notification for new ticket
         //Email owner of ticket

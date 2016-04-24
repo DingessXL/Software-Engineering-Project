@@ -32,11 +32,13 @@
 			<g:render template="form"/>
 		</fieldset>
 		<fieldset class="buttons">
+
 			<g:actionSubmit class="save" action="update" value="${message(code: 'default.button.update.label', default: 'Update')}" />
-			<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
-			<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
 
-
+			<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+				<g:link class="edit" action="editTech" resource="${ticketInstance}"><g:message code="Assign Technician" default="Assign Technician" /></g:link>
+				<g:link class="edit" action="editWorkgroup" resource="${ticketInstance}"><g:message code="Switch Workgroup" default="Switch Workgroup" /></g:link>
+			</sec:ifAnyGranted>
 			<!-- OPEN / CLOSE TICKET BUTTONS -->
 
 			<g:if test="${ticketInstance?.status.equals("Open")}">

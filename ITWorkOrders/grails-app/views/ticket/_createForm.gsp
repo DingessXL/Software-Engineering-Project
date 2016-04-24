@@ -90,6 +90,12 @@
 
 </div>
 
+<!-- Add Document NOT WORKING RIGHT NOW
+<!--
+<g:form action="save" method="post" enctype="multipart/form-data">
+    <input type="file" name="document" id="document"
+</g:form> -->
+
 <!-- NOTES HIDDEN FROM NON ADMIN or TECH -->
 
 <!-- ADMIN AND TECH RIGHTS -->

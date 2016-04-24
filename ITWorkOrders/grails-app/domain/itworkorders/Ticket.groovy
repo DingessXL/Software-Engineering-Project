@@ -27,9 +27,10 @@ class Ticket {
     //This may have cascading delete 
     //static belongsTo = [workgroup:Workgroup]
 
-    static hasMany = [reply:Reply, note:Note, history:String]
+    static hasMany = [reply:Reply, note:Note, history:String, document:String]
 
     List history
+    List document
 
 
     static constraints = {
@@ -73,6 +74,8 @@ class Ticket {
         note blank:true, nullable:true
 
         history nullable:true, display:false
+
+        document nullable:true
 
     }
 

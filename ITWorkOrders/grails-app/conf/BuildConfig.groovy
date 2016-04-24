@@ -86,6 +86,9 @@ grails.project.dependency.resolution = {
         //compile ":spring-security-core:2.0-RC2"
         compile "org.grails.plugins:spring-security-core:2.0.0"
 
+        //JQuery Plugin
+        compile ":jquery:1.11.1"
+
 
     }
 }

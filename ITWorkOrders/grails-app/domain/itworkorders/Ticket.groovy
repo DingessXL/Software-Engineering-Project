@@ -15,12 +15,17 @@ class Ticket {
     String description
     String status
 
+    User technician
+    Building buildingName
+    Department departmentName
+    Workgroup workgroup
+
     Date dateCreated
     Date lastUpdated
 
 
     //This may have cascading delete 
-    static belongsTo = [workgroup:Workgroup, technician:User, workgroup:Workgroup, buildingName:Building, departmentName:Department]
+    //static belongsTo = [workgroup:Workgroup]
 
     static hasMany = [reply:Reply, note:Note, history:String]
 
@@ -78,6 +83,7 @@ class Ticket {
         to the date created.  This keeps us from having to manually edit the views when using
         the g:each tags.
         */
+
         reply sort: 'dateCreated', order: 'asc'
         note sort: 'dateCreated', order: 'asc'
         history sort: 'dateCreated', order: 'asc'

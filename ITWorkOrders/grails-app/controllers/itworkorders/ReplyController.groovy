@@ -67,6 +67,10 @@ class ReplyController {
         respond new Reply(params)
     }
 
+    def createCloseReply() {
+        respond new Reply(params)
+    }
+
     @Transactional
     def save(Reply replyInstance) {
         if (replyInstance == null) {
@@ -90,6 +94,29 @@ class ReplyController {
             '*' { respond replyInstance, [status: CREATED] }
         }
     }
+
+    def saveClose(Reply replyInstance) {
+        if (replyInstance == null) {
+            notFound()
+            return
+        }
+
+        if (replyInstance.hasErrors()) {
+            respond replyInstance.errors, view:'create'
+            return
+        }
+
+        replyInstance.save flush:true
+        redirect(controller: 'ticket', action:'close')
+        /*
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'reply.label', default: 'Reply'), replyInstance.id])
+            }
+            '*' { respond replyInstance, [status: CREATED] }
+        }*/
+    }
+
 
     def edit(Reply replyInstance) {
         respond replyInstance

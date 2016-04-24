@@ -14,11 +14,12 @@ class TicketController {
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
     def viewStatus = "Open"
+    def workgroupID
+    def techID
 
     //To get current logged in user
     def springSecurityService
     def index(Integer max) {
-
 
         //Get current logged in user authentication information
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
@@ -27,8 +28,12 @@ class TicketController {
 
         //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
         if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
-            def user = getAuthenticatedUser()
-            def workgroupID = user.workgroup.id
+            def user = springSecurityService.currentUser
+
+            //If workgroupID has not been set, set it to current logged in user workgroupID.
+            if(workgroupID==null) {
+                workgroupID = user.workgroup.id
+            }
 
             params.max = Math.min(params.max ? params.int('max') :5, 100)
             def ticketList = Ticket.createCriteria().list(params){
@@ -53,6 +58,9 @@ class TicketController {
                 else if(params.querySubject){
                     respond Ticket.executeQuery("from Ticket where lower(subject) like lower('%${params.querySubject}%')")
                 }
+                else if(techID!=null) {
+                    respond Ticket.executeQuery("from Ticket where technician.id = ${techID}")
+                }
                 //Display All Open tickets
                 else{
 
@@ -73,14 +81,15 @@ class TicketController {
                     respond Ticket.executeQuery("from Ticket where id = '$params.queryID'")
                 }
                 else{
-                    //Query database for users tickets -- Doing all tickets including closed tickets.
+                    //Query database for users tickets -- Show only users tickets that are open.
                     //Add offset to change amount: , [offset: 0, max: 50]
-                    respond Ticket.executeQuery("from Ticket where email = '$name'")
+                    respond Ticket.executeQuery("from Ticket where lower(status) like lower('%${viewStatus}%') and email = '$name'")
                 }
             }
         }
     }
     def show(Ticket ticketInstance) {
+        //Save ticket in session for use in the replies
         session['ticket'] = ticketInstance
         respond ticketInstance
     }
@@ -103,8 +112,7 @@ class TicketController {
 
         //Add to history of ticket
 
-
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         if(ticketInstance.history)
         {
             ticketInstance.history.add "Ticket created by " + user.firstName + " " + user.lastName + " on " + new Date()
@@ -172,20 +180,27 @@ class TicketController {
     def openTickets() {
         viewStatus = "Open"
         redirect(action: "index")
-
     }
     @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
     def closedTickets(){
         viewStatus = "Closed"
         redirect(action: "index")
     }
-    def showTechTickets(){
-        //Add logic here to show only tech id
-
+    @Secured(['ROLE_ADMIN','ROLE_TECH'])
+    def showAssignedTickets(){
+        def user = springSecurityService.currentUser
+        techID = user.id
         redirect(action: "index")
-
     }
-
+    def showAllTickets(){
+        techID = null
+        redirect(action: "index")
+    }
+    @Secured(['ROLE_ADMIN','ROLE_TECH'])
+    def showWorkgroupTickets(){
+        workgroupID = params.workgroup
+        redirect(action:"index")
+    }
 
     @Transactional
     def update(Ticket ticketInstance) {
@@ -200,7 +215,7 @@ class TicketController {
         }
 
         //Add to history of ticket
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         def size = ticketInstance.history.size()
         ticketInstance.history.add "" + new Date() + ":  Ticket updated by " + user.firstName + " " + user.lastName+"."
 
@@ -224,8 +239,6 @@ class TicketController {
             }
         }
 
-
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -233,6 +246,9 @@ class TicketController {
             }
             '*'{ respond ticketInstance, [status: OK] }
         }
+    }
+    def workgroupSelect(){
+
     }
 
     @Transactional
@@ -264,7 +280,7 @@ class TicketController {
         }
 
         //Add History
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         ticketInstance.history.add "" + new Date() + ":  Ticket closed by " + user.firstName + " " + user.lastName+"."
 
         //set ticket status to closed
@@ -301,14 +317,12 @@ class TicketController {
         }
 
         //Update History
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         ticketInstance.history.add "" + new Date() + ":  Ticket reopened by " + user.firstName + " " + user.lastName+"."
 
         //set ticket status to Open
         ticketInstance.status = "Open"
         ticketInstance.save flush:true
-
-
 
         request.withFormat {
             form multipartForm {
@@ -333,7 +347,7 @@ class TicketController {
         }
 
         //Add to history of ticket
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         def size = ticketInstance.history.size()
         ticketInstance.history.add "" + new Date() + ":  Ticket assigned to " + ticketInstance.technician + " by " + user.firstName + " " + user.lastName+"."
 
@@ -357,10 +371,6 @@ class TicketController {
             }
         }
 
-
-
-
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'Ticket.label', default: 'Ticket'), ticketInstance.id])
@@ -370,7 +380,6 @@ class TicketController {
         }
 
     }
-
 
     //Controller for assigning tech.
     def assignWorkgroup(Ticket ticketInstance){
@@ -385,7 +394,7 @@ class TicketController {
         }
 
         //Add to history of ticket
-        def user = getAuthenticatedUser()
+        def user = springSecurityService.currentUser
         def size = ticketInstance.history.size()
         ticketInstance.history.add "" + new Date() + ":  Ticket workgroup switched to " + ticketInstance.workgroup + " by " + user.firstName + " " + user.lastName+"."
 
@@ -402,11 +411,6 @@ class TicketController {
             subject "Your ticket (ID: "+ticketInstance.id+") has been switched to another workgroup."
             html g.render(template:"/grails-app/views/email/ticketWorkgroupUser", model:[ticketInstance:ticketInstance])
         }
-
-
-
-
-
 
         request.withFormat {
             form multipartForm {

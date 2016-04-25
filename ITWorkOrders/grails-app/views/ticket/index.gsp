@@ -1,7 +1,8 @@
 
 <%@ page import="itworkorders.Ticket" %>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/html">
+<html xmlns="http://www.w3.org/1999/html" xmlns:background-color="http://www.w3.org/1999/xhtml"
+	  xmlns:foreground-color="http://www.w3.org/1999/xhtml">
 <head>
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
@@ -23,44 +24,78 @@
 	<table>
 		<thead>
 		<tr>
+			<!-- Column Headings for Admin and Techs -->
 
-			<g:sortableColumn property="email" title="${message(code: 'ticket.email.label', default: 'Email')}" />
+			<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+				<g:sortableColumn property="firstName" title="${message(code: 'ticket.firstName.label', default: 'First Name')}" />
 
-			<g:sortableColumn property="firstName" title="${message(code: 'ticket.firstName.label', default: 'First Name')}" />
+				<g:sortableColumn property="lastName" title="${message(code: 'ticket.lastName.label', default: 'Last Name')}" />
 
-			<g:sortableColumn property="lastName" title="${message(code: 'ticket.lastName.label', default: 'Last Name')}" />
+				<g:sortableColumn property="subject" title="${message(code: 'ticket.subject.label', default: 'Subject')}" />
 
-			<g:sortableColumn property="subject" title="${message(code: 'ticket.subject.label', default: 'Subject')}" />
+				<g:sortableColumn property="technician" title="${message(code: 'ticket.technician.label', default: 'Assigned Technician')}" />
 
-			<g:sortableColumn property="technician" title="${message(code: 'ticket.technician.label', default: 'Assigned Technician')}" />
+				<g:sortableColumn property="dateCreated" title="${message(code: 'ticket.dateCreated.label', default: 'Date Created')}" />
 
-			<g:sortableColumn property="dateCreated" title="${message(code: 'ticket.dateCreated.label', default: 'Date Created')}" />
+				<g:sortableColumn property="priority" title="${message(code: 'ticket.status.label', default: 'Priority')}" />
+			</sec:ifAnyGranted>
+			<!-- Column Headings for Patrons-->
 
-			<g:sortableColumn property="status" title="${message(code: 'ticket.status.label', default: 'Status')}" />
+			<sec:ifAnyGranted roles="ROLE_USER">
+				<g:sortableColumn property="firstName" title="${message(code: 'ticket.firstName.label', default: 'First Name')}" />
 
+				<g:sortableColumn property="lastName" title="${message(code: 'ticket.lastName.label', default: 'Last Name')}" />
+
+				<g:sortableColumn property="subject" title="${message(code: 'ticket.subject.label', default: 'Subject')}" />
+
+				<g:sortableColumn property="status" title="${message(code: 'ticket.dateCreated.label', default: 'Status')}" />
+
+				<g:sortableColumn property="dateCreated" title="${message(code: 'ticket.dateCreated.label', default: 'Date Created')}" />
+
+			</sec:ifAnyGranted>
 		</tr>
 		</thead>
 		<tbody>
 		<g:each in="${ticketInstanceList}" status="i" var="ticketInstance">
 			<tr class="${(i % 2) == 0 ? 'even' : 'odd'}">
 
-				<!--Set Variable for Workgroup Name -->
-				<g:set var="workgroupID" value="${ticketInstance.workgroup.id}" />
+				<!-- Table Items for Admin and Techs -->
+				<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+					<!--Set Variable for Workgroup Name -->
+					<g:set var="workgroupID" value="${ticketInstance.workgroup.id}" />
+					<!--Set Variable for Priority -->
+					<g:set var="priority" value="${ticketInstance.priority}" />
 
-				<td><g:link action="show" id="${ticketInstance.id}">${fieldValue(bean: ticketInstance, field: "email")}</g:link></td>
+					<td>${fieldValue(bean: ticketInstance, field: "firstName")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "firstName")}</td>
+					<td>${fieldValue(bean: ticketInstance, field: "lastName")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "lastName")}</td>
+					<td><g:link action="show" id="${ticketInstance.id}">${fieldValue(bean: ticketInstance, field: "subject")}</g:link></td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "subject")}</td>
+					<td>${fieldValue(bean: ticketInstance, field: "technician")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "technician")}</td>
+					<td>${fieldValue(bean: ticketInstance, field: "dateCreated")}</td>
+					<!-- Change Font color based on priority level of ticket.
+						Using a depricated tag <font> right now until css is implemented for this
+					-->
+					<g:if test="${priority=='critical'}"><td foreground-color:red><font color="darkred">${priority}</font></td></g:if>
+					<g:if test="${priority=='high'}"><td background-color:orange><font color="#ff8c00">${priority}</font></td></g:if>
+					<g:if test="${priority=='normal'}"><td background-color:green><font color="#00008b">${priority}</font></td></g:if>
+					<g:if test="${priority=='low'}"><td>${priority}</td></g:if>
+				</sec:ifAnyGranted>
 
-				<td>${fieldValue(bean: ticketInstance, field: "dateCreated")}</td>
+				<!-- Table Items for Patrons -->
+				<sec:ifAnyGranted roles="ROLE_USER">
+					<td>${fieldValue(bean: ticketInstance, field: "firstName")}</td>
 
-				<td>${fieldValue(bean: ticketInstance, field: "status")}</td>
+					<td>${fieldValue(bean: ticketInstance, field: "lastName")}</td>
 
+					<td><g:link action="show" id="${ticketInstance.id}">${fieldValue(bean: ticketInstance, field: "subject")}</g:link></td>
+
+					<td>${fieldValue(bean: ticketInstance, field: "status")}</td>
+
+					<td>${fieldValue(bean: ticketInstance, field: "dateCreated")}</td>
+				</sec:ifAnyGranted>
 			</tr>
 		</g:each>
 		</tbody>

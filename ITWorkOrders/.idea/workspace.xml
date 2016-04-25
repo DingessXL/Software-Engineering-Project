@@ -27,30 +27,33 @@
       <file leaf-file-name="TicketController.groovy" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/controllers/itworkorders/TicketController.groovy">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-20.347826">
+            <state vertical-scroll-proportion="-74.347824">
               <caret line="95" column="18" selection-start-line="95" selection-start-column="18" selection-end-line="95" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserController.groovy" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/controllers/itworkorders/UserController.groovy">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.826087">
-              <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
               <folding>
-                <element signature="e#21#47#0" expanded="true" />
+                <element signature="e#21#76#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.gsp" pinned="false" current-in-tab="true">
+      <file leaf-file-name="index.gsp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/index.gsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5665584">
-              <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+            <state vertical-scroll-proportion="-8.26">
+              <caret line="74" column="76" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="80" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Ticket.groovy" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy">
+          <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.0806452">
+              <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
               <folding />
             </state>
           </provider>
@@ -60,57 +63,7 @@
         <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/show.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.06">
-              <caret line="244" column="38" selection-start-line="244" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="show.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/show.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.5466666">
-              <caret line="121" column="23" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addTechRole.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/addTechRole.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/index.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.78">
-              <caret line="61" column="85" selection-start-line="61" selection-start-column="85" selection-end-line="61" selection-end-column="85" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="addAdminRole.gsp" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/grails-app/views/user/addAdminRole.gsp">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.76">
-              <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+              <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -130,7 +83,6 @@
         <option value="$PROJECT_DIR$/grails-app/views/building/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/itworkorders/StatusController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/status/index.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/user/_form.gsp" />
         <option value="$PROJECT_DIR$/grails-app/domain/itworkorders/auth/SecRole.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/user/index.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/itworkorders/NoteController.groovy" />
@@ -146,7 +98,6 @@
         <option value="$PROJECT_DIR$/grails-app/views/ticket/editWorkgroup.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/email/_ticketcreate.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/nav/_nav.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/views/ticket/_form.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/_formEditTech.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/_formEditWorkgroup.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/technicianIndex.gsp" />
@@ -161,7 +112,6 @@
         <option value="$PROJECT_DIR$/grails-app/conf/Config.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/email/_replyUser.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/email/_replyTech.gsp" />
-        <option value="$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/create.gsp" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/_createForm.gsp" />
         <option value="$PROJECT_DIR$/grails-app/controllers/itworkorders/FileUploadService.groovy" />
@@ -177,6 +127,9 @@
         <option value="$PROJECT_DIR$/grails-app/controllers/itworkorders/TicketController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/controllers/itworkorders/UserController.groovy" />
         <option value="$PROJECT_DIR$/grails-app/views/ticket/index.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/views/user/_form.gsp" />
+        <option value="$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy" />
+        <option value="$PROJECT_DIR$/grails-app/views/ticket/_form.gsp" />
       </list>
     </option>
   </component>
@@ -194,9 +147,9 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="420" />
-    <option name="y" value="39" />
-    <option name="width" value="1381" />
-    <option name="height" value="1041" />
+    <option name="y" value="60" />
+    <option name="width" value="1490" />
+    <option name="height" value="1011" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -224,7 +177,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -263,28 +215,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ITWorkOrders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ITWorkOrders" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="grails-app" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="views" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="user" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -410,6 +340,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -916,11 +847,13 @@
       <workItem from="1461525466589" duration="2004000" />
       <workItem from="1461529035224" duration="6053000" />
       <workItem from="1461535775962" duration="5529000" />
+      <workItem from="1461548162731" duration="3156000" />
+      <workItem from="1461551933650" duration="818000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="131063000" />
+    <option name="totallyTimeSpent" value="135037000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -932,7 +865,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="420" y="39" width="1381" height="1041" extended-state="4" />
+    <frame x="420" y="60" width="1490" height="1011" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -940,16 +873,15 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33333334" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3329821" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24981189" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32875264" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32665965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Grails View" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -957,8 +889,9 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32899022" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20911127" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24446785" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18991713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24429968" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32665965" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1017,26 +950,15 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy</url>
-          <line>54</line>
-          <properties />
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
       <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/grails-app/views/email/_ticketAssignedTech.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.8">
-          <caret line="5" column="38" selection-start-line="5" selection-start-column="38" selection-end-line="5" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/email/_ticketcreate.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18222722">
@@ -1062,13 +984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/edit.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6349454">
-          <caret line="34" column="19" selection-start-line="34" selection-start-column="16" selection-end-line="36" selection-end-column="27" />
         </state>
       </provider>
     </entry>
@@ -1228,17 +1143,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40206185">
-          <caret line="75" column="44" selection-start-line="75" selection-start-column="44" selection-end-line="75" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/workgroup/edit.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1279,7 +1183,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.163142">
           <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1315,37 +1218,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/_form.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.9597315">
-          <caret line="144" column="35" selection-start-line="144" selection-start-column="35" selection-end-line="144" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/_selectWorkgroup.gsp">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12080537">
           <caret line="6" column="28" selection-start-line="6" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/domain/itworkorders/User.groovy">
-      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.56">
-          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/views/user/addAdminRole.gsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.76">
-          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1357,39 +1233,19 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.16901408">
           <caret line="7" column="25" selection-start-line="7" selection-start-column="25" selection-end-line="7" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="39" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/grails-app/controllers/itworkorders/TicketController.groovy">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.347826">
-          <caret line="95" column="18" selection-start-line="95" selection-start-column="18" selection-end-line="95" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/controllers/itworkorders/UserController.groovy">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.826087">
+        <state vertical-scroll-proportion="0.0">
           <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding>
-            <element signature="e#21#47#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/show.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.06">
+        <state vertical-scroll-proportion="0.6979866">
           <caret line="244" column="38" selection-start-line="244" selection-start-column="0" selection-end-line="245" selection-end-column="0" />
           <folding />
         </state>
@@ -1397,9 +1253,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/show.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.5466666">
+        <state vertical-scroll-proportion="0.59731543">
           <caret line="121" column="23" selection-start-line="121" selection-start-column="23" selection-end-line="121" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1407,22 +1262,90 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/user/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.78">
+        <state vertical-scroll-proportion="0.7181208">
           <caret line="61" column="85" selection-start-line="61" selection-start-column="85" selection-end-line="61" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/addAdminRole.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32214764">
+          <caret line="16" column="7" selection-start-line="16" selection-start-column="7" selection-end-line="16" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/itworkorders/User.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-10.08">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/_form.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.56162244">
+          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/controllers/itworkorders/TicketController.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-74.347824">
+          <caret line="95" column="18" selection-start-line="95" selection-start-column="18" selection-end-line="95" selection-end-column="18" />
+          <folding>
+            <element signature="e#21#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/conf/BootStrap.groovy">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="18" column="36" selection-start-line="18" selection-start-column="36" selection-end-line="18" selection-end-column="36" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/index.gsp">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5665584">
-          <caret line="77" column="0" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
+        <state vertical-scroll-proportion="-8.26">
+          <caret line="74" column="76" selection-start-line="74" selection-start-column="24" selection-end-line="74" selection-end-column="80" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/ticket/_form.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="4.3260503">
+          <caret line="143" column="107" selection-start-line="143" selection-start-column="107" selection-end-line="143" selection-end-column="107" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/views/user/edit.gsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6516129">
+          <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/grails-app/domain/itworkorders/Ticket.groovy">
+      <provider editor-type-id="org.jetbrains.plugins.grails.perspectives.DomainClassesRelationsEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.0806452">
+          <caret line="58" column="45" selection-start-line="58" selection-start-column="45" selection-end-line="58" selection-end-column="45" />
           <folding />
         </state>
       </provider>

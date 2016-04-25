@@ -116,7 +116,29 @@ class UserController {
             return
         }
 
+        Role patronRole = Role.findByAuthority('ROLE_USER')
+        try{
+            UserRole.remove userInstance, patronRole
+        } //REMOVE PATRON ROL
+        catch(Exception e){
+            println "User does not have user role"
+        }
+       Role techRole = Role.findByAuthority('ROLE_TECH')
+        try{
+            UserRole.remove userInstance, techRole
+        } //REMOVE TECH ROLE
+        catch(Exception e){
+            println "User does not have tech role"
+        }
+        Role adminRole = Role.findByAuthority('ROLE_ADMIN')
+        try {
+            UserRole.remove userInstance, adminRole
+        } //REMOVE TECH ROLE
+        catch(Exception e){
+            println "User does not have admin role"
+        }
         userInstance.delete flush:true
+
 
         request.withFormat {
             form multipartForm {

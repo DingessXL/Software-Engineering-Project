@@ -287,7 +287,7 @@ class TicketController {
         ticketInstance.status = "Closed"
         ticketInstance.save flush:true
 
-        //Email notification for new ticket
+        //Email notification for closed ticket
         //Email owner of ticket
         sendMail {
             to ticketInstance.email
@@ -313,6 +313,24 @@ class TicketController {
         if (ticketInstance == null){
             notFound()
             return
+        }
+
+        //Email notification for reopen ticket
+        //Email owner of ticket
+        sendMail {
+            to ticketInstance.email
+            subject "A Ticket Has Been Reopened"
+            html g.render(template:"/grails-app/views/email/ticketreopen", model:[ticketInstance:ticketInstance])
+        }
+
+        //Email technician if one is assigned
+        if(ticketInstance.technician)
+        {
+            sendMail {
+                to ticketInstance.technician.username
+                subject "A Ticket Has Been Reopened"
+                html g.render(template:"/grails-app/views/email/ticketreopen", model:[ticketInstance:ticketInstance])
+            }
         }
 
         //Update History

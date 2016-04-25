@@ -10,7 +10,9 @@ class Ticket {
 
     String phoneNumber
     String roomNumber
-    String priority = "low"
+
+    //Priotity defaults to "normal"
+    String priority = "normal"
     String subject
     String description
     String status

@@ -27,6 +27,6 @@ Should be rendered on all accesable pages.
 
 
 		<!-- LOGOUT LINK -->
-		<li><g:link class="logout" controller="logout">Logout</g:link></li>
+		<li><g:link class="logout" controller="logout">Logout of <sec:username /> </g:link></li>
 	</ul>
 </div>

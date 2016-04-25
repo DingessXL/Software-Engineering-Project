@@ -1,6 +1,8 @@
 package itworkorders
-
+import itworkorders.auth.*
 import grails.plugin.springsecurity.annotation.Secured
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.context.SecurityContextHolder
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
@@ -8,6 +10,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 @Secured(['ROLE_ADMIN'])
 class UserController {
+    def authenticateService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -24,6 +27,33 @@ class UserController {
         respond new User(params)
     }
 
+    def addTechRole(User userInstance){
+        userInstance.userRole = "Tech"
+
+        Role patronRole = Role.findByAuthority('ROLE_USER')
+        UserRole.remove userInstance, patronRole //REMOVE PATRON ROLE
+
+        def techRole = Role.findByAuthority('ROLE_TECH')
+        UserRole.create userInstance, techRole, true
+
+        userInstance.save flush:true
+        redirect(controller: "user", action: "index")
+
+    }
+
+    def addAdminRole(User userInstance){
+        userInstance.userRole = "Admin"
+
+        Role techRole = Role.findByAuthority('ROLE_TECH')
+        UserRole.remove userInstance, techRole //REMOVE TECH ROLE
+
+        def adminRole = Role.findByAuthority('ROLE_ADMIN')
+        UserRole.create userInstance, adminRole, true
+
+        userInstance.save flush:true
+        redirect(controller: "user", action: "index")
+    }
+
     @Transactional
     def save(User userInstance) {
         if (userInstance == null) {
@@ -37,6 +67,10 @@ class UserController {
         }
 
         userInstance.save flush:true
+
+        userInstance.userRole = "Patron"
+        def userRole = Role.findByAuthority('ROLE_USER')
+        UserRole.create userInstance, userRole, true
 
         request.withFormat {
             form multipartForm {

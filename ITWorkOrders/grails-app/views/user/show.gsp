@@ -112,11 +112,21 @@
 					
 				</li>
 				</g:if>
+				<g:if test="${userInstance?.userRole}">
+					<li class="fieldcontain">
+						<span id="userRole-label" class="property-label"><g:message code="user.userRole.label" default="userRole" /></span>
+
+						<span class="property-value" aria-labelledby="userRole-label"><g:fieldValue bean="${userInstance}" field="userRole"/></span>
+
+					</li>
+				</g:if>
 			
 			</ol>
 			<g:form url="[resource:userInstance, action:'delete']" method="DELETE">
 				<fieldset class="buttons">
 					<g:link class="edit" action="edit" resource="${userInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
+					<g:link class="edit" action="addTechRole" resource="${userInstance}"><g:message code="Assign Tech Role" default="Assign Technician Role" onclick="return confirm('${message(code: 'Are you sure you want to assign this user as a Technician?', default: 'Are you sure?')}');" /></g:link>
+					<g:link class="edit" action="addAdminRole" resource="${userInstance}"><g:message code="Assign Tech Role" default="Assign Admin Role" onclick="return confirm('${message(code: 'Are you sure you want to assign this user as a Technician?', default: 'Are you sure?')}');" /></g:link>
 					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
 				</fieldset>
 			</g:form>

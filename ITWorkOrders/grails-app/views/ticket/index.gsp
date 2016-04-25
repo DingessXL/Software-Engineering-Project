@@ -7,8 +7,13 @@
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
 	<title><g:message code="default.list.label" args="[entityName]" /></title>
+
+	%{--Load in numeric plugin--}%
+	<g:javascript src="jquery.numeric.js" />
+
 </head>
 <body>
+
 <a href="#list-ticket" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
 
 %{-- Render Nav Template --}%
@@ -191,5 +196,8 @@
 		</sec:ifAnyGranted>
 	</table>
 </div>
+
+%{--Make queryID only input numeric values--}%
+<g:javascript>$("#queryID").numeric()</g:javascript>
 </body>
 </html>

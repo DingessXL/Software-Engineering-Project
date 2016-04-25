@@ -4,6 +4,10 @@
 	<meta name="layout" content="main">
 	<g:set var="entityName" value="${message(code: 'ticket.label', default: 'Ticket')}" />
 	<title><g:message code="default.create.label" args="[entityName]" /></title>
+
+	%{--Load in JQuery Masks--}%
+	<g:javascript src="jquery.mask.js" />
+
 </head>
 <body>
 <a href="#create-ticket" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
@@ -36,5 +40,7 @@
 		</fieldset>
 	</g:form>
 </div>
+%{--Add mask to phone number--}%
+<g:javascript>$("#phoneNumber").mask("(000)-000-0000")</g:javascript>
 </body>
 </html>

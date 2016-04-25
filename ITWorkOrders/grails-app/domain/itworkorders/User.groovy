@@ -20,8 +20,10 @@ class User implements Serializable {
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
+	Workgroup workgroup
 
-	static belongsTo = [workgroup: Workgroup, tickets: Ticket]
+
+	//static belongsTo = [workgroup: Workgroup]
 	static hasMany = [tickets: Ticket]
 
 	User(String username, String password) {

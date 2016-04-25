@@ -24,9 +24,6 @@ class Ticket {
     Date lastUpdated
 
 
-    //This may have cascading delete 
-    //static belongsTo = [workgroup:Workgroup]
-
     static hasMany = [reply:Reply, note:Note, history:String, document:String]
 
     List history

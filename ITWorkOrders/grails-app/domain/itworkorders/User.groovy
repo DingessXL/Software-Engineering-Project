@@ -15,6 +15,7 @@ class User implements Serializable {
 	String password
 	String firstName
 	String lastName
+	String userRole = "Patron"
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
@@ -54,7 +55,7 @@ class User implements Serializable {
 		password blank: false
 		firstName blank:true, nullalbe:true
 		lastName blank:true, nullable:true
-
+		userRole inList:["Admin", "Tech", "Patron"], nullable:true
 		tickets blank:true,nullable: true, display:false
 		workgroup blank:true, nullable:true
 	}

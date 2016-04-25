@@ -21,9 +21,7 @@ class BootStrap {
 				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true)
 		def techUser = User.findOrSaveWhere(username: 'tech@gcsu.edu', password:'abcd1234', firstName:"Tech",lastName:"Account", workgroup:wg,
 				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true)
-		def user1 = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"User", lastName:"Account",
-				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
-		def user2 = User.findOrSaveWhere(username:'matt.gaines@gcsu.edu', password:'abcd1234', firstName:"Matt", lastName:"Gaines",
+		def patronUser = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"User", lastName:"Account",
 				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
 
 		//Adding unassigned to techRole
@@ -39,13 +37,8 @@ class BootStrap {
 			UserRole.create(techUser,techRole,true)
 		}
 		//Creating normal user account for user above.
-		if(!user1.authorities.contains(userRole)){
-			UserRole.create(user1,userRole, true)
-		}
-
-		//Createing normal user account for Matt Gaines
-		if(!user2.authorities.contains(userRole)){
-			UserRole.create(user2,userRole, true)
+		if(!patronUser.authorities.contains(userRole)){
+			UserRole.create(patronUser,userRole, true)
 		}
 
     	new Department(departmentName:"Computer Science", departmentAddress: "123 CS St.").save(flush:true)

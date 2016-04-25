@@ -75,12 +75,16 @@
 			<fieldset class="buttons">
 				<a class="list" href="${createLink(uri: '/ticket/openTickets')}">Opened Tickets</a>
 				<a class="list" href="${createLink(uri: '/ticket/closedTickets')}">Closed Tickets</a>
-				<a class="list" href="${createLink(uri: '/ticket/showAssignedTickets')}">Assigned Tickets</a>
-				<a class="list" href="${createLink(uri: '/ticket/showAllTickets')}">All Tickets</a>
-		<g:form name="selectWorkgroup" controller="ticket" action="showWorkgroupTickets">
-				<g:select id="workgroup" name="workgroup" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${workgroupID}" class="many-to-one"/>
-				<g:actionSubmit class="save" action="showWorkgroupTickets" value="${message(code: 'Select Workgroup', default: 'Select')}" />
-		</g:form>
+
+				<!-- Hide assigned, show all tickets buttons and select workgroup from Patrons -->
+				<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
+					<a class="list" href="${createLink(uri: '/ticket/showAssignedTickets')}">Assigned Tickets</a>
+					<a class="list" href="${createLink(uri: '/ticket/showAllTickets')}">All Tickets</a>
+					<g:form name="selectWorkgroup" controller="ticket" action="showWorkgroupTickets">
+							<g:select id="workgroup" name="workgroup" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${workgroupID}" class="many-to-one"/>
+							<g:actionSubmit class="save" action="showWorkgroupTickets" value="${message(code: 'Select Workgroup', default: 'Select')}" />
+					</g:form>
+				</sec:ifAnyGranted>
 			</fieldset>
 
 	</sec:ifAnyGranted>

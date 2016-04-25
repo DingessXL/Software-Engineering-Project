@@ -23,12 +23,11 @@ class TicketController {
 
         //Get current logged in user authentication information
         Authentication auth = SecurityContextHolder.getContext().getAuthentication()
-        String name = auth.getName() //Get login username
+        def user = springSecurityService.currentUser
         String role = auth.getAuthorities()
 
         //If user is a tech or admin, display all tickets.  Filter list based on tech workgroup id in view.
         if(role.equals("[ROLE_ADMIN]") || role.equals("[ROLE_TECH]")){
-            def user = springSecurityService.currentUser
 
             //If workgroupID has not been set, set it to current logged in user workgroupID.
             if(workgroupID==null) {
@@ -83,7 +82,7 @@ class TicketController {
                 else{
                     //Query database for users tickets -- Show only users tickets that are open.
                     //Add offset to change amount: , [offset: 0, max: 50]
-                    respond Ticket.executeQuery("from Ticket where lower(status) like lower('%${viewStatus}%') and email = '$name'")
+                    respond Ticket.executeQuery("from Ticket where lower(status) like lower('%${viewStatus}%') and lower(email) = lower('$user.username')")
                 }
             }
         }

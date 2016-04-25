@@ -131,12 +131,12 @@
 
 		<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'technician', 'error')} ">
 
-			<label for="workgroup">
+			<label for="technician">
 				<g:message code="ticket.technician.label" default="Technician" />
 				<span class="required-indicator">*</span>
 			</label>
 
-			<g:field type="text" readonly="true" name="technician.id" value="${ticketInstance.technician}" />
+			${fieldValue(bean: ticketInstance, field: "technician")}
 			<g:hiddenField id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
 
 		</div>
@@ -146,7 +146,7 @@
 				<g:message code="ticket.workgroup.label" default="Workgroup" />
 				<span class="required-indicator">*</span>
 			</label>
-			<g:field type="text" readonly="true" id="workgroup" name="workgroup.id" optionKey="id" required="" value="${ticketInstance.workgroup}" class="many-to-one"/>
+			${fieldValue(bean: ticketInstance, field: "workgroup")}
 			<g:hiddenField id="workgroup" name="workgroup.id" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${ticketInstance?.workgroup?.id}" class="many-to-one"/>
 		</div>
 

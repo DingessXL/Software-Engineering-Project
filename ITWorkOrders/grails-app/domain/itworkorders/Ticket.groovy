@@ -57,7 +57,7 @@ class Ticket {
         roomNumber blank:true, nullable:true
         subject blank:false
         description blank:false, maxSize:2500
-        priority inList:["low","medium","high"], nullable:false
+        priority inList:["low","normal","high","critical"], nullable:false
         //We need technician to check to see s isTechnician is true in the user table.  Display only technicians from user table.
         technician blank:true, nullable:true
 

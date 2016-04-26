@@ -40,7 +40,7 @@
 				<li class="fieldcontain">
 					<span id="author-label" class="property-label"><g:message code="note.author.label" default="Author" /></span>
 					
-						<span class="property-value" aria-labelledby="author-label"><g:link controller="user" action="show" id="${noteInstance?.author?.id}">${noteInstance?.author?.encodeAsHTML()}</g:link></span>
+						<span class="property-value" aria-labelledby="author-label"><g:fieldValue bean="${noteInstance}" field="author"/></span>
 					
 				</li>
 				</g:if>

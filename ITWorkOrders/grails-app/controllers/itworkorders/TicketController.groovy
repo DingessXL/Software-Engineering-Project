@@ -53,13 +53,21 @@ class TicketController {
                 else if(params.queryLastName){
                     respond Ticket.executeQuery("from Ticket where lower(firstName) like lower('%${params.queryLastName}%')")
                 }
+                //Search by Phone Number
+                else if(params.queryPhone){
+                    respond Ticket.executeQuery("from Ticket where phoneNumber like '%${params.queryPhone}%'")
+                }
                 //Search by Subject
                 else if(params.querySubject){
                     respond Ticket.executeQuery("from Ticket where lower(subject) like lower('%${params.querySubject}%')")
                 }
+                else if(techID==-1){
+                    respond Ticket.executeQuery("from Ticket where technician.id = null")
+                }
                 else if(techID!=null) {
                     respond Ticket.executeQuery("from Ticket where technician.id = ${techID}")
                 }
+
                 //Display All Open tickets
                 else{
 
@@ -193,6 +201,11 @@ class TicketController {
     }
     def showAllTickets(){
         techID = null
+        viewStatus="Open"
+        redirect(action: "index")
+    }
+    def showUnassignedTickets(){
+        techID = -1
         redirect(action: "index")
     }
     @Secured(['ROLE_ADMIN','ROLE_TECH'])

@@ -4,7 +4,7 @@
 
 <div class="fieldcontain ${hasErrors(bean: replyInstance, field: 'reply', 'error')} required">
 	<label for="reply">
-		<g:message code="reply.reply.label" default="Add Reply:" />
+		<g:message code="reply.reply.label" default="Add Reply to Close Ticket:" />
 		<span class="required-indicator">*</span>
 	</label>
 	<g:textArea name="reply" cols="40" rows="5" maxlength="2500" required="" value="${replyInstance?.reply}"/>

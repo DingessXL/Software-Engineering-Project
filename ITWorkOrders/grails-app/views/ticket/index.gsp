@@ -109,7 +109,7 @@
 		<g:paginate total="${ticketInstanceCount ?: 0}" />
 	</div>
 	<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH, ROLE_USER">
-
+	<h1>Ticket Browser</h1>
 			<!-- Ticket Status Table -->
 
 			<fieldset class="buttons">
@@ -118,8 +118,9 @@
 
 				<!-- Hide assigned, show all tickets buttons and select workgroup from Patrons -->
 				<sec:ifAnyGranted roles="ROLE_ADMIN, ROLE_TECH">
-					<a class="list" href="${createLink(uri: '/ticket/showAssignedTickets')}">Assigned Tickets</a>
-					<a class="list" href="${createLink(uri: '/ticket/showAllTickets')}">All Tickets</a>
+					<a class="list" href="${createLink(uri: '/ticket/showAssignedTickets')}">Assigned To Me</a>
+					<a class="list" href="${createLink(uri: '/ticket/showUnassignedTickets')}">Unassigned</a>
+					<a class="list" href="${createLink(uri: '/ticket/showAllTickets')}">Reset</a>
 					<g:form name="selectWorkgroup" controller="ticket" action="showWorkgroupTickets">
 							<g:select id="workgroup" name="workgroup" from="${itworkorders.Workgroup.list()}" optionKey="id" required="" value="${workgroupID}" class="many-to-one"/>
 							<g:actionSubmit class="save" action="showWorkgroupTickets" value="${message(code: 'Select Workgroup', default: 'Select')}" />
@@ -128,8 +129,8 @@
 			</fieldset>
 
 	</sec:ifAnyGranted>
+	<h1>Search Tickets</h1>
 	<table>
-		<tr><th colspan="3">Search Ticket</th></tr>
 		<tr>
 			<td>Ticket ID: </td>
 			<td>
@@ -181,6 +182,18 @@
 				</fieldset>
 			</td>
 		</tr>
+			<tr>
+				<td>Phone Number</td>
+				<td>
+					<fieldset class="form">
+						<g:form action="index" method="GET">
+							<div class="fieldcontain">
+								<g:textField name="queryPhone" value="${params.query}" />
+							</div>
+						</g:form>
+					</fieldset>
+				</td>
+			</tr>
 		<tr>
 			<td>Subject: </td>
 			<td>
@@ -199,5 +212,8 @@
 
 %{--Make queryID only input numeric values--}%
 <g:javascript>$("#queryID").numeric()</g:javascript>
+
+%{--Add mask to phone number--}%
+<g:javascript>$("#queryPhone").mask("(000)-000-0000")</g:javascript>
 </body>
 </html>

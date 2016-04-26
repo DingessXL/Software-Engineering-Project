@@ -1,11 +1,13 @@
 package itworkorders
 
-
+import grails.plugin.springsecurity.annotation.Secured
 
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
+//This locks down the notes section to only admins or techs:
+@Secured(['ROLE_ADMIN', 'ROLE_TECH'])
 class NoteController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
@@ -16,10 +18,14 @@ class NoteController {
     }
 
     def show(Note noteInstance) {
+        //Send current logged in users instance from controller to the GSP page.
+        //User user = getAuthenticatedUser()
         respond noteInstance
     }
 
     def create() {
+        //Send current logged in users instance from controller to the GSP page.
+        //User user = getAuthenticatedUser()
         respond new Note(params)
     }
 
@@ -47,6 +53,8 @@ class NoteController {
     }
 
     def edit(Note noteInstance) {
+        //Send current logged in users instance from controller to the GSP page.
+        //User user = getAuthenticatedUser()
         respond noteInstance
     }
 

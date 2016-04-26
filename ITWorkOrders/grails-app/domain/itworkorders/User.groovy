@@ -1,35 +1,73 @@
 package itworkorders
 
-class User {
-    String email
-    String firstName
-    String lastName
-    Boolean isTechnician //default should be no
-    //Boolean isManager  //created for feature add later
-    Boolean isAdmin     //default should be no
+import groovy.transform.EqualsAndHashCode
+import groovy.transform.ToString
 
-    static belongsTo = [workgroup: Workgroup]
+@EqualsAndHashCode(includes='username')
+@ToString(includes='username', includeNames=true, includePackage=false)
+class User implements Serializable {
 
-    static hasMany = [tickets: Ticket]
+	private static final long serialVersionUID = 1
 
-    static constraints = {
-        email blank:false,nullable: false
-        /*
-        firstName and lastName does not need to be selectable.  We will use a string split
-        to split the email address.
-         */
-        firstName blank:true, nullalbe:true
-        lastName blank:true, nullable:true
+	transient springSecurityService
 
-        /*
-        isTechnician and isAdmin only needs to be selectable if current logged in user is admin
-        or we may just want to limit the user controller to admin, since technicians should not
-        need to edit/create users
-        */
-        isTechnician blank:true,nullable:true
-        isAdmin blank:true,nullable: true
-        tickets blank:true,nullable: true, display:false
+	String username
+	String password
+	String firstName
+	String lastName
+	String userRole = "Patron"
+	boolean enabled = true
+	boolean accountExpired
+	boolean accountLocked
+	boolean passwordExpired
+	Workgroup workgroup
 
-    }
-    String toString () {"$firstName $lastName"}
+
+	//static belongsTo = [workgroup: Workgroup]
+	static hasMany = [tickets: Ticket]
+
+	User(String username, String password) {
+		this()
+		this.username = username
+		this.password = password
+	}
+
+	Set<Role> getAuthorities() {
+		UserRole.findAllByUser(this)*.role
+	}
+
+	def beforeInsert() {
+		encodePassword()
+	}
+
+	def beforeUpdate() {
+		if (isDirty('password')) {
+			encodePassword()
+		}
+	}
+
+	protected void encodePassword() {
+		password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
+	}
+
+	static transients = ['springSecurityService']
+
+	static constraints = {
+		username blank: false, unique: true
+		password blank: false
+		firstName blank:true, nullalbe:true
+		lastName blank:true, nullable:true
+		userRole inList:["Admin", "Tech", "Patron"], nullable:true
+		tickets blank:true,nullable: true, display:false
+		workgroup blank:true, nullable:true
+	}
+
+	static mapping = {
+		password column: '`password`'
+	}
+
+	//Return first name and last name as string for users
+	String toString() {
+		return "$firstName $lastName"
+	}
 }

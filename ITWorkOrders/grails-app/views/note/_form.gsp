@@ -12,11 +12,14 @@
 </div>
 
 <div class="fieldcontain ${hasErrors(bean: noteInstance, field: 'author', 'error')} ">
-	<label for="author">
+	<!--<label for="author">
 		<g:message code="note.author.label" default="Author" />
 		
-	</label>
-	<g:select id="author" name="author.id" from="${itworkorders.User.list()}" optionKey="id" value="${noteInstance?.author?.id}" class="many-to-one" noSelection="['null': '']"/>
+	</label> -->
+
+	<!-- SET AUTHOR AS CURRENT LOGGED IN USER -->
+	<g:set var="userID"><sec:loggedInUserInfo field="id" /></g:set>
+	<g:hiddenField id="author" name="author.id" from="${itworkorders.User.list()}" optionKey="id" value="${userID}" class="many-to-one" noSelection="['null': '']"/>
 
 </div>
 

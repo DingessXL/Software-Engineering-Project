@@ -1,3 +1,20 @@
+/*
+*
+* Email Configuration Variables
+*
+*/
+
+//Used to hold email account username
+final EMAIL_USERNAME  = "pispark3.14@gmail.com"
+
+//Used to hold email account password
+final EMAIL_PASSWORD  = "cats-r-cool"
+
+//used to hold the integer value of the port
+final EMAIL_PORT      = 465
+
+
+
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -41,6 +58,10 @@ grails.views.default.codec = "html"
 // If unspecified, controllers are prototype scoped.
 grails.controllers.defaultScope = 'singleton'
 
+//This is to allow the GET requests necessary for login logout functionality -MG
+grails.plugin.springsecurity.logout.postOnly=false
+
+
 // GSP settings
 grails {
     views {
@@ -57,6 +78,56 @@ grails {
         // escapes all not-encoded output at final stage of outputting
         // filteringCodecForContentType.'text/html' = 'html'
     }
+
+    /*****************************************
+     *
+     * Email Plugin Configurations
+     *
+     * Please only un comment one at a time
+     *
+    *****************************************/
+
+    
+    //Uncomment for use with Gmail account
+    mail {
+     host = "smtp.gmail.com"
+     port = EMAIL_PORT
+     username = EMAIL_USERNAME
+     password = EMAIL_PASSWORD
+     props = ["mail.smtp.auth":"true",                     
+              "mail.smtp.socketFactory.port":Integer.toString(EMAIL_PORT),
+              "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+              "mail.smtp.socketFactory.fallback":"false"]
+
+   }
+   
+
+   /*
+   //Uncomment for use with Hotmail/Live account
+    mail {
+         host = "smtp.live.com"
+         port = EMAIL_PORT
+         username = EMAIL_USERNAME
+         password = EMAIL_PASSWORD
+         props = ["mail.smtp.starttls.enable":"true", 
+                      "mail.smtp.port":Integer.toString(EMAIL_PORT)]
+
+       }
+   */
+
+   /*
+   //Uncomment for use with Yahoo account
+    mail {
+          host = "smtp.correo.yahoo.es"
+          port = EMAIL_PORT
+          username = EMAIL_USERNAME
+          password = EMAIL_PASSWORD
+          props = [ "mail.smtp.auth":"true",
+                           "mail.smtp.socketFactory.port":Integer.toString(EMAIL_PORT),
+                           "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+                           "mail.smtp.socketFactory.fallback":"false"  ]
+       }
+   */
 }
 
 
@@ -115,3 +186,23 @@ log4j.main = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+
+
+
+// Added by the Spring Security Core plugin:
+grails.plugin.springsecurity.userLookup.userDomainClassName = 'itworkorders.User'
+grails.plugin.springsecurity.userLookup.authorityJoinClassName = 'itworkorders.UserRole'
+grails.plugin.springsecurity.authority.className = 'itworkorders.Role'
+grails.plugin.springsecurity.controllerAnnotations.staticRules = [
+	'/':                ['permitAll'],
+	'/index':           ['permitAll'],
+	'/index.gsp':       ['permitAll'],
+	'/assets/**':       ['permitAll'],
+	'/**/js/**':        ['permitAll'],
+	'/**/css/**':       ['permitAll'],
+	'/**/images/**':    ['permitAll'],
+	'/**/favicon.ico':  ['permitAll'],
+
+]
+

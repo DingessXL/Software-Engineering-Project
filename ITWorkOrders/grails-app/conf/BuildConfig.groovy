@@ -89,6 +89,9 @@ grails.project.dependency.resolution = {
         //JQuery Plugin
         compile ":jquery:1.11.1"
 
+        //Plugin for file uploads
+        compile "org.grails.plugins:uploadr:latest.integration"
+
 
     }
 }

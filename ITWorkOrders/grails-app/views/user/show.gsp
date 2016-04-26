@@ -36,7 +36,9 @@
 				<li class="fieldcontain">
 					<span id="password-label" class="property-label"><g:message code="user.password.label" default="Password" /></span>
 					
-						<span class="property-value" aria-labelledby="password-label"><g:fieldValue bean="${userInstance}" field="password"/></span>
+						<span class="property-value" aria-labelledby="password-label">
+							<g:link class="edit" action="edit" resource="${userInstance}"><g:message code="Change Password" default="Change Password" /></g:link>
+						</span>
 					
 				</li>
 				</g:if>
@@ -114,7 +116,7 @@
 				</g:if>
 				<g:if test="${userInstance?.userRole}">
 					<li class="fieldcontain">
-						<span id="userRole-label" class="property-label"><g:message code="user.userRole.label" default="userRole" /></span>
+						<span id="userRole-label" class="property-label"><g:message code="user.userRole.label" default="User Role" /></span>
 
 						<span class="property-value" aria-labelledby="userRole-label"><g:fieldValue bean="${userInstance}" field="userRole"/></span>
 

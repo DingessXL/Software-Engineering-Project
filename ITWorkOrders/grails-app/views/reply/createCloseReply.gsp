@@ -28,7 +28,7 @@
 			</g:hasErrors>
 			<g:form url="[resource:replyInstance, action:'saveClose']" >
 				<fieldset class="form">
-					<g:render template="form"/>
+					<g:render template="formCloseReply"/>
 				</fieldset>
 				<fieldset class="buttons">
 					<g:submitButton name="saveClose" class="saveClose" value="${message(code: 'Close Ticket', default: 'Close Ticket')}" />

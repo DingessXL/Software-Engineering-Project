@@ -90,11 +90,12 @@
 
 </div>
 
-<!-- Add Document NOT WORKING RIGHT NOW
-<!--
-<g:form action="save" method="post" enctype="multipart/form-data">
-    <input type="file" name="document" id="document"
-</g:form> -->
+<!-- Add Document NOT WORKING RIGHT NOW-->
+<div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'description', 'error')} required">
+    <label for="document"> 
+        <g:message code="ticket.document.label" default="Document"/>
+    </label>
+    <uploadr:add name="documentUploader" path="/documents" maxVisible="3"/>
 
 <!-- NOTES HIDDEN FROM NON ADMIN or TECH -->
 

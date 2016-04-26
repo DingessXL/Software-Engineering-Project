@@ -91,11 +91,16 @@
 </div>
 
 <!-- Add Document NOT WORKING RIGHT NOW-->
+
+<asset:javascript src="uploadr.manifest.js"/>
+<asset:stylesheet href="uploadr.manifest.css"/>
+
 <div class="fieldcontain ${hasErrors(bean: ticketInstance, field: 'description', 'error')} required">
     <label for="document"> 
         <g:message code="ticket.document.label" default="Document"/>
     </label>
-    <uploadr:add name="documentUploader" path="/documents" maxVisible="3"/>
+    <uploadr:add name="documentUploader" maxSize="204800" maxConcurrentUploads="3" class="fieldcontain" path="/documents"/>
+</div>
 
 <!-- NOTES HIDDEN FROM NON ADMIN or TECH -->
 

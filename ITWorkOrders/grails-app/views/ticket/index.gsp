@@ -11,6 +11,9 @@
 	%{--Load in numeric plugin--}%
 	<g:javascript src="jquery.numeric.js" />
 
+	%{--Load in mask plugin--}%
+	<g:javascript src="jquery.mask.js" />
+
 </head>
 <body>
 

@@ -74,7 +74,7 @@
 				<g:message code="ticket.technician.label" default="Technician" />
 
 			</label>
-            <g:select id="technician" name="technician.id" from="${itworkorders.User.list()}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
+            <g:select id="technician" name="technician.id" from="${itworkorders.User.executeQuery("from User where userRole = 'Tech' or userRole = 'Admin'")}" optionKey="id" value="${ticketInstance?.technician?.id}" class="many-to-one" noSelection="['null': '']"/>
 
         </div>
 

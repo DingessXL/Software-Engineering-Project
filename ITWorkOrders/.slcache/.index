@@ -5802,3 +5802,5 @@ n:2952:script1461466130431603195998$_run_closure2_closure9
 n:3432:script1461466130431603195998$_run_closure3
 n:510:org/springframework/web/multipart/MultipartFile
 n:1003:org/codehaus/groovy/grails/web/context/ServletContextHolder
+n:3157:BuildConfig$_run_closure1_closure5
+n:6275:org/codehaus/groovy/grails/resolve/maven/aether/support/ScopeAwareNearestVersionSelector$ScopeComparator

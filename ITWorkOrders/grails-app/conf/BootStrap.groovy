@@ -15,14 +15,14 @@ class BootStrap {
 
 
 		//Unassigned added first so it is the first in the list to assign.  Unassigned is a disabled account: no login allowed.
-		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Unassigned",lastName:" ", workgroup:wg,
-				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: false)
+		def unassignedTech = User.findOrSaveWhere(username: 'unassigned@gcsu.edu', password:'abcd1234', firstName:"Not",lastName:"Assigned", workgroup:wg,
+				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: false, userRole:"Tech")
 		def adminUser = User.findOrSaveWhere(username: 'admin@gcsu.edu', password:'abcd1234', firstName: "Admin", lastName: "Account", workgroup:wg,
-				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true)
+				accountLocked: false, passwordExpired: false, accountExpired: false, enabled:true, userRole:"Admin")
 		def techUser = User.findOrSaveWhere(username: 'tech@gcsu.edu', password:'abcd1234', firstName:"Tech",lastName:"Account", workgroup:wg,
-				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true)
+				accountLocked:false, passwordExpired:false, accountExpired:false, enabled: true, userRole:"Tech")
 		def patronUser = User.findOrSaveWhere(username:'user@gcsu.edu', password:'abcd1234', firstName:"User", lastName:"Account",
-				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true)
+				accountLocked:false, passwordExpired: false, accountExpired: false, enabled: true, userRole:"Patron")
 
 		//Adding unassigned to techRole
 		if(!unassignedTech.authorities.contains(techRole)){

@@ -1,7 +1,13 @@
 package itworkorders
 
 /*
-Note Class:  Technicians use notes to communicate to other technicians
+
+Note Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose:  Technicians use notes to communicate to other technicians
 that may be reading the ticket without the regular users being able to view
 this communication.  This hides technical jargon from the user.
 

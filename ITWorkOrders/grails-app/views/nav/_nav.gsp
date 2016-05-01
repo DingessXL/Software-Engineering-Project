@@ -2,7 +2,7 @@
 File: /grails-app/views/nav/_nav.gsp 
 
 Used for sitewide navigation.
-Should be rendered on all accesable pages.
+Should be rendered on all accessible pages.
 --}%
 <div class="nav" role="navigation">
 	<ul>

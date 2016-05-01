@@ -1,3 +1,14 @@
+/*
+User Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: used to create, edit/update, or delete users by admin only
+
+-Secured: ROLE_ADMIN
+
+*/
 package itworkorders
 import itworkorders.auth.*
 import grails.plugin.springsecurity.annotation.Secured
@@ -10,7 +21,6 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 @Secured(['ROLE_ADMIN'])
 class UserController {
-    def authenticateService
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
@@ -116,7 +126,7 @@ class UserController {
             notFound()
             return
         }
-
+        //Must delete all roles before deleting user.  Suggest disabling user instead of delete.
         Role patronRole = Role.findByAuthority('ROLE_USER')
         try{
             UserRole.remove userInstance, patronRole

@@ -1,7 +1,13 @@
 package itworkorders
 
 /*
-Reply Class: This class if for the communication between technicians and
+
+Reply Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: This class if for the communication between technicians and
 end users.
 
 -Viewable in ascending order (oldest->newest)
@@ -29,9 +35,9 @@ class Reply  {
     static constraints = {
         reply blank: false, nullable:false, maxSize: 2500
 
-        //We need to edit the view to get the current logged in user, and then hide the field
-        //right now we are just going to select the user from the list.
+        //Author is determined by current logged in user in the controller
         author blank:true, nullable:true
+        //Ticket is determined automatically by the ticket that selected "Add reply"
         ticket display:true, nullable:false
     }
 

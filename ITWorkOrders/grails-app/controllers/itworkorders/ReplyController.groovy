@@ -1,3 +1,15 @@
+/*
+Reply Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used to create, edit/update, and delete replies.
+
+- Must not be able to create notes if ticket has not been created, this is handles using different forms in ticekt.
+- Secured: ROLE_TECH and ROLE_ADMIN.
+
+*/
 package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured

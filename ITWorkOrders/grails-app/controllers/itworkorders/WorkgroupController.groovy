@@ -1,3 +1,15 @@
+/*
+Workgroup Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: used to create, edit/update, or delete workgroups by admin only
+
+-Secured: ROLE_ADMIN
+
+*/
+
 package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured
@@ -12,16 +24,19 @@ import grails.transaction.Transactional
 class WorkgroupController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+
+    def springSecurityService //used to get current logged in user
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Workgroup.list(params), model:[workgroupInstanceCount: Workgroup.count()]
     }
 
     def showTechWorkgroup() {
-        def user = getAuthenticatedUser()
+        //Get current logged in user.
+        def user = springSecurityService.currentUser
         def workgroupID = user.workgroup.id
 
-        //println "USER WORKGROUP $workgroupID"
         redirect(action: "show", id:workgroupID)
 
 

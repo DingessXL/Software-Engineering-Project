@@ -1,3 +1,15 @@
+/*
+Building Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used to create, edit/update, and delete buildings.  Handles the data between the building views, ticket forms,
+and the database.
+
+- Secured: ROLE_ADMIN
+*/
+
 package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured

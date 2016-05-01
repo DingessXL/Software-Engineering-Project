@@ -1,3 +1,16 @@
+/*
+Role Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used in springSecurityService for user authentication roles.  Roles are created in the bootstrap.groovy file
+
+- In Bootstrap, we have created "ROLE_ADMIN", "ROLE_TECH", and "ROLE_USER".  New accounts are given the "ROLE_USER" by default.
+
+Required Fields:
+
+*/
 package itworkorders
 
 import groovy.transform.EqualsAndHashCode

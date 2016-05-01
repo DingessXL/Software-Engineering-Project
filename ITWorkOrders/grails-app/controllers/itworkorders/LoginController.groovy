@@ -1,3 +1,14 @@
+/*
+Login Controller
+
+Last Update: 5/1/2016
+
+Purpose: Used by springSecurityService to handle logins.
+
+- Secured: permitAll
+
+*/
+
 /* Copyright 2013-2015 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");

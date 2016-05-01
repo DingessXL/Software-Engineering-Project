@@ -1,50 +1,55 @@
+/*
+Ticket Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: The ticket object is the most important object in the system.  Tickets are created by Patrons ("ROLE_USER"),
+technicians ("ROLE_TECH"), and administrators ("ROLE_ADMIN").  Depending on your role, you will see different forms.
+- Patrons do not have the ability to assign/edit workgroup, priority, techncians, or view notes.
+- No user has the ability to create replies or notes for a ticket that has not already been created (Edit form only).
+- Only admins are allowed to delete tickets (No Referential integrity check).
+
+Required Fields:
+- email, must be email
+- subject
+- description
+- workgroup, default is Serve Help Desk
+- status, default is Open
+*/
+
 package itworkorders
 
 
 class Ticket {
     String email
-
-    //Default names to empty for easier logic in view
-    String firstName = ""
+    String firstName = "" //Default names to empty for easier logic in view
     String lastName = ""
-
     String phoneNumber
     String roomNumber
-
-    //Priotity defaults to "normal"
-    String priority = "normal"
+    String priority = "normal" //Priority defaults to "normal"
     String subject
     String description
     String status
-
     User technician
     Building buildingName
     Department departmentName
     Workgroup workgroup
 
+    //dateCreated and lastUpdated are handled automatically by grails
     Date dateCreated
     Date lastUpdated
 
-
-    static hasMany = [reply:Reply, note:Note, history:String, document:String]
+    static hasMany = [reply:Reply, note:Note, history:String]
 
     List history
-    List document
-
 
     static constraints = {
-        /* Required Fields:
-            email
-            subject
-            description
-            workgroup - default needs to be Serve
-            status - default needs to be Open
-         */ //mg
-
         /*
-        First element that is displayed is the link to the ticket, so it must be
-        required if you want to be able to select the ticket
-         */ //mg
+        Note: It's important to link on the ticket view to the ticket using a required field.  If you
+        link to an nullable field, and the field is not populated by a user, then you will not be able
+        to link to the ticket.
+         */
 
         email email: true
         firstName blank:true, nullable:true
@@ -57,24 +62,23 @@ class Ticket {
         subject blank:false
         description blank:false, maxSize:2500
         priority inList:["low","normal","high","critical"], nullable:false
-        //We need technician to check to see s isTechnician is true in the user table.  Display only technicians from user table.
+        //Displays only technicians from user table.
         technician blank:true, nullable:true
 
-        //workgroup needs to be set to Serve Help Desk by default and hidden from view if the current logged in user is not a technician.
+        //Serve Help Desk by default and hidden from view if the current logged in user is not a technician.
         workgroup blank:false, nullable:false
 
-        //ticketStatus needs to be set to Open by default in the create form, and hidden from view from any normal user
+        //Open by default in the create form, and hidden from view from any normal user
         status blank:false, nullable:false, inList: ["Open", "Closed", "On Hold"]
 
-        //Reply needs to be hidden from view on the create page only.
+        //Reply hidden from view on the create page only.
         reply blank:true, nullable:true
 
-        //Notes should be hidden from view to create or view notes if the user is not a technician.
+        //Notes hidden from view to create or view notes if the user is not a technician.
         note blank:true, nullable:true
 
+        //Autocreated when users open, close, update, reassign, switch workgroup, reply.
         history nullable:true, display:false
-
-        document nullable:true
 
     }
 

@@ -1,3 +1,19 @@
+/*
+User Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used in springSecurityService for user authentication.  Users are created in the bootstrap.groovy file,
+and also by Admins when the application is running in the Users controller.
+
+
+Required Fields:
+- username (important to use username and not userName, springSecurity expects username)
+- password
+
+*/
+
 package itworkorders
 
 import groovy.transform.EqualsAndHashCode
@@ -15,15 +31,15 @@ class User implements Serializable {
 	String password
 	String firstName
 	String lastName
-	String userRole = "Patron"
+	String userRole = "Patron"  //Default user role is Patron
 	boolean enabled = true
 	boolean accountExpired
 	boolean accountLocked
 	boolean passwordExpired
 	Workgroup workgroup
 
-
-	//static belongsTo = [workgroup: Workgroup]
+	//Referential Integrity Check: Does not allow the deletion of Workgroups if users are assigned to them.
+	static belongsTo = [workgroup: Workgroup]
 	static hasMany = [tickets: Ticket]
 
 	User(String username, String password) {

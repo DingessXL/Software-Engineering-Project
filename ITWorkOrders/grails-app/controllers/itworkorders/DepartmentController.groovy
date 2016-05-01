@@ -1,3 +1,16 @@
+/*
+Department Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used to create, edit/update, and delete departments.  Handles the data between the department views, ticket forms,
+and the database.
+
+- Secured: Only available for ROLE_ADMIN
+
+*/
+
 package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured

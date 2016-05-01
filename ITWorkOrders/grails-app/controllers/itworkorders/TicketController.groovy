@@ -1,3 +1,17 @@
+/*
+Ticket Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used to create, edit/update, and delete tickets.
+
+- Secured: ROLE_USER, ROLE_TECH, ROLE_ADMIN.
+- Some actions are secured to only ROLE_TECH and ROLE_ADMIN
+- Some actions are secured to only ROLE_ADMIN (delete)
+
+*/
+
 package itworkorders
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
@@ -131,17 +145,6 @@ class TicketController {
 
         ticketInstance.save flush:true
 
-        //NEEDED FOR DOCUMENT UPLOAD TO SERVER
-        /* Cannot find a good solution for this
-        if(ticketInstance.save(flush:true)){
-            def documentUpload = request.getFile('document')
-            if(!documentUpload.isEmpty()){
-               if(ticketInstance.document){
-                   ticketInstance.document.add FileUploadService.uploadFile(documentUpload, "${ticketInstance.id}.png", "uploadedDocuments")
-               }
-            }
-        } */
-
         //Email notification for new ticket
         //Email owner of ticket
         sendMail {
@@ -179,35 +182,45 @@ class TicketController {
     def editTech(Ticket ticketInstance) {
         respond ticketInstance
     }
-
+    //Edit workgroup is used to assign the ticket to a new workgroup.
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH'])
     def editWorkgroup(Ticket ticketInstance){
         respond ticketInstance
     }
+    //Action openTickets shows all open tickets in default view
     @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
     def openTickets() {
         viewStatus = "Open"
         redirect(action: "index")
     }
+    //Action closedTickets shows all closed tickets in default view
     @Secured(['ROLE_ADMIN', 'ROLE_TECH', 'ROLE_USER'])
     def closedTickets(){
         viewStatus = "Closed"
         redirect(action: "index")
     }
+    //Action: showAssignedTickets shows all the tickets assigned ot current logged in technician
     @Secured(['ROLE_ADMIN','ROLE_TECH'])
     def showAssignedTickets(){
         def user = springSecurityService.currentUser
         techID = user.id
         redirect(action: "index")
     }
+    //Action: showAllTickets resets the ticket view for all users to show Open tickets, default view
     def showAllTickets(){
+        //This resets everything
         techID = null
+        workgroupID = null
         viewStatus="Open"
         redirect(action: "index")
     }
+    //Action: showUnassignedTickets shows any tickets that are unassigned in the workgroup.
+    @Secured(['ROLE_ADMIN','ROLE_TECH'])
     def showUnassignedTickets(){
         techID = -1
         redirect(action: "index")
     }
+    //Action: showWorkgroupTickets shows tickets for the workgroup that was selected.
     @Secured(['ROLE_ADMIN','ROLE_TECH'])
     def showWorkgroupTickets(){
         workgroupID = params.workgroup
@@ -264,7 +277,7 @@ class TicketController {
     }
 
     @Transactional
-    @Secured(['ROLE_ADMIN'])
+    @Secured(['ROLE_ADMIN']) //Only admins should have the ability to delete.
     def delete(Ticket ticketInstance) {
 
         if (ticketInstance == null) {
@@ -365,6 +378,7 @@ class TicketController {
     }
 
     //Controller for assigning tech.
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH'])
     def assignTech(Ticket ticketInstance){
         if (ticketInstance == null) {
             notFound()
@@ -411,7 +425,8 @@ class TicketController {
 
     }
 
-    //Controller for assigning tech.
+    //Action for assigning workgroups.
+    @Secured(['ROLE_ADMIN', 'ROLE_TECH'])
     def assignWorkgroup(Ticket ticketInstance){
         if (ticketInstance == null) {
             notFound()

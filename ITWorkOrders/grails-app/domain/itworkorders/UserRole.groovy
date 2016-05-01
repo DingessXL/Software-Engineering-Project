@@ -1,3 +1,13 @@
+/*
+UserRole Domain Class
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used in springSecurityService for user authentication roles.  Roles are created in the bootstrap.groovy file
+
+*/
+
 package itworkorders
 
 import grails.gorm.DetachedCriteria

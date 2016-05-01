@@ -1,3 +1,17 @@
+/*
+Note Controller
+
+Developer: Matt Gaines, Alexander Heavner, Daniel Dingess
+Last Update: 5/1/2016
+
+Purpose: Used to create, edit/update, and delete notes.
+
+- Cannot create notes unless a ticket has already been created.  Using different forms in ticket to handle this.
+- Must hide notes and note controller from unauthorized users or they will get an unauthorized error.
+- Secured: ROLE_TECH and ROLE_ADMIN.
+
+*/
+
 package itworkorders
 
 import grails.plugin.springsecurity.annotation.Secured
